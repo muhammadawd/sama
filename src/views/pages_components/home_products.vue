@@ -32,7 +32,7 @@
                                 </router-link>
                             </div>
                             <h4 class="float-left pull-left  text-left mt-3 p-2 font-weight-bold">
-                                <i class="fa fa-gift text-success"></i>
+                                <img :src="require('@/assets/images/newImages/next.png')" width="40px"/>
                                 {{cat.translated.title}}
                             </h4>
                             <div class="clearfix"></div>

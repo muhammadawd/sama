@@ -147,9 +147,14 @@
         </div>
 
         <div class="container">
-            <div class="row direction header_search_bar">
-                <div class="col-12">
-
+            <div class="row direction text-left header_search_bar">
+                <div class="col-2 pt-1">
+                    {{$ml.get('search')}}
+                    <img class="m-1" :src="require('@/assets/images/newImages/search.png')" width="20px"/>
+                </div>
+                <div class="col-4">
+                    <input type="text" class="form-control form-control-alternative"
+                           :class="$ml.current == 'ar' ?  'rad_left' : 'rad_right'" :placeholder="$ml.get('search')">
                 </div>
             </div>
         </div>
@@ -488,5 +493,14 @@
         color: #fff;
         background: #00adee;
         padding: 5px;
+    }
+
+    .rad_left {
+        border-radius: 25px 0  0 25px!important;
+    }
+
+    .rad_right {
+        border-radius: 0 25px 25px 0 !important;
+
     }
 </style>
