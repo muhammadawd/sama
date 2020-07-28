@@ -18,12 +18,11 @@
                     <!--:style="{background: 'url('+header_image+') center center no-repeat',backgroundSize:'contain'}">-->
                     <div class="overlay"></div>
                     <div class="px-4">
-
                     </div>
                 </card>
 
 
-                <div class="landing_cover2" v-if="isMobile()">
+                <div class="d-none landing_cover2" v-if="isMobile()">
 
                     <home_header_swiper/>
 
@@ -33,7 +32,7 @@
                     </div>
                 </div>
 
-                <div class="landing_cover2" v-if="!isMobile()">
+                <div class="d-none landing_cover2" v-if="!isMobile()">
 
                     <!--<home_slider></home_slider>-->
                     <home_header></home_header>

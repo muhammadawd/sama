@@ -1,151 +1,50 @@
 <template>
     <div>
-
-        <header class="header-global">
-            <base-nav class="navbar-main navbar-fixed-top  p-1 bg-white"
-                      :class="isMobile() ? 'direction-inverse':'direction'" type="" effect="light" expand>
-                <router-link slot="brand" class="navbar-brand mr-lg-5" to="/">
-                    <!--<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ43hxtf1M24Ye1TDjcA6oQ_R8fzPb4jOCwb-HnvezqGx70pbTG&usqp=CAU"-->
-                    <!--width="170" height="40" alt="logo">-->
-                    <img :src="$helper.getLogo()" width="170" height="40"/>
-                </router-link>
-
-                <div style="position: absolute;right: 60px;top: 0;" slot="content-cart">
-                    <div class="d-md-none" style="margin-top: 20px;">
-                        <a href="#" @click.prevent="modals.modal2 = true"
-                           class="nav-link nav-link-icon position-relative">
-                            <div class="cart_bullet" v-if="cart.length">{{cart.length}}</div>
-                            <i class="ni ni-basket ni-lg" style="color: #7f7f7f"
-                               :style="$ml.current == 'ar' ? {top: '0'}: {top: '5px'}"></i>
-                        </a>
-                    </div>
-                </div>
-                <div style="position: absolute;right: 100px;" :style="$ml.current == 'ar' ? {top: '5px'}: {top: '10px'}"
-                     slot="content-lang">
-                    <div class="d-md-none" style="margin-top: 12px;" dir="rtl">
-                        <a class="nav-link nav-link-icon" style="cursor: pointer" @click="changeLang">
-                            |
-                            <span class="nav-link-inner--text font-weight-bold text-capitalize">
-                                {{this.$ml.current === 'ar' ? 'En' : 'العربية'}}
-                            </span>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="w-100  d-md-none" slot="content-search">
-                    <div class="input-group input-group-sm search-input direction-inverse">
-                        <span class="input-group-addon">
-                            <i class="fa fa-search"></i>
-                        </span>
-                        <input type="text" class="form-control text-left direction pr-2 pl-2"
-                               @input="getApiSuggest()"
-                               @blur="hideSearch()"
-                               @keyup.enter="goToResult()"
-                               v-model="search"
-                               :placeholder="$ml.get('site_search')">
-                        <div class="autocompletes">
-                            <div id="myInputautocomplete-list" class="autocomplete-items">
-                                <div v-for="(items , key) in suggestList" :key="key"
-                                     class="text-left">
-                                    <div class="category text-left font-weight-bold">
-                                        <i class="fa fa-gift fa-lg"></i>
-                                        {{$ml.get(key)}}
-                                    </div>
-                                    <div class="item text-left"
-                                         v-for="(item , key) in items"
-                                         :key="key" @click="setQuerySearch(item)">
-                                        <strong>{{item}}</strong>
-                                    </div>
-                                    <div class="item text-center"
-                                         v-if="items.length == 0">
-                                        <strong>{{$ml.get('no_data')}}</strong>
-                                    </div>
-                                </div>
-                            </div>
+        <div class="container">
+            <div class="header_bar"></div>
+            <div class="row direction header_tool_bar">
+                <div class="col-12">
+                    <div class="d-flex">
+                        <div class="header_logo">
+                            <img :src="$helper.getLogo()" width="120px" alt="">
+                        </div>
+                        <div class="header_lang">
+                            <ul class="list-unstyled list-inline direction-inverse">
+                                <li class="list-inline-item">
+                                    <a :class="$ml.current == 'ar' ? 'active' : ''" href=""
+                                       @click.prevent="changeLang('ar')">عربي</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    |
+                                </li>
+                                <li class="list-inline-item">
+                                    <a :class="$ml.current == 'en' ? 'active' : ''" href=""
+                                       @click.prevent="changeLang('en')">English</a>
+                                </li>
+                            </ul>
+                            <div class="current_currency">{{$store.getters.getCurrency}}</div>
+                        </div>
+                        <div class="header_contact">
+                            <ul class="list-unstyled">
+                                <li class="list-inline-item" v-if="$helper.getSettings().phone1">
+                                    <a :href="'tel:'+$helper.getSettings().phone1">
+                                        {{$helper.getSettings().phone1}}
+                                    </a>
+                                </li>
+                                <li class="list-inline-item" v-if="$helper.getSettings().phone2">
+                                    <a :href="'tel:'+$helper.getSettings().phone2">
+                                        {{$helper.getSettings().phone2}}
+                                    </a>
+                                </li>
+                                <li class="list-inline-item"></li>
+                                <li class="list-inline-item"></li>
+                                <li class="list-inline-item"></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-
-                <div class="row" slot="content-header" slot-scope="{closeMenu}">
-                    <div class="col-6 collapse-brand text-left" style="text-align:right;">
-                        <a href="">
-                            <img :src="$helper.getLogo()">
-                        </a>
-                    </div>
-                    <div class="col-6 collapse-close text-right">
-                        <close-button @click="closeMenu"></close-button>
-                    </div>
-                </div>
-                <ul class="list-unstyled navbar-nav text-left align-items-lg-center ml-lg-auto direction">
-
-                    <li class="nav-item">
-                        <router-link :to="{name:'search_result'}" class="nav-link">
-                            <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('search')}}</span>
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="{name:'about_us'}" class="nav-link">
-                            <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('about_us')}}</span>
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="{name:'register_vendor'}" class="nav-link">
-                            <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('contact_us')}}</span>
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="{name:'location'}" class="nav-link">
-                            <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('location')}}</span>
-                        </router-link>
-                    </li>
-                    <li class="nav-item" v-if="auth_user">
-                        <router-link :to="{name:'account'}" class="nav-link">
-                            <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('my_account')}}</span>
-                        </router-link>
-                    </li>
-                    <li class="nav-item" v-if="auth && checkPointModule()">
-                        <router-link :to="{name:'my_points'}" class="nav-link get-toggle-button">
-                            <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('my_points')}}</span>
-                        </router-link>
-                    </li>
-                    <li class="nav-item" v-if="auth_user">
-                        <a href="" @click.prevent="Logout" class="nav-link">
-                            <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('logout')}}</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" v-if="!auth_user">
-                        <router-link :to="{name:'login'}" class="nav-link nav-link-icon btn_new">
-                            <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('login')}}</span>
-                        </router-link>
-                    </li>
-                    <li class="nav-item" v-if="!auth_user">
-                        <router-link :to="{name:'register'}" class="nav-link nav-link-icon ">
-                            <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('register')}}</span>
-                        </router-link>
-                    </li>
-                    <button id="_header_cart" class="d-none" @click="modals.modal2 = true"></button>
-                    <li class="nav-item position-relative d-none d-md-block" v-if="$route.name != 'checkout'">
-                        <!--                        <router-link :to="{name:'cart'}"-->
-                        <!--                                     class="nav-link nav-link-icon position-relative">-->
-                        <!--                            <div class="cart_bullet">{{cart.length}}</div>-->
-                        <!--                            <i class="ni ni-cart ni-2x"></i>-->
-                        <!--                        </router-link>-->
-                        <a href="#" @click.prevent="modals.modal2 = true"
-                           class="nav-link nav-link-icon position-relative">
-                            <div class="cart_bullet" v-if="cart.length">{{cart.length}}</div>
-                            <i class="ni ni-basket ni-lg"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-icon" style="cursor: pointer" @click="changeLang">
-                            <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.current === 'ar' ? 'En' : 'العربية'}}</span>
-                            <!--                        <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('change_lang')}}</span>-->
-                        </a>
-                    </li>
-                </ul>
-            </base-nav>
-        </header>
-
+            </div>
+        </div>
 
         <modal :show.sync="modals.modal2"
                gradient="white"
@@ -296,13 +195,16 @@
                     location.reload()
                 }, 300)
             },
-            changeLang() {
-                if (this.$ml.current == 'ar') {
-                    this.$ml.change('en')
+            changeLang(lang) {
+                if (lang) {
+                    this.$ml.change(lang)
+                }
+                if (this.$ml.current == 'en') {
+                    // this.$ml.change('en')
                     localStorage.setItem('current_currency', 'KWD')
                 } else {
-                    this.$ml.change('ar');
-                    localStorage.setItem('current_currency', 'د.ك')
+                    // this.$ml.change('ar');
+                    localStorage.setItem('current_currency', 'دينار كويتي')
                 }
                 location.reload()
             }
@@ -323,88 +225,36 @@
     };
 </script>
 <style>
-
-    .autocomplete-items {
-        position: absolute;
-        border: 1px solid #d4d4d4;
-        border-bottom: none;
-        border-top: none;
-        z-index: 99999;
-        /*position the autocomplete items to be the same width as the container:*/
-        top: 100%;
-        left: 0;
-        right: 0;
-        max-height: 500px;
-        overflow: hidden;
-        overflow-y: scroll;
+    .header_bar {
+        height: 30px;
+        background: #00aeef;
     }
 
-    .autocomplete-items .category {
-        color: #2dce89;
+    .header_tool_bar {
         padding: 10px;
-        background-color: #fff;
     }
 
-    .autocomplete-items .item {
-        padding: 10px;
-        cursor: pointer;
-        background-color: #fff;
-        border-bottom: 1px solid #d4d4d4;
+    .header_tool_bar .header_logo {
+
     }
 
-    .autocomplete-items div:hover {
-        /*when hovering an item:*/
-        background-color: #e9e9e9;
+    .header_tool_bar .header_lang {
+        padding: 12px 15px 0 15px;
     }
 
-    .autocomplete-active {
-        /*when navigating through the items using the arrow keys:*/
-        background-color: DodgerBlue !important;
-        color: #ffffff;
+    .header_tool_bar .header_lang ul li a {
+        font-size: 15px;
     }
-</style>
-<style>
-    .cart_bullet {
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        background-color: #2dce89;
-        z-index: 9;
-        color: #000;
-        border-radius: 50%;
+
+    .header_tool_bar .header_lang ul li a.active {
         font-weight: bold;
-        line-height: 1.7;
-        font-size: 12px;
+    }
+
+    .header_tool_bar .current_currency {
+        font-weight: bold;
         text-align: center;
-        right: 0;
-        top: 3px;
-    }
-
-    @media only screen and (max-width: 600px) {
-        .cart_bullet {
-            right: 3px;
-            top: -5px;
-        }
-    }
-
-    .search-input input {
-        border: 1px solid #333 !important;
-        border-left: 0 !important;
-        border-top-right-radius: 20px !important;
-        border-bottom-right-radius: 20px !important;
-        padding-top: 6px!important;
-    }
-
-    .search-input .input-group-addon i{
-        position: relative;
-        top: 3px;
-    }
-    .search-input .input-group-addon {
-        border: 1px solid #333 !important;
-        border-right: 0 !important;
-        border-top-left-radius: 20px !important;
-        border-bottom-left-radius: 20px !important;
-        padding: 2px 10px;
-        position: relative;
+        background: #5d5d5d;
+        padding: 3px;
+        color: #fff;
     }
 </style>

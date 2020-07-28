@@ -1,8 +1,8 @@
 <template>
     <section class="position-relative">
-        <div class="overlay_color"></div>
-        <footer class="footer has-cards" style="padding-top: 10px">
-            <section class="section-profile-cover section-shaped my-0" style="z-index: 9;width: 100%;height: 0">
+        <footer class="footer has-cards">
+            <div class="overlay_color"></div>
+            <section class="section-profile-covesr section-shapesd my-0s" style="z-index: 9;width: 100%;height: 0">
                 <div class="shape shape-style-1 ">
                     <span class="d-none"></span>
                     <span class="d-none"></span>
@@ -219,11 +219,13 @@
                             twitter: data.setting.twitter[0].value,
                             snapchat: data.setting.snapchat[0].value,
                             instagram: data.setting.instagram[0].value,
+                            front_email: data.setting.front_email[0].value,
                             pinterest: data.setting.pinterest[0].value,
                             youtube: data.setting.youtube[0].value,
                             googleplay: data.setting.googleplay[0].value,
                             appstore: data.setting.appstore[0].value,
                             delivery_cost: data.setting.delivery_cost[0].value,
+                            delivery_cost_condition: data.setting.delivery_cost_condition[0].value,
                             logo: logo
                         };
                         vm.settings = settings;
@@ -254,10 +256,13 @@
     }
 
     .overlay_color {
-        background: #000;
+        /*background: #000;*/
+        background: url("../assets/images/footer_bg.png") top center;
+        background-size: cover;
         width: 100%;
         height: 100%;
         position: absolute;
         z-index: 0;
+        bottom: 0;
     }
 </style>
