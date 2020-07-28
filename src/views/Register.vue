@@ -1,210 +1,185 @@
 <template>
     <div class="profile-page">
-        <section class="section-profile-cover section-shaped my-0">
-            <div class="shape shape-style-1 shape-primary shape-skews alpha-4">
-                <!--                <span></span>-->
-                <!--                <span></span>-->
-                <!--                <span></span>-->
-                <!--                <span></span>-->
-                <!--                <span></span>-->
-                <!--                <span></span>-->
-                <!--                <span></span>-->
-            </div>
-        </section>
-        <section class="section section-skew" style="padding-bottom: 0">
-            <div class="container-full">
-                <card class="card-profile border-0 mb-5" no-body style="position: relative;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="container">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-6 mt-5">
-                                        <card type="secondary" shadow
-                                              header-classes="bg-white pb-5"
-                                              body-classes="px-lg-5 py-lg-5"
-                                              class="border-0">
-                                            <template>
-                                                <div class="text-muted text-center mb-3">
-                                                    <small>{{this.$ml.get('or_sign_with')}}</small>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 mt-5">
+                            <card type="secondary" shadow
+                                  header-classes="bg-main pb-5"
+                                  body-classes="px-lsg-5 p-0 py-lsg-5"
+                                  class="border-0 new_card_auth2 bg-white">
+                                <div class="card-header bg-main-register mb-2">
+                                    {{this.$ml.get('register')}}
+                                </div>
+                                <div class="p-4">
+                                    <template>
+                                        <div class="btn-wrapper text-center">
+                                            <base-button type="new_btn" class="text-black btn-block mb-2"
+                                                         @click="googleSign">
+                                                <img slot="icon" src="img/icons/common/google.svg">
+                                                {{this.$ml.get('google')}}
+                                            </base-button>
+                                        </div>
+                                        <div class="btn-wrapper text-center">
+                                            <base-button type="new_btn" class="text-black btn-block mb-2"
+                                                         @click="twitterSign">
+                                                <img slot="icon" src="img/icons/common/twitter.png">
+                                                {{this.$ml.get('twitter')}}
+                                            </base-button>
+                                        </div>
+                                    </template>
+                                    <template>
+                                        <div class="text-center text-muted mb-4">
+                                            <small>{{this.$ml.get('sign_with')}}</small>
+                                        </div>
+                                        <form role="form" @submit.prevent="handleRegister">
+                                            <div class="row">
+                                                <div class="col-md-6 text-left">
+                                                    <base-input alternative
+                                                                class="mb-3"
+                                                                type="text"
+                                                                v-model="first_name"
+                                                                :placeholder="this.$ml.get('first_name')"
+                                                                addon-left-icon="ni ni-satisfied">
+                                                    </base-input>
+                                                    <small id="first_name"
+                                                           class="position-relative font-weight-bold text-error"
+                                                           style="top: -10px;"></small>
                                                 </div>
-                                                <div class="btn-wrapper text-center">
-                                                    <base-button type="neutral" class="text-black btn-block mb-2"
-                                                                 @click="googleSign">
-                                                        <img slot="icon" src="img/icons/common/google.svg">
-                                                        {{this.$ml.get('google')}}
-                                                    </base-button>
+                                                <div class="col-md-6 text-left">
+                                                    <base-input alternative
+                                                                class="mb-3"
+                                                                type="text"
+                                                                v-model="last_name"
+                                                                :placeholder="this.$ml.get('last_name')"
+                                                                addon-left-icon="ni ni-satisfied">
+                                                    </base-input>
+                                                    <small id="last_name"
+                                                           class="position-relative font-weight-bold text-error"
+                                                           style="top: -10px;"></small>
                                                 </div>
-                                                <div class="btn-wrapper text-center">
-                                                    <base-button type="neutral" class="text-black btn-block mb-2"
-                                                                 @click="twitterSign">
-                                                        <img slot="icon" src="img/icons/common/twitter.png">
-                                                        {{this.$ml.get('twitter')}}
-                                                    </base-button>
+                                                <div class="col-md-6 text-left">
+                                                    <base-input alternative
+                                                                class="mb-3"
+                                                                type="email"
+                                                                v-model="email"
+                                                                :placeholder="this.$ml.get('email_optional')"
+                                                                addon-left-icon="ni ni-email-83">
+                                                    </base-input>
+                                                    <small id="email"
+                                                           class="position-relative font-weight-bold text-error"
+                                                           style="top: -10px;"></small>
                                                 </div>
-                                            </template>
-                                            <template>
-                                                <div class="text-center text-muted mb-4">
-                                                    <small>{{this.$ml.get('sign_with')}}</small>
-                                                </div>
-                                                <form role="form" @submit.prevent="handleRegister">
-                                                    <div class="row">
-                                                        <div class="col-12 text-left">
-                                                            <base-input alternative
-                                                                        class="mb-3"
-                                                                        type="text"
-                                                                        v-model="first_name"
-                                                                        :placeholder="this.$ml.get('first_name')"
-                                                                        addon-left-icon="ni ni-satisfied">
-                                                            </base-input>
-                                                            <small id="first_name"
-                                                                   class="position-relative font-weight-bold text-error"
-                                                                   style="top: -10px;"></small>
-                                                        </div>
-                                                        <div class="col-12 text-left">
-                                                            <base-input alternative
-                                                                        class="mb-3"
-                                                                        type="text"
-                                                                        v-model="last_name"
-                                                                        :placeholder="this.$ml.get('last_name')"
-                                                                        addon-left-icon="ni ni-satisfied">
-                                                            </base-input>
-                                                            <small id="last_name"
-                                                                   class="position-relative font-weight-bold text-error"
-                                                                   style="top: -10px;"></small>
-                                                        </div>
-                                                        <div class="col-12 text-left">
-                                                            <base-input alternative
-                                                                        class="mb-3"
-                                                                        type="email"
-                                                                        v-model="email"
-                                                                        :placeholder="this.$ml.get('email_optional')"
-                                                                        addon-left-icon="ni ni-email-83">
-                                                            </base-input>
-                                                            <small id="email"
-                                                                   class="position-relative font-weight-bold text-error"
-                                                                   style="top: -10px;"></small>
-                                                        </div>
-                                                        <div class="col-12 text-left">
-                                                            <!--<base-input alternative-->
-                                                            <!--class="mb-3"-->
-                                                            <!--type="email"-->
-                                                            <!--v-model="phone"-->
-                                                            <!--:placeholder="this.$ml.get('phone')"-->
-                                                            <!--addon-left-icon="ni ni-mobile-button">-->
-                                                            <!--</base-input>-->
-                                                            <div class="form-group mb-3 input-group input-group-alternative">
-                                                                <!---->
-                                                                <div class="input-group-prepend">
+                                                <div class="col-md-6 text-left">
+                                                    <!--<base-input alternative-->
+                                                    <!--class="mb-3"-->
+                                                    <!--type="email"-->
+                                                    <!--v-model="phone"-->
+                                                    <!--:placeholder="this.$ml.get('phone')"-->
+                                                    <!--addon-left-icon="ni ni-mobile-button">-->
+                                                    <!--</base-input>-->
+                                                    <div class="form-group mb-3 input-group input-group-alternative">
+                                                        <!---->
+                                                        <div class="input-group-prepend">
                                                                     <span class="input-group-text">
                                                                         <i class="ni ni-mobile-button"></i>
                                                                     </span>
-                                                                </div>
-                                                                <input aria-describedby="addon-right addon-left"
-                                                                       v-model="phone"
-                                                                       type="text" :placeholder="this.$ml.get('phone')"
-                                                                       class="form-control"/>
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text">
-                                                                        965
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <small id="phone"
-                                                                   class="position-relative font-weight-bold text-error"
-                                                                   style="top: -10px;"></small>
                                                         </div>
-                                                        <!--<div class="col-12 text-center">-->
-                                                        <!--<div class="btn-group text-center m-auto direction-inverse button-group round toggle">-->
-                                                        <!--<input type="radio" v-model="gender" id="r1"-->
-                                                        <!--value="male"-->
-                                                        <!--name="r-group">-->
-                                                        <!--<label class="btn btn-default" style="border-radius: 0"-->
-                                                        <!--for="r1">{{this.$ml.get('male')}}</label>-->
-                                                        <!--<input type="radio" v-model="gender" id="r2"-->
-                                                        <!--value="female"-->
-                                                        <!--name="r-group">-->
-                                                        <!--<label class="btn btn-default" style="border-radius: 0"-->
-                                                        <!--for="r2">{{this.$ml.get('female')}}</label>-->
-                                                        <!--</div>-->
-                                                        <!--</div>-->
-                                                        <div class="col-12 text-left">
-                                                            <base-input alternative
-                                                                        type="password"
-                                                                        v-model="password"
-                                                                        :placeholder="this.$ml.get('password')"
-                                                                        addon-left-icon="ni ni-lock-circle-open">
-                                                            </base-input>
-                                                            <small id="password"
-                                                                   class="position-relative font-weight-bold text-error"
-                                                                   style="top: -10px;"></small>
+                                                        <input aria-describedby="addon-right addon-left"
+                                                               v-model="phone"
+                                                               type="text" :placeholder="this.$ml.get('phone')"
+                                                               class="form-control"/>
+                                                        <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            965
+                                                        </span>
                                                         </div>
-                                                        <div class="col-12 text-left">
-                                                            <base-input alternative
-                                                                        type="password"
-                                                                        v-model="password_confirmation"
-                                                                        :placeholder="this.$ml.get('confirm_password')"
-                                                                        addon-left-icon="ni ni-lock-circle-open">
-                                                            </base-input>
-                                                            <small id="password_confirmation"
-                                                                   class="position-relative font-weight-bold text-error"
-                                                                   style="top: -10px;"></small>
-                                                        </div>
-                                                        <!--<div class="col-12 text-left">-->
-                                                        <!--<base-input alternative-->
-                                                        <!--addon-left-icon="ni ni-calendar-grid-58">-->
-                                                        <!--<flat-picker slot-scope="{focus, blur}"-->
-                                                        <!--@on-open="focus"-->
-                                                        <!--@on-close="blur"-->
-                                                        <!--:config="{allowInput: true}"-->
-                                                        <!--class="form-control datepicker"-->
-                                                        <!--v-model="date_birth">-->
-                                                        <!--</flat-picker>-->
-                                                        <!--</base-input>-->
-                                                        <!--<small id="date_birth"-->
-                                                        <!--class="position-relative font-weight-bold text-error"-->
-                                                        <!--style="top: -10px;"></small>-->
-                                                        <!--</div>-->
                                                     </div>
-                                                    <div class="text-left">
-                                                        <vue-recaptcha class="m-auto" :loadRecaptchaScript="true"
-                                                                       @verify="onCaptchaVerified"
-                                                                       sitekey="6LdWQj0UAAAAAIK0lw1Vt_e2kk_uUzKWe56gUHMU"></vue-recaptcha>
-                                                        <small id="recaptchaToken"
-                                                               class="position-relative font-weight-bold text-error"
-                                                               style="top: -10px;"></small>
-                                                    </div>
-                                                    <div class="text-center">
-                                                        <base-button type="default" class="my-4 bg-black"
-                                                                     @click="handleRegister">
-                                                            {{this.$ml.get('register')}}
-                                                        </base-button>
-                                                    </div>
-
-                                                </form>
-                                            </template>
-                                        </card>
-                                        <div class="row mt-3">
-                                            <div class="col-6 text-left">
-                                                <router-link :to="{name:'forget_password'}" class="text-black">
-                                                    <small>{{this.$ml.get('forget_password')}}</small>
-                                                </router-link>
+                                                    <small id="phone"
+                                                           class="position-relative font-weight-bold text-error"
+                                                           style="top: -10px;"></small>
+                                                </div>
+                                                <!--<div class="col-12 text-center">-->
+                                                <!--<div class="btn-group text-center m-auto direction-inverse button-group round toggle">-->
+                                                <!--<input type="radio" v-model="gender" id="r1"-->
+                                                <!--value="male"-->
+                                                <!--name="r-group">-->
+                                                <!--<label class="btn btn-default" style="border-radius: 0"-->
+                                                <!--for="r1">{{this.$ml.get('male')}}</label>-->
+                                                <!--<input type="radio" v-model="gender" id="r2"-->
+                                                <!--value="female"-->
+                                                <!--name="r-group">-->
+                                                <!--<label class="btn btn-default" style="border-radius: 0"-->
+                                                <!--for="r2">{{this.$ml.get('female')}}</label>-->
+                                                <!--</div>-->
+                                                <!--</div>-->
+                                                <div class="col-md-6 text-left">
+                                                    <base-input alternative
+                                                                type="password"
+                                                                v-model="password"
+                                                                :placeholder="this.$ml.get('password')"
+                                                                addon-left-icon="ni ni-lock-circle-open">
+                                                    </base-input>
+                                                    <small id="password"
+                                                           class="position-relative font-weight-bold text-error"
+                                                           style="top: -10px;"></small>
+                                                </div>
+                                                <div class="col-md-6 text-left">
+                                                    <base-input alternative
+                                                                type="password"
+                                                                v-model="password_confirmation"
+                                                                :placeholder="this.$ml.get('confirm_password')"
+                                                                addon-left-icon="ni ni-lock-circle-open">
+                                                    </base-input>
+                                                    <small id="password_confirmation"
+                                                           class="position-relative font-weight-bold text-error"
+                                                           style="top: -10px;"></small>
+                                                </div>
+                                                <!--<div class="col-12 text-left">-->
+                                                <!--<base-input alternative-->
+                                                <!--addon-left-icon="ni ni-calendar-grid-58">-->
+                                                <!--<flat-picker slot-scope="{focus, blur}"-->
+                                                <!--@on-open="focus"-->
+                                                <!--@on-close="blur"-->
+                                                <!--:config="{allowInput: true}"-->
+                                                <!--class="form-control datepicker"-->
+                                                <!--v-model="date_birth">-->
+                                                <!--</flat-picker>-->
+                                                <!--</base-input>-->
+                                                <!--<small id="date_birth"-->
+                                                <!--class="position-relative font-weight-bold text-error"-->
+                                                <!--style="top: -10px;"></small>-->
+                                                <!--</div>-->
                                             </div>
-                                            <div class="col-6 text-right">
+                                            <div class="text-left">
+                                                <vue-recaptcha class="m-auto" :loadRecaptchaScript="true"
+                                                               @verify="onCaptchaVerified"
+                                                               sitekey="6LdWQj0UAAAAAIK0lw1Vt_e2kk_uUzKWe56gUHMU"></vue-recaptcha>
+                                                <small id="recaptchaToken"
+                                                       class="position-relative font-weight-bold text-error"
+                                                       style="top: -10px;"></small>
+                                            </div>
+                                            <div class="text-center">
+                                                <base-button type="info" class="my-4"
+                                                             @click="handleRegister">
+                                                    {{this.$ml.get('register')}}
+                                                </base-button>
                                                 <router-link :to="{name:'login'}" class="text-black">
-                                                    <small>{{this.$ml.get('have_account')}}</small>
+                                                    <p class="main_color">{{this.$ml.get('have_account')}}</p>
                                                 </router-link>
                                             </div>
-                                        </div>
-                                    </div>
+
+                                        </form>
+                                    </template>
                                 </div>
-                            </div>
+                            </card>
                         </div>
                     </div>
-
-                </card>
+                </div>
             </div>
-        </section>
+        </div>
     </div>
 
 
@@ -392,6 +367,19 @@
 
     .button-group input:checked + label,
     .button-group input:checked + label:active {
-        background-color: #2dce89;
+        background-color: #00adee;
+    }
+
+    .bg-main-register {
+        text-align: center;
+        font-weight: bold;
+        color: #fff;
+        background-color: #00adee;
+        border-radius: 40px 40px 0 0 !important;
+
+    }
+
+    .new_card_auth2 {
+        border-radius: 40px !important;
     }
 </style>

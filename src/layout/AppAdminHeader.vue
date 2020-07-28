@@ -152,7 +152,7 @@
         position: absolute;
         width: 16px;
         height: 16px;
-        background-color: #2dce89;
+        background-color: #00adee;
         z-index: 9;
         color: #000;
         border-radius: 50%;

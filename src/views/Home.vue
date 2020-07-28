@@ -1,26 +1,16 @@
 <template>
     <div class="profile-page">
-        <section class="section-profile-cover section-shaped my-0" style="height: 50px">
-            <div class="shape shape-style-1 shape-primary shape-skews alpha-4 d-none">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </section>
-        <section class=" section-skew" style="padding-bottom: 0">
+        <div class="container">
+            <home_header></home_header>
+        </div>
+        <section class=" sesction-skew" style="padding-bottom: 0">
             <div class="container-full ">
-                <card class="card-profile border-0 landing_cover  position-relative"
-                      no-body>
-                    <!--:style="{background: 'url('+header_image+') center center no-repeat',backgroundSize:'contain'}">-->
-                    <div class="overlay"></div>
-                    <div class="px-4">
-                    </div>
-                </card>
 
+                <div class="landing_cover2">
+                    <div class="container mb-5">
+                        <home_products></home_products>
+                    </div>
+                </div>
 
                 <div class="d-none landing_cover2" v-if="isMobile()">
 
@@ -373,7 +363,7 @@
 
     .landing_cover2 {
         /*background: url(/img/theme/clothes_pattern.jpg) center center repeat;*/
-        background: #eee;
+        /*background: #eee;*/
         /*min-height: 600px;*/
         min-height: 500px;
         width: 100%;

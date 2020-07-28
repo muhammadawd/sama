@@ -16,7 +16,7 @@
                                     <!--style="position:relative;color: #fff;"></i>-->
                                 </div>
                             </div>
-                            <div class="font-weight-bold" style="background: #2dce89;color: #fff;padding: 7px;">
+                            <div class="font-weight-bold" style="background: #00adee;color: #fff;padding: 7px;">
                                 {{this.$ml.get('order_summary')}}
                             </div>
                         </li>
@@ -40,7 +40,7 @@
                                     <!--style="position:relative;color: #fff;"></i>-->
                                 </div>
                             </div>
-                            <div class="font-weight-bold" style="background: #2dce89;color: #fff;padding: 7px;">
+                            <div class="font-weight-bold" style="background: #00adee;color: #fff;padding: 7px;">
                                 {{this.$ml.get('address')}}
                             </div>
                         </li>
@@ -63,7 +63,7 @@
                                 </div>
 
                             </div>
-                            <div class="font-weight-bold" style="background: #2dce89;color: #fff;padding: 7px;">
+                            <div class="font-weight-bold" style="background: #00adee;color: #fff;padding: 7px;">
                                 {{this.$ml.get('payment_methods')}}
                             </div>
                         </li>

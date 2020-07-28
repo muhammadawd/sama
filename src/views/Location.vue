@@ -1,50 +1,26 @@
 <template>
     <div class="profile-page">
-        <section class="section-profile-cover section-shaped my-0">
-            <div class="shape shape-style-1 shape-primary shape-skews alpha-4">
-<!--                <span></span>-->
-<!--                <span></span>-->
-<!--                <span></span>-->
-<!--                <span></span>-->
-<!--                <span></span>-->
-<!--                <span></span>-->
-<!--                <span></span>-->
-            </div>
-        </section>
-        <section class="section section-skew" style="padding-bottom: 0">
-            <div class="container-full">
-                <card class="card-profile border-0 mb-5" no-body style="position: relative;">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-12 mt-5">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <card type="secondary" shadow
-                                                      header-classes="bg-white pb-5"
-                                                      class="border-0">
-                                                    <template>
-                                                        <div class="text-muted text-center mb-3">
-                                                            <span class="display-4 text-black" style="font-size: 18px">{{this.$ml.get('map')}}</span>
-                                                        </div>
-                                                    </template>
-                                                    <template  v-if="branch_info">
-                                                        <div v-html="branch_info.map_frame"></div>
-                                                    </template>
-                                                </card>
-                                            </div>
-                                        </div>
-                                    </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-12 mt-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <card type="secondary" shadow
+                              header-classes="bg-white pb-5"
+                              class="border-0 bg-white new_card_auth">
+                            <template>
+                                <div class="text-muted text-center mb-3">
+                                    <span class="display-4 text-black" style="font-size: 18px">{{this.$ml.get('map')}}</span>
                                 </div>
-                            </div>
-                        </div>
+                            </template>
+                            <template  v-if="branch_info">
+                                <div v-html="branch_info.map_frame"></div>
+                            </template>
+                        </card>
                     </div>
-
-                </card>
+                </div>
             </div>
-        </section>
+        </div>
     </div>
 
 
@@ -96,5 +72,8 @@
 
     .g-recaptcha {
         display: inline-block;
+    }
+    .new_card_auth {
+        border-radius: 40px 0 40px 0!important;
     }
 </style>

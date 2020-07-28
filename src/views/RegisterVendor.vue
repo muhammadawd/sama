@@ -1,200 +1,74 @@
 <template>
     <div class="profile-page">
-        <section class="section-profile-cover section-shaped my-0">
-            <div class="shape shape-style-1 shape-primary shape-skews alpha-4">
-<!--                <span></span>-->
-<!--                <span></span>-->
-<!--                <span></span>-->
-<!--                <span></span>-->
-<!--                <span></span>-->
-<!--                <span></span>-->
-<!--                <span></span>-->
-            </div>
-        </section>
-        <section class="section section-skew" style="padding-bottom: 0">
-            <div class="container-full">
-                <card class="card-profile border-0 mb-5" no-body style="position: relative;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="container">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8 mt-5">
 
-                                        <tabs fill class="flex-column flex-md-row">
-                                            <card shadow style="background: #eee">
-<!--                                                <tab-pane :title="this.$ml.get('contact_us')" style="min-height: 400px">-->
-
-                                                    <card type="secondary" shadow
-                                                          header-classes="bg-white pb-5"
-                                                          body-classes="px-lg-5 py-lg-5"
-                                                          class="border-0">
-                                                        <template>
-                                                            <div class="text-center text-muted mb-4"></div>
-                                                            <h3 class="display-4 text-left">
-                                                                {{$ml.get('contact_us')}}</h3>
-                                                            <form role="form">
-                                                                <base-input alternative
-                                                                            class="mb-3"
-                                                                            type="text"
-                                                                            v-model="contact_name"
-                                                                            :placeholder="this.$ml.get('name')"
-                                                                            addon-left-icon="ni ni-satisfied">
-                                                                </base-input>
-                                                                <div class="text-black text-left"
-                                                                     id="contact_name"></div>
-                                                                <base-input alternative
-                                                                            class="mb-3"
-                                                                            type="number"
-                                                                            v-model="contact_phone"
-                                                                            :placeholder="this.$ml.get('phone')"
-                                                                            addon-left-icon="ni ni-satisfied">
-                                                                </base-input>
-                                                                <div class="text-black text-left"
-                                                                     id="contact_phone"></div>
-                                                                <base-input alternative
-                                                                            class="mb-3"
-                                                                            type="email"
-                                                                            v-model="contact_email"
-                                                                            :placeholder="this.$ml.get('email')"
-                                                                            addon-left-icon="ni ni-email-83">
-                                                                </base-input>
-                                                                <div class="text-black text-left"
-                                                                     id="contact_email"></div>
-                                                                <textarea class="form-control form-control-alternative"
-                                                                          v-model="contact_message"
-                                                                          :placeholder="this.$ml.get('message')"
-                                                                          rows="4"></textarea>
-                                                                <div class="text-black text-left"
-                                                                     id="contact_message"></div>
-                                                                <div class="text-center">
-                                                                </div>
-                                                                <div class="text-center">
-                                                                    <base-button type="default" class="my-4 bg-black"
-                                                                                 @click="saveContact()">
-                                                                        {{this.$ml.get('send')}}
-                                                                    </base-button>
-                                                                </div>
-                                                            </form>
-                                                        </template>
-                                                    </card>
-<!--                                                </tab-pane>-->
-<!--                                                <tab-pane :title="this.$ml.get('join_us')" style="min-height: 400px">-->
-
-<!--                                                    <card type="secondary" shadow-->
-<!--                                                          header-classes="bg-white pb-5"-->
-<!--                                                          body-classes="px-lg-5 py-lg-5"-->
-<!--                                                          class="border-0">-->
-<!--                                                        <template>-->
-<!--                                                            <div class="text-center text-muted mb-4"></div>-->
-<!--                                                            <h3 class="display-4 text-left">{{$ml.get('join_us')}}</h3>-->
-<!--                                                            <form role="form">-->
-<!--                                                                <base-input alternative-->
-<!--                                                                            class="mb-3"-->
-<!--                                                                            type="text"-->
-<!--                                                                            v-model="join_first_name"-->
-<!--                                                                            :placeholder="this.$ml.get('first_name')"-->
-<!--                                                                            addon-left-icon="ni ni-satisfied">-->
-<!--                                                                </base-input>-->
-<!--                                                                <div class="text-black text-left"-->
-<!--                                                                     id="join_first_name"></div>-->
-<!--                                                                <base-input alternative-->
-<!--                                                                            class="mb-3"-->
-<!--                                                                            type="text"-->
-<!--                                                                            v-model="join_last_name"-->
-<!--                                                                            :placeholder="this.$ml.get('last_name')"-->
-<!--                                                                            addon-left-icon="ni ni-satisfied">-->
-<!--                                                                </base-input>-->
-<!--                                                                <div class="text-black text-left"-->
-<!--                                                                     id="join_last_name"></div>-->
-<!--                                                                <base-input alternative-->
-<!--                                                                            class="mb-3"-->
-<!--                                                                            type="text"-->
-<!--                                                                            v-model="join_branch_name"-->
-<!--                                                                            :placeholder="this.$ml.get('branch_name')"-->
-<!--                                                                            addon-left-icon="fa fa-user fa-lg">-->
-<!--                                                                </base-input>-->
-<!--                                                                <div class="text-black text-left"-->
-<!--                                                                     id="join_branch_name"></div>-->
-<!--                                                                <base-input alternative-->
-<!--                                                                            class="mb-3"-->
-<!--                                                                            type="number"-->
-<!--                                                                            v-model="join_phone"-->
-<!--                                                                            :placeholder="this.$ml.get('phone')"-->
-<!--                                                                            addon-left-icon="fa fa-phone fa-lg">-->
-<!--                                                                </base-input>-->
-<!--                                                                <div class="text-black text-left" id="join_phone"></div>-->
-<!--                                                                <base-input alternative-->
-<!--                                                                            class="mb-3"-->
-<!--                                                                            type="email"-->
-<!--                                                                            v-model="join_email"-->
-<!--                                                                            :placeholder="this.$ml.get('email')"-->
-<!--                                                                            addon-left-icon="ni ni-email-83">-->
-<!--                                                                </base-input>-->
-<!--                                                                <div class="text-black text-left" id="join_email"></div>-->
-<!--                                                                <select class="form-control form-control-alternative mb-3"-->
-<!--                                                                        v-model="join_gov_id">-->
-<!--                                                                    <option v-for="(govern,k) in addresses"-->
-<!--                                                                            :key="k"-->
-<!--                                                                            :value="govern.id">-->
-<!--                                                                        {{govern.translated.name}}-->
-<!--                                                                    </option>-->
-<!--                                                                </select>-->
-<!--                                                                <div class="text-black text-left"-->
-<!--                                                                     id="join_address_id"></div>-->
-<!--                                                                <select class="form-control form-control-alternative  mb-3"-->
-<!--                                                                        v-if="addresses.length > 0"-->
-<!--                                                                        v-model="join_city_id">-->
-<!--                                                                    <option v-for="(city,k) in addresses[0].cities"-->
-<!--                                                                            :value="city.id"-->
-<!--                                                                            :key="k"-->
-<!--                                                                            :selected="k == 0">-->
-<!--                                                                        {{city.translated.name}}-->
-<!--                                                                    </option>-->
-<!--                                                                </select>-->
-<!--                                                                <base-input alternative-->
-<!--                                                                            class="mb-3"-->
-<!--                                                                            type="text"-->
-<!--                                                                            v-model="join_street"-->
-<!--                                                                            :placeholder="this.$ml.get('street')"-->
-<!--                                                                            addon-left-icon="fa fa-map fa-lg">-->
-<!--                                                                </base-input>-->
-<!--                                                                <div class="text-black text-left"-->
-<!--                                                                     id="join_full_address"></div>-->
-<!--                                                                <div class="text-center">-->
-<!--                                                                    <vue-recaptcha class="m-auto"-->
-<!--                                                                                   :loadRecaptchaScript="true"-->
-<!--                                                                                   @verify="onCaptchaVerified"-->
-<!--                                                                                   sitekey="6LdWQj0UAAAAAIK0lw1Vt_e2kk_uUzKWe56gUHMU"></vue-recaptcha>-->
-<!--                                                                </div>-->
-<!--                                                                <div class="text-black text-left"-->
-<!--                                                                     id="join_recaptchaToken"></div>-->
-<!--                                                                <div class="text-center">-->
-<!--                                                                    <base-button type="default" class="my-4 bg-black"-->
-<!--                                                                                 @click="saveJoinUs()">-->
-<!--                                                                        {{this.$ml.get('register')}}-->
-<!--                                                                    </base-button>-->
-<!--                                                                </div>-->
-<!--                                                            </form>-->
-<!--                                                        </template>-->
-<!--                                                    </card>-->
-<!--                                                </tab-pane>-->
-
-
-                                            </card>
-                                        </tabs>
-                                    </div>
-                                    <div class="col-md-7 mt-5">
-                                    </div>
-                                    <div class="col-md-5 mt-5">
-                                    </div>
-                                </div>
-                            </div>
+                            <card type="secondary" shadow
+                                  header-classes="bg-white pb-5"
+                                  body-classes="px-lg-5 py-lg-5"
+                                  class="border-0 new_card_auth bg-white">
+                                <template>
+                                    <div class="text-center text-muted mb-4"></div>
+                                    <h3 class="display-4 text-left">
+                                        {{$ml.get('contact_us')}}</h3>
+                                    <form role="form">
+                                        <base-input alternative
+                                                    class="mb-3"
+                                                    type="text"
+                                                    v-model="contact_name"
+                                                    :placeholder="this.$ml.get('name')"
+                                                    addon-left-icon="ni ni-satisfied">
+                                        </base-input>
+                                        <div class="text-black text-left"
+                                             id="contact_name"></div>
+                                        <base-input alternative
+                                                    class="mb-3"
+                                                    type="number"
+                                                    v-model="contact_phone"
+                                                    :placeholder="this.$ml.get('phone')"
+                                                    addon-left-icon="ni ni-satisfied">
+                                        </base-input>
+                                        <div class="text-black text-left"
+                                             id="contact_phone"></div>
+                                        <base-input alternative
+                                                    class="mb-3"
+                                                    type="email"
+                                                    v-model="contact_email"
+                                                    :placeholder="this.$ml.get('email')"
+                                                    addon-left-icon="ni ni-email-83">
+                                        </base-input>
+                                        <div class="text-black text-left"
+                                             id="contact_email"></div>
+                                        <textarea class="form-control form-control-alternative"
+                                                  v-model="contact_message"
+                                                  :placeholder="this.$ml.get('message')"
+                                                  rows="4"></textarea>
+                                        <div class="text-black text-left"
+                                             id="contact_message"></div>
+                                        <div class="text-center">
+                                        </div>
+                                        <div class="text-center">
+                                            <base-button type="info" class="my-4"
+                                                         @click="saveContact()">
+                                                {{this.$ml.get('send')}}
+                                            </base-button>
+                                        </div>
+                                    </form>
+                                </template>
+                            </card>
+                        </div>
+                        <div class="col-md-7 mt-5">
+                        </div>
+                        <div class="col-md-5 mt-5">
                         </div>
                     </div>
-
-                </card>
+                </div>
             </div>
-        </section>
+        </div>
     </div>
 
 
@@ -352,5 +226,9 @@
 
     .g-recaptcha {
         display: inline-block;
+    }
+
+    .new_card_auth {
+        border-radius: 40px 0 40px 0 !important;
     }
 </style>

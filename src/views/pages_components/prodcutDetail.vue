@@ -908,7 +908,7 @@
 </style>
 <style lang="scss">
     .swiper-container {
-        background-color: #fff;
+        background-color: transparent!important;
     }
 
     .swiper-slide {
@@ -1000,7 +1000,7 @@
             bottom: 0;
             left: 0;
             height: 3px;
-            background-color: #2dce89;
+            background-color: #00adee;
             transition: transform 0.4s ease, width 0.4s ease;
         }
     }

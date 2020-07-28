@@ -227,9 +227,15 @@ export default new MLCreate({
             shipping_data: 'Orders Less Than 30 Dinar Forces fees with amount of 2 dinars',
             guest: 'Login as a guest',
             user_info: 'User Info',
+            favourite: 'Favourite',
+            book: 'book',
+            author: 'author',
         }),
 
         new MLanguage('ar').create({
+            author: 'الكاتب',
+            book: 'كتاب',
+            favourite: 'المفضلة',
             user_info: 'بيانات العميل',
             guest: 'الدخول كزائر',
             show: 'عرض',

@@ -222,7 +222,7 @@
     }
 
     .vue-tab[aria-selected="true"] {
-        background: #2dce89;
+        background: #00adee;
         color: #fff;
         /*padding: 10px 5px 5px 5px;*/
     }
@@ -254,6 +254,6 @@
     }
 
     .swiper-pagination-bullet-active {
-        background-color: #2dce89;
+        background-color: #00adee;
     }
 </style>

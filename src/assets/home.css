@@ -1,26 +1,31 @@
 /*@import url('https://fonts.googleapis.com/css?family=Sriracha&display=swap');*/
-/*@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap');
 
 .card_curve {
     /*border-radius: 90px 0 90px 0;*/
     min-height: 300px;
     overflow: hidden;
     margin-top: 15px !important;
+    border: 3px solid #00adee;
+    border-radius: 40px 0 40px 0;
 }
 
 body {
     overflow-x: hidden;
-    background: #f4feff;
     background: linear-gradient(to bottom, #f4feff, #c7e2f5);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background: #f4feff;
 }
 
-body, div, span, h1, h2, h3, h4, h5, h6 {
+body, div, span, h1, h2, h3, h4, h5, h6, a {
+    font-family: 'Cairo', sans-serif !important;
     /*font-family: 'Sriracha', cursive !important;*/
     /*font-family: 'Josefin Sans', sans-serif !important;*/
 }
 
 .main_color {
-    color: #2dce89;
+    color: #00adee;
 }
 
 
@@ -144,32 +149,32 @@ body, div, span, h1, h2, h3, h4, h5, h6 {
 .section-shaped .shape-style-1 :nth-child(1) {
     left: -4%;
     bottom: auto;
-    background: #2dce89;
+    background: #00adee;
 }
 
 .section-shaped .shape-style-1 :nth-child(2) {
     right: 4%;
     top: 10%;
-    background: #2dce89;
+    background: #00adee;
 }
 
 .section-shaped .shape-style-1 :nth-child(3) {
     top: 280px;
     right: 5.66666%;
-    background: #2dce89;
+    background: #00adee;
 }
 
 .section-shaped .shape-style-1 :nth-child(4) {
     top: 320px;
     right: 7%;
-    background: #2dce89;
+    background: #00adee;
 }
 
 .section-shaped .shape-style-1 :nth-child(5) {
     top: -92px;
     left: 26%;
     right: auto;
-    background: #2dce89;
+    background: #00adee;
 }
 
 .section-shaped .shape-style-1 :nth-child(6) {
@@ -178,27 +183,27 @@ body, div, span, h1, h2, h3, h4, h5, h6 {
     top: 44%;
     left: 10%;
     right: auto;
-    background: #2dce89;
+    background: #00adee;
 }
 
 .section-shaped .shape-style-1 :nth-child(7) {
     bottom: 50%;
     right: 36%;
-    background: #2dce89;
+    background: #00adee;
     opacity: 0.7;
 }
 
 .section-shaped .shape-style-1 :nth-child(8) {
     bottom: 70px;
     right: 2%;
-    background: #2dce89;
+    background: #00adee;
     opacity: 0.7;
 }
 
 .section-shaped .shape-style-1 :nth-child(9) {
     bottom: 1%;
     right: 2%;
-    background: #2dce89;
+    background: #00adee;
     opacity: 0.7;
 }
 
@@ -206,7 +211,7 @@ body, div, span, h1, h2, h3, h4, h5, h6 {
     bottom: 1%;
     left: 1%;
     right: auto;
-    background: #2dce89;
+    background: #00adee;
     opacity: 0.7;
 }
 
@@ -214,7 +219,7 @@ body, div, span, h1, h2, h3, h4, h5, h6 {
     top: 100px;
     right: 3%;
     left: auto;
-    background: #2dce89;
+    background: #00adee;
     width: 250px;
     height: 250px;
     opacity: 0.7;
@@ -225,7 +230,7 @@ body, div, span, h1, h2, h3, h4, h5, h6 {
 }
 
 .btn_new {
-    background-color: #2dce89;
+    background-color: #00adee;
     padding: 0px;
 }
 

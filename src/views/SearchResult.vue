@@ -611,7 +611,7 @@
     }
 
     .autocomplete-items .category {
-        color: #2dce89;
+        color: #00adee;
         padding: 10px;
         background-color: #2e2e2e;
     }

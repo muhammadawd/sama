@@ -1,23 +1,28 @@
 <template>
-    <section class="header_height" style="position: relative;overflow: hidden;margin-bottom: 0;margin-top: 100px"
-             v-if="current_slide">
-        <div class="h1_text">
-            <h1 class="h1_text_data">
-                {{current_slide.translated.title}}</h1>
-        </div>
-        <div class="image_width">
-            <!--<img :src="current_slide.icon" :alt="current_slide.icon" width="100%">-->
-        </div>
-        <div class="home_header_overlay"></div>
-        <div v-if="current_slide" class="home_header"
-             :style="{ backgroundImage: 'url(' + current_slide.image + ')',backgroundSize:'contain'}">
+    <section v-if="slides.length">
+        <agile :dots="false" :autoplay="true" :autoplay-speed="2000">
+            <div v-for="(slide  ,key) in slides" class="slide" :key="key">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img :src="slide.image" class="w-100" alt="">
+                        </div>
+                        <div class="col-md-8"
+                             style="display: flex;flex-direction:column;justify-content: center;align-items: center">
+                            <h3 class="text-center font-weight-bold">{{slide.translated.title}}</h3>
+                            <p class="text-center">{{slide.translated.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <!--            <video class="video_content" autoplay loop>-->
-            <!--                <source src="/img/Comp1.mp4" type="video/mp4">-->
-            <!--            </video>-->
-            <!--            <div class="image_corner"></div>-->
-            <!--            <div class="image_line"></div>-->
-        </div>
+            <template slot="prevButton">
+                <img :src="require('@/assets/images/newImages/prev.png')" width="40px" alt="">
+            </template>
+            <template slot="nextButton">
+                <img :src="require('@/assets/images/newImages/next.png')" width="40px" alt="">
+            </template>
+        </agile>
     </section>
 </template>
 
@@ -36,29 +41,6 @@
             return {
                 current_slide: null,
                 lang: this.$ml.current,
-                // slides: [{
-                //     image: require('@/assets/images/data/1.png'),
-                //     text: 'PLUTONE',
-                //     icon: require('@/assets/images/data/icon1.png'),
-                // },
-                //     {
-                //         image: require('@/assets/images/data/2.png'),
-                //         text: 'GIOVE',
-                //         icon: require('@/assets/images/data/icon2.png'),
-                //     }, {
-                //         image: require('@/assets/images/data/3.png'),
-                //         text: 'ICE ROCK',
-                //         icon: require('@/assets/images/data/icon3.png'),
-                //     }, {
-                //         image: require('@/assets/images/data/4.png'),
-                //         text: 'MARTE',
-                //         icon: require('@/assets/images/data/icon4.png'),
-                //     }, {
-                //         image: require('@/assets/images/data/5.png'),
-                //         text: 'NITTO',
-                //         icon: require('@/assets/images/data/icon5.png'),
-                //     }
-                // ]
                 slides: [],
             };
 
@@ -66,7 +48,6 @@
         },
         mounted() {
             this.getAllSliders();
-            // this.slidesAction();
         },
         methods: {
             slidesAction() {
@@ -111,93 +92,18 @@
     }
 </script>
 
-<style scoped>
-    .home_header_overlay {
+<style>
+    .agile__actions{
         position: absolute;
         width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.4);
-        z-index: 1;
+        top: 30%;
     }
-
-    .header_height {
-        height: 70vh !important;
-    }
-
-    @media only screen and (max-width: 600px) {
-        .header_height {
-            height: 95vh !important;
-        }
-    }
-
-    .home_header {
-        background: #000;
-        /*background: url('/img/theme/leather-bags-hoi-an.jpg') center center;*/
-        background-size: 100%;
-        background-size: cover;
-        height: 800px;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .video_content {
-        position: relative;
-        top: 0;
-        height: 800px;
-        width: 100% !important;
-    }
-
-    .image_corner {
-        background: url("/img/brand/VagueVerte.png") top left no-repeat;
-        background-size: 25%;
-        height: 225px;
-        position: absolute;
-        bottom: 125px;
-        left: -190px;
-        width: 100%;
-        z-index: 9999;
-    }
-
-    .image_line {
-        background: #ffffff;
-        clip-path: polygon(0 30%, 0% 100%, 100% 100%);
-        height: 306px;
-        width: 100%;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        z-index: 9999;
-    }
-
-    .h1_text {
-        background: rgba(0, 0, 0, 0.5);
-        position: absolute;
-        z-index: 99;
-        bottom: 18%;
-        left: 10%;
-        padding: 0 5px;
-    }
-
-    .h1_text .h1_text_data {
-        font-weight: bold;
-        font-size: 50px;
-        background: -webkit-linear-gradient(10deg, #fff, #62daa7);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .image_width {
-        width: 300px;
-        position: absolute;
-        z-index: 99;
-        top: 20%;
-        right: 10%;
-    }
-
-    @media screen and (min-width: 1400px) {
-
-        .image_width {
-            width: 30%
-        }
+    .agile__nav-button{
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
     }
 </style>

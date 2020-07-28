@@ -112,9 +112,9 @@
     .addtoCartbtn {
         width: 50px;
         height: 50px;
-        /*background-color: #2dce89;*/
-        background-color: #2dce89;
-        border:0.5px dashed #2dce89;
+        /*background-color: #00adee;*/
+        background-color: #00adee;
+        border:0.5px dashed #00adee;
         color: #fff;
         line-height: 50px;
         text-align: center;

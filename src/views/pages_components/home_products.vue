@@ -22,9 +22,10 @@
             <div class="col-md-12 mb-4" v-if="categories.length">
                 <div v-for="(cat , key) in categories" v-if="cat.products.length > 0"
                      :key="key">
-                    <div class="card" style="overflow: hidden" :class="key != 0 ? 'mt-3' : ''">
+                    <div class="card" style="overflow: hidden;border: 0;background: transparent"
+                         :class="key != 0 ? 'mt-3' : ''">
                         <div class="card-body">
-                            <div class="main_color bg-white  float-right pull-right">
+                            <div class="main_color float-right pull-right">
                                 <router-link class="main_color "
                                              :to="{name:'search_result',query: {'q': cat.translated.title}}">
                                     <h4 style="margin-top: 20px;" class="font-weight-bold">{{$ml.get('all')}}</h4>
@@ -34,6 +35,8 @@
                                 <i class="fa fa-gift text-success"></i>
                                 {{cat.translated.title}}
                             </h4>
+                            <div class="clearfix"></div>
+                            <hr class="m-0 p-0" style="border-color: #000">
                         </div>
                     </div>
 
@@ -46,35 +49,35 @@
                     </swiper>
 
 
-                    <template v-if="cat.category_ad.length == 2">
-                        <div class="card mt-2 mb-2">
-                            <div class="card-body p-1">
-                                <div class="w-100">
-                                    <div class="w-50 d-inline-block p-1 text-ellipsis"
-                                         v-for="(ads , index) in cat.category_ad"
-                                         :key="index">
-                                        <a :href="ads.url">
-                                            <img :src="ads.wide_image_path" width="100%" alt=""/>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </template>
-                    <template v-if="cat.category_ad.length == 1">
-                        <div class="card mt-2 mb-2">
-                            <div class="card-body p-1">
-                                <div class="row w-100">
-                                    <div class="col-3"></div>
-                                    <div class="col-6" v-for="(ads , index) in cat.category_ad" :key="index">
-                                        <a :href="ads.url" class="mt-3">
-                                            <img :src="ads.wide_image_path" width="100%" alt=""/>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </template>
+                    <!--<template v-if="cat.category_ad.length == 2">-->
+                    <!--<div class="card mt-2 mb-2">-->
+                    <!--<div class="card-body p-1">-->
+                    <!--<div class="w-100">-->
+                    <!--<div class="w-50 d-inline-block p-1 text-ellipsis"-->
+                    <!--v-for="(ads , index) in cat.category_ad"-->
+                    <!--:key="index">-->
+                    <!--<a :href="ads.url">-->
+                    <!--<img :src="ads.wide_image_path" width="100%" alt=""/>-->
+                    <!--</a>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</template>-->
+                    <!--<template v-if="cat.category_ad.length == 1">-->
+                    <!--<div class="card mt-2 mb-2">-->
+                    <!--<div class="card-body p-1">-->
+                    <!--<div class="row w-100">-->
+                    <!--<div class="col-3"></div>-->
+                    <!--<div class="col-6" v-for="(ads , index) in cat.category_ad" :key="index">-->
+                    <!--<a :href="ads.url" class="mt-3">-->
+                    <!--<img :src="ads.wide_image_path" width="100%" alt=""/>-->
+                    <!--</a>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</template>-->
 
                 </div>
             </div>

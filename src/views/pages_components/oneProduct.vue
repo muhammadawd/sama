@@ -13,15 +13,6 @@
                      class="position-absolute">{{$ml.get('out_off_stock')}}
                 </div>
                 <figure class="snip1527">
-                    <div :class="isMobile() ? 'addtoCartbtn' :'addtoCartbtnDesk'"
-                         v-on:click.prevent="addToCart(product)"
-                         v-if="!(product.product_option_values[0].store_detail && (product.product_option_values[0].store_detail.quantity - product.product_option_values[0].store_detail.reserved == 0))"
-                         :style="$ml.current == 'ar' ? {left:'5px',right:'auto'}: {right:'5px',left:'auto'}">
-                <span class="day">
-                    <i class="fa fa-cart-plus fa-lg"></i>
-                </span>
-                        <!--<span class="month">{{$ml.get('add')}}</span>-->
-                    </div>
                     <div class="image"
                          v-lazy-container="{ selector: 'img', error:'img/icons/common/no_image.png', loading: 'img/icons/common/restricted.gif' }">
                         <img v-if="current_image" :data-src="current_image" width="100%"
@@ -29,38 +20,41 @@
                     </div>
                     <figcaption>
 
-                        <h3 class="text-black text-left w-100" style="font-size: 14px">
-                            {{product.translated.title}}</h3>
+                        <h3 class="text-black text-center w-100" style="font-size: 14px">
+                            {{$ml.get('book')}} : {{product.translated.title}} <br>
+                            {{$ml.get('author')}} : {{product.translated.description}}
+                        </h3>
                         <div class="row mt-2">
                             <div class="col-12" style="color: #000;">
-                                <p v-if="isMobile()" class="font-weight-bold text-left" style="font-size: 15px;">
-                                    {{parseFloat(product.minimum_price).toFixed(3)}}
-                                    <small>{{getCurrency()}}</small>
-                                </p>
-                                <template v-if="!isMobile()">
-                                    <template v-if="product.price_before_discount == 0">
-                                        <p class="font-weight-bold text-left" style="font-size: 18px;">
-                                            {{parseFloat(product.minimum_price).toFixed(3)}}
-                                            <small style="font-size: 12px">{{getCurrency()}}</small>
-                                        </p>
-                                    </template>
-                                    <template v-else>
-                                        <p class="font-weight-bold text-left" style="font-size: 18px;">
-                                            {{parseFloat(product.minimum_price).toFixed(3)}}
-                                            <small style="font-size: 12px">{{$ml.get('kwd')}}</small>
-                                        </p>
-                                        <!--<p class="font-weight-bold float-right">-->
-                                        <!--{{parseFloat(product.minimum_price).toFixed(3)}}-->
-                                        <!--<small>{{getCurrency()}}</small>-->
-                                        <!--</p>-->
-                                        <!--<del class="font-weight-bold float-left">-->
-                                        <!--&lt;!&ndash;<slot v-if="product.price_before_discount">&ndash;&gt;-->
-                                        <!--{{parseFloat(product.price_before_discount).toFixed(3)}}-->
-                                        <!--<small>{{getCurrency()}}</small>-->
-                                        <!--&lt;!&ndash;</slot>&ndash;&gt;-->
-                                        <!--</del>-->
-                                    </template>
+                                <template>
+                                    <p class="font-weight-bold text-center" style="font-size: 18px;">
+                                        {{parseFloat(product.minimum_price).toFixed(3)}}
+                                        <small style="font-size: 12px">{{getCurrency()}}</small>
+                                    </p>
                                 </template>
+                            </div>
+                            <div class="col-12 text-center">
+                                <div class="btn-group direction-inverse">
+                                    <button class="btn btn-secondary btn-sm"
+                                            :style="$ml.current == 'ar' ? {left:'5px',right:'auto'}: {right:'5px',left:'auto'}">
+                                        <span class="day">
+                                            <i class="fa fa-star fa-lg"></i>
+                                        </span>
+                                    </button>
+                                    <button class="btn btn-secondary btn-sm"
+                                            :style="$ml.current == 'ar' ? {left:'5px',right:'auto'}: {right:'5px',left:'auto'}">
+                                        <span class="day">
+                                            <i class="fa fa-book fa-lg"></i>
+                                        </span>
+                                    </button>
+                                    <button class="btn btn-info btn-sm" v-on:click.prevent="addToCart(product)"
+                                            v-if="!(product.product_option_values[0].store_detail && (product.product_option_values[0].store_detail.quantity - product.product_option_values[0].store_detail.reserved == 0))"
+                                            :style="$ml.current == 'ar' ? {left:'5px',right:'auto'}: {right:'5px',left:'auto'}">
+                                        <span class="day">
+                                            <i class="fa fa-cart-plus fa-lg"></i>
+                                        </span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </figcaption>
@@ -194,8 +188,8 @@
         position: absolute;
         z-index: 99;
         bottom: 15px;
-         left: 5px;
-        
+        left: 5px;
+
         /*box-shadow: 1px 2px 12px #999;*/
         /*padding: 0px;*/
     }
