@@ -77,7 +77,7 @@
                     <table class="table table-bordered" v-if="pov">
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('section')}}</td>
-                            <td class="text-center"></td>
+                            <td class="text-center">{{product.category.translated.title}}</td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('book')}}</td>
@@ -85,7 +85,7 @@
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('author')}}</td>
-                            <td class="text-center"></td>
+                            <td class="text-center">{{product.author ? product.author.name : ''}}</td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('publisher')}}</td>
@@ -125,7 +125,7 @@
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('visits')}}</td>
-                            <td class="text-center"></td>
+                            <td class="text-center">{{product.views}}</td>
                         </tr>
                     </table>
                 </div>
