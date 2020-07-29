@@ -283,12 +283,14 @@
 
 <style>
     .bm-burger-button {
-        position: fixed;
+        position: absolute!important;
         width: 24px !important;
         height: 18px !important;
         /*right: 0!important;*/
         top: 28px;
         cursor: pointer;
+        left: 15px!important;;
+        right: auto!important;
     }
 
     .bm-burger-bars {
@@ -297,6 +299,8 @@
 
     .bm-menu {
         background-color: #fff !important;
+        left: 0!important;;
+        right: auto!important;
     }
 
     .bm-item-list {

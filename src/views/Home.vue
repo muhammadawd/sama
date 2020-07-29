@@ -1,5 +1,5 @@
 <template>
-    <div class="profile-page">
+    <div class="profile-page" style="margin-top: 70px">
         <div class="container">
             <home_header></home_header>
         </div>
@@ -7,139 +7,10 @@
             <div class="container-full ">
 
                 <div class="landing_cover2">
+                    <best_sales_products class="mt-5 mb-4"></best_sales_products>
                     <div class="container mb-5">
                         <home_products></home_products>
                     </div>
-                </div>
-
-                <div class="d-none landing_cover2" v-if="isMobile()">
-
-                    <home_header_swiper/>
-
-                    <div class="container mb-5" style="z-index: 9;">
-                        <home_categories/>
-                        <home_products_swiper/>
-                    </div>
-                </div>
-
-                <div class="d-none landing_cover2" v-if="!isMobile()">
-
-                    <!--<home_slider></home_slider>-->
-                    <home_header></home_header>
-
-
-                    <div class="container mb-5" style="z-index: 9;">
-                        <div class="mt-0">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <home_categories/>
-                                    <br/>
-                                </div>
-                            </div>
-                        </div>
-                        <!--<div class="mt-4">-->
-                        <!--<h1 class="text-center  font-weight-bold position-relative"-->
-                        <!--style="line-height: 2;">-->
-                        <!--<img src="@/assets/images/decore.png" width="180" alt=""-->
-                        <!--style="top: 20px;position: relative;" class="m-auto">-->
-                        <!--<div>-->
-                        <!--{{$ml.get('top_products')}}-->
-                        <!--</div>-->
-                        <!--<img src="@/assets/images/decore.png"-->
-                        <!--style="transform: rotateZ(180deg);bottom: 25px;position: relative;" width="180"-->
-                        <!--alt="" class="m-auto">-->
-                        <!--</h1>-->
-                        <!--</div>-->
-                        <!--<home_ads></home_ads>-->
-
-                        <home_products></home_products>
-                        <div class="row">
-
-                            <div class="col-md-12 mb-4">
-                                <div class="card">
-                                    <div class="card-body p-1">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <ul class="list-unstyled list-inline direction text-center">
-                                                    <li class="list-inline-item p-3">
-                                                        <i class="fa fa-shopping-cart fa-3x main_color"></i>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <div class="data">
-                                                            <b>{{$ml.get('header_1')}}</b>
-                                                            <p>{{$ml.get('header_p_1')}}</p>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <ul class="list-unstyled list-inline direction  text-center">
-                                                    <li class="list-inline-item p-3">
-                                                        <i class="fa fa-car fa-3x main_color"></i>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <div class="data">
-                                                            <b>{{$ml.get('header_2')}}</b>
-                                                            <p>{{$ml.get('header_p_2')}}</p>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <ul class="list-unstyled list-inline direction text-center">
-                                                    <li class="list-inline-item p-3">
-                                                        <i class="fa fa-gift fa-3x main_color"></i>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <div class="data">
-                                                            <b>{{$ml.get('header_3')}}</b>
-                                                            <p>{{$ml.get('header_p_3')}}</p>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--<div class="mt-4  d-none" style="width: 100%;height:115px;background: #1e1e1e;">-->
-                    <!--<h3 class="text-center text-white font-weight-bold"-->
-                    <!--style="line-height: 2;font-family: 'Dancing Script', cursive;font-size: 60px;">-->
-                    <!--{{$ml.get('ads')}}</h3>-->
-                    <!--</div>-->
-
-                    <!--<div class="container d-none">-->
-                    <!--<div v-if="advertisements.length == 0">-->
-                    <!--<h2 class="display-4 text-uppercase text-center mt-5">{{$ml.get('no_result')}}</h2>-->
-                    <!--</div>-->
-                    <!--<div class="card shadow ads_item" v-for="(advertisement,key) in advertisements" :key="key">-->
-                    <!--<div class="card-body">-->
-                    <!--<div class="row">-->
-                    <!--<div class="col-md-12" dir="ltr" v-if="advertisement.files.length > 0">-->
-                    <!--<carousel-3d :controls-visible="true" :autoplay="true">-->
-                    <!--<slide v-for="(slide , index) in advertisement.files" :index="index"-->
-                    <!--:key="index">-->
-                    <!--&lt;!&ndash;                                                <img :src="file.path" width="360px" height="270px" class="img-fluid" alt="">&ndash;&gt;-->
-                    <!--<template slot-scope="{ index, isCurrent, leftIndex, rightIndex }">-->
-                    <!--<img :data-index="index" style="height:270px!important;"-->
-                    <!--:class="{ current: isCurrent, onLeft: (leftIndex >= 0), onRight: (rightIndex >= 0) }"-->
-                    <!--:src="slide.path">-->
-                    <!--</template>-->
-                    <!--</slide>-->
-                    <!--</carousel-3d>-->
-                    <!--</div>-->
-                    <!--<div class="col-md-12 text-left">-->
-                    <!--<h4 class="display-4 text-uppercase">{{advertisement.translated.title}}</h4>-->
-                    <!--<p class="leads">{{advertisement.translated.description}}</p>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--                        <img class="sales_image" style="padding-top:100px " src="/img/theme/sales.jpg" alt="">-->
                 </div>
             </div>
         </section>
@@ -149,13 +20,13 @@
 </template>
 <script>
     import {ModelSelect} from 'vue-search-select'
-    import Vue from 'vue';
-    import {Carousel3d, Slide} from 'vue-carousel-3d';
-
-    Vue.use(Carousel3d);
     import apiServiesRoutes from '../bootstrap/apiServiesRoutes'
     import home_ads from '../views/pages_components/home_ads'
     import home_products from '../views/pages_components/home_products'
+
+    import new_arrival_products from '../views/pages_components/new_arrival_products'
+    import best_sales_products from '../views/pages_components/best_sales_products'
+
     import home_products_swiper from '../views/pages_components/home_products_swiper'
     import home_header_swiper from '../views/pages_components/home_header_swiper'
     import home_categories from '../views/pages_components/home_categories'
@@ -165,14 +36,14 @@
     export default {
         components: {
             ModelSelect,
-            Carousel3d,
-            Slide,
             home_header,
             home_ads,
             // home_slider,
             home_products_swiper,
             home_categories,
             home_header_swiper,
+            new_arrival_products,
+            best_sales_products,
             home_products
         },
         data() {

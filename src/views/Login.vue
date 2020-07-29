@@ -30,7 +30,7 @@
                                         </base-button>
                                     </div>
                                     <div class="btn-wrapper text-center" v-if="cart.length">
-                                        <base-button type="neutral" class="text-black btn-block mb-2"
+                                        <base-button type="new_btn" class="text-black btn-block mb-2"
                                                      @click="loginGuest">
                                             <img slot="icon" src="img/icons/common/user_male2-512.png">
                                             {{this.$ml.get('guest')}}

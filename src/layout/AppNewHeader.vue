@@ -1,194 +1,434 @@
 <template>
-    <div>
-        <div class="container">
-            <div class="header_bar"></div>
-            <div class="row direction header_tool_bar">
-                <div class="col-12">
+    <div v-if="settings">
+        <div class="d-md-none">
+            <div class="header_bar">
+                <div class="container">
+                    <div class="row pt-2">
+                        <div class="col-6 text-left">
+                            <ul class="list-unstyled p-0 list-inline text-white direction">
+                                <li class="list-inline-item">
+                                    <a :class="$ml.current == 'ar' ? 'active' : ''" href="" class="text-white"
+                                       @click.prevent="changeLang($ml.current == 'ar' ? 'en':'ar')">{{$ml.current ==
+                                        'ar' ? 'English' : 'عربي'}}</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    |
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="text-white" href="" @click.prevent>{{$store.getters.getCurrency}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-6 text-right">
+                            <ul class="list-unstyled p-0 list-inline text-white direction">
+                                <li class="list-inline-item" @click.prevent="$router.push({name:'register'})">
+                                    <a href="" class="text-white">
+                                        <i class="fa fa-user-plus"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    |
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="" class="text-white">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    |
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="" @click.prevent="modals.modal2 = true" class="text-white">
+                                        <div class="position-relative">
+                                            <span class="cart_count2">{{cart.length}}</span>
+                                            <i class="fa fa-cart-plus"></i>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="news_bar">
+                <div class="container">
                     <div class="row">
-                        <div class="col-1">
-                            <div class="header_logo">
+                        <div class="col-12 text-left">
+                            <marquee behavior="scroll" class="text-white pt-2"
+                                     :direction="$ml.current == 'ar' ? 'right' : 'left'">
+                                يمكنك متابعة اخر الاخبار يمكنك متابعة اخر الاخبار يمكنك متابعة اخر الاخبار
+                                يمكنك متابعة اخر الاخبار يمكنك متابعة اخر الاخبار يمكنك متابعة اخر الاخبار
+                            </marquee>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header_nv mb-5 position-relative">
+
+                <header class="header-global">
+                    <base-nav class="navbar-main direction" transparent type="" effect="light" expand>
+                        <router-link slot="brand" class="navbar-brand mr-lg-5" to="/">
+                            <img :src="$helper.getLogo()">
+                        </router-link>
+
+                        <div class="row" slot="content-header" slot-scope="{closeMenu}">
+                            <div class="col-6 collapse-brand text-left" style="text-align:right;">
                                 <a href="">
-                                    <img :src="$helper.getLogo()" width="120px" alt="">
+                                    <img :src="$helper.getLogo()">
                                 </a>
                             </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="header_lang">
-                                <ul class="list-unstyled list-inline direction-inverse">
-                                    <li class="list-inline-item">
-                                        <a :class="$ml.current == 'ar' ? 'active' : ''" href=""
-                                           @click.prevent="changeLang('ar')">عربي</a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        |
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a :class="$ml.current == 'en' ? 'active' : ''" href=""
-                                           @click.prevent="changeLang('en')">English</a>
-                                    </li>
-                                </ul>
-                                <div class="current_currency">{{$store.getters.getCurrency}}</div>
+                            <div class="col-6 collapse-close text-right">
+                                <close-button @click="closeMenu"></close-button>
                             </div>
                         </div>
-                        <div class="col-5 text-left">
-                            <div class="header_contact">
-                                <ul class="list-unstyled direction">
-                                    <li class="list-inline-item direction-inverse" v-if="$helper.getSettings().phone1">
-                                        <a :href="'tel:'+$helper.getSettings().phone1">
-                                            {{$helper.getSettings().phone1}}
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item direction-inverse" v-if="$helper.getSettings().phone2">
-                                        <a :href="'tel:'+$helper.getSettings().phone2">
-                                            {{$helper.getSettings().phone2}}
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item" v-if="$helper.getSettings().facebook">
-                                        <a :href="$helper.getSettings().facebook">
-                                            <img :src="require('@/assets/images/newImages/facebook.png')" width="30px"
-                                                 alt="">
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item" v-if="$helper.getSettings().twitter">
-                                        <a :href="$helper.getSettings().twitter">
-                                            <img :src="require('@/assets/images/newImages/twitter.png')" width="30px"
-                                                 alt="">
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item" v-if="$helper.getSettings().snapchat">
-                                        <a :href="$helper.getSettings().snapchat">
-                                            <img :src="require('@/assets/images/newImages/snapchat.png')" width="30px"
-                                                 alt="">
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item" v-if="$helper.getSettings().instagram">
-                                        <a :href="$helper.getSettings().instagram">
-                                            <img :src="require('@/assets/images/newImages/instagram.png')" width="30px"
-                                                 alt="">
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item" v-if="$helper.getSettings().front_email">
-                                        <a :href="'mailto:'+$helper.getSettings().front_email">
-                                            <img :src="require('@/assets/images/newImages/email.png')" width="30px"
-                                                 alt="">
-                                        </a>
-                                    </li>
-                                    <li></li>
-                                </ul>
+
+
+                        <ul class="list-unstyled navbar-nav text-left align-items-lg-center ml-lg-auto direction">
+
+                            <li class="nav-item">
+                                <router-link :to="{name:'search_result'}" class="nav-link">
+                                    <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('search')}}</span>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="{name:'about_us'}" class="nav-link">
+                                    <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('about_us')}}</span>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="{name:'register_vendor'}" class="nav-link">
+                                    <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('contact_us')}}</span>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="{name:'location'}" class="nav-link">
+                                    <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('location')}}</span>
+                                </router-link>
+                            </li>
+                            <li class="nav-item" v-if="auth">
+                                <router-link :to="{name:'account'}" class="nav-link">
+                                    <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('my_account')}}</span>
+                                </router-link>
+                            </li>
+                            <li class="nav-item" v-if="auth">
+                                <a href="" @click.prevent="Logout" class="nav-link">
+                                    <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('logout')}}</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" v-if="!auth">
+                                <router-link :to="{name:'login'}" class="nav-link nav-link-icon">
+                                    <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('login')}}</span>
+                                </router-link>
+                            </li>
+                            <li class="nav-item" v-if="!auth">
+                                <router-link :to="{name:'register'}" class="nav-link nav-link-icon">
+                                    <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('register')}}</span>
+                                </router-link>
+                            </li>
+                            <!--                    <li class="nav-item">-->
+                            <!--                        <router-link :to="{name:'register_vendor'}" class="nav-link nav-link-icon">-->
+                            <!--                            <span class="nav-link-inner&#45;&#45;text font-weight-bold text-capitalize">{{this.$ml.get('register_vendor')}}</span>-->
+                            <!--                        </router-link>-->
+                            <!--                    </li>-->
+
+                            <button id="_header_cart" class="d-none" @click="modals.modal2 = true"></button>
+                            <li class="nav-item d-md-block">
+                                <!--                        <router-link :to="{name:'cart'}"-->
+                                <!--                                     class="nav-link nav-link-icon position-relative">-->
+                                <!--                            <div class="cart_bullet">{{cart.length}}</div>-->
+                                <!--                            <i class="ni ni-cart ni-2x"></i>-->
+                                <!--                        </router-link>-->
+                                <a href="#" @click.prevent="modals.modal2 = true"
+                                   class="nav-link nav-link-icon position-relative">
+                                    <div class="cart_bullet">{{cart.length}}</div>
+                                    <i class="ni ni-cart ni-2x"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-icon" style="cursor: pointer" @click="changeLang">
+                                    <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.current === 'ar' ? 'En' : 'العربية'}}</span>
+                                    <!--                        <span class="nav-link-inner--text font-weight-bold text-capitalize">{{this.$ml.get('change_lang')}}</span>-->
+                                </a>
+                            </li>
+                        </ul>
+                    </base-nav>
+                </header>
+            </div>
+            <div class="search-query-bar">
+
+                <div class="container">
+                    <div class="row direction text-left">
+                        <div class="col-12 text-center">
+                            <div class="search_bar d-inline-block">
+                                <img class="m-1" :src="require('@/assets/images/newImages/search.png')" width="20px"/>
                             </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="header_fav_cart">
-                                <ul class="list-unstyled direction">
-                                    <li class="text-left mt-2">
-                                        <a href="">
-                                            <div class="float-left">
-                                                <span>
-                                                    {{$ml.get('favourite')}}
-                                                 </span>
-                                            </div>
-                                            <div class="float-right">
-                                            <span>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-empty"></i>
-                                        </span>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </a>
-                                    </li>
-                                    <li class="text-left mt-4">
-                                        <a href="" @click.prevent="modals.modal2 = true">
-                                            <div class="float-left">
-                                                <span>{{$ml.get('cart')}}</span>
-                                            </div>
-                                            <div class="position-relative float-right">
-                                                <span class="cart_count">{{cart.length}}</span>
-                                                <img :src="require('@/assets/images/newImages/cart.png')" width="40px"
-                                                     alt="">
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="header_fav_cart">
-                                <ul class="list-unstyled text-center direction">
-                                    <li class="mt-2 bg-active-login" v-if="!auth_user">
-                                        <a class="text-white" href="" @click.prevent="$router.push({name:'login'})">
-                                            {{$ml.get('login')}}
-                                        </a>
-                                    </li>
-                                    <li class="mt-3 bg-active-register" v-if="!auth_user">
-                                        <a href="" @click.prevent="$router.push({name:'register'})">
-                                            {{$ml.get('register')}}
-                                        </a>
-                                    </li>
-                                    <li class="mt-2 bg-active-login" v-if="auth_user">
-                                        <a class="text-white" href=""
-                                           @click.prevent="$router.push({name:'account'})">
-                                            {{$ml.get('my_account')}}
-                                        </a>
-                                    </li>
-                                    <li class="mt-3 bg-active-register" v-if="auth_user">
-                                        <a href="" @click.prevent="Logout">
-                                            {{this.$ml.get('logout')}}
-                                        </a>
-                                    </li>
-                                </ul>
+                            <input type="text" class="form-control form-control-alternative d-inline-block w-75"
+                                   :class="$ml.current == 'ar' ?  'rad_left' : 'rad_right'"
+                                   @input="getApiSuggest()"
+                                   @blur="hideSearch()"
+                                   @keyup.enter="goToResult()"
+                                   v-model="search"
+                                   :placeholder="$ml.get('site_search')">
+                            <div class="autocompletes">
+                                <div class="autocomplete-items">
+                                    <div v-for="(items , key) in suggestList" :key="key"
+                                         class="text-left">
+                                        <div class="category text-left font-weight-bold">
+                                            <img :src="require('@/assets/images/newImages/next.png')" width="25px"
+                                                 alt="">
+                                            {{$ml.get(key)}}
+                                        </div>
+                                        <div class="item text-left"
+                                             v-for="(item , key) in items"
+                                             :key="key" @click="setQuerySearch(item)">
+                                            <strong>{{item}}</strong>
+                                        </div>
+                                        <div class="item text-center"
+                                             v-if="items.length == 0">
+                                            <strong>{{$ml.get('no_data')}}</strong>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="container">
-            <div class="row direction text-left header_search_bar">
-                <div class="col-2 pt-1">
-                    {{$ml.get('search')}}
-                    <img class="m-1" :src="require('@/assets/images/newImages/search.png')" width="20px"/>
-                </div>
-                <div class="col-4">
-                    <input type="text" class="form-control form-control-alternative"
-                           :class="$ml.current == 'ar' ?  'rad_left' : 'rad_right'" :placeholder="$ml.get('search')">
+        <div class="d-none d-md-block">
+            <div class="container">
+                <div class="header_bar"></div>
+                <div class="row direction header_tool_bar">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-1">
+                                <div class="header_logo">
+                                    <a href="">
+                                        <img :src="$helper.getLogo()" width="120px" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="header_lang">
+                                    <ul class="list-unstyled list-inline direction-inverse">
+                                        <li class="list-inline-item">
+                                            <a :class="$ml.current == 'ar' ? 'active' : ''" href=""
+                                               @click.prevent="changeLang('ar')">عربي</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            |
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a :class="$ml.current == 'en' ? 'active' : ''" href=""
+                                               @click.prevent="changeLang('en')">English</a>
+                                        </li>
+                                    </ul>
+                                    <div class="current_currency">{{$store.getters.getCurrency}}</div>
+                                </div>
+                            </div>
+                            <div class="col-5 text-left">
+                                <div class="header_contact">
+                                    <ul class="list-unstyled direction">
+                                        <li class="list-inline-item direction-inverse"
+                                            v-if="$helper.getSettings().phone1">
+                                            <a :href="'tel:'+$helper.getSettings().phone1">
+                                                {{$helper.getSettings().phone1}}
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item direction-inverse"
+                                            v-if="$helper.getSettings().phone2">
+                                            <a :href="'tel:'+$helper.getSettings().phone2">
+                                                {{$helper.getSettings().phone2}}
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item" v-if="$helper.getSettings().facebook">
+                                            <a :href="$helper.getSettings().facebook">
+                                                <img :src="require('@/assets/images/newImages/facebook.png')"
+                                                     width="30px"
+                                                     alt="">
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item" v-if="$helper.getSettings().twitter">
+                                            <a :href="$helper.getSettings().twitter">
+                                                <img :src="require('@/assets/images/newImages/twitter.png')"
+                                                     width="30px"
+                                                     alt="">
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item" v-if="$helper.getSettings().snapchat">
+                                            <a :href="$helper.getSettings().snapchat">
+                                                <img :src="require('@/assets/images/newImages/snapchat.png')"
+                                                     width="30px"
+                                                     alt="">
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item" v-if="$helper.getSettings().instagram">
+                                            <a :href="$helper.getSettings().instagram">
+                                                <img :src="require('@/assets/images/newImages/instagram.png')"
+                                                     width="30px"
+                                                     alt="">
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item" v-if="$helper.getSettings().front_email">
+                                            <a :href="'mailto:'+$helper.getSettings().front_email">
+                                                <img :src="require('@/assets/images/newImages/email.png')" width="30px"
+                                                     alt="">
+                                            </a>
+                                        </li>
+                                        <li></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="header_fav_cart">
+                                    <ul class="list-unstyled direction">
+                                        <li class="text-left mt-2">
+                                            <a href="">
+                                                <div class="float-left">
+                                                <span>
+                                                    {{$ml.get('favourite')}}
+                                                 </span>
+                                                </div>
+                                                <div class="float-right">
+                                            <span>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-empty"></i>
+                                        </span>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </a>
+                                        </li>
+                                        <li class="text-left mt-4">
+                                            <a href="" @click.prevent="modals.modal2 = true">
+                                                <div class="float-left">
+                                                    <span>{{$ml.get('cart')}}</span>
+                                                </div>
+                                                <div class="position-relative float-right">
+                                                    <span class="cart_count">{{cart.length}}</span>
+                                                    <img :src="require('@/assets/images/newImages/cart.png')"
+                                                         width="40px"
+                                                         alt="">
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="header_fav_cart">
+                                    <ul class="list-unstyled text-center direction">
+                                        <li class="mt-2 bg-active-login" v-if="!auth_user">
+                                            <a class="text-white" href="" @click.prevent="$router.push({name:'login'})">
+                                                {{$ml.get('login')}}
+                                            </a>
+                                        </li>
+                                        <li class="mt-3 bg-active-register" v-if="!auth_user">
+                                            <a href="" @click.prevent="$router.push({name:'register'})">
+                                                {{$ml.get('register')}}
+                                            </a>
+                                        </li>
+                                        <li class="mt-2 bg-active-login" v-if="auth_user">
+                                            <a class="text-white" href=""
+                                               @click.prevent="$router.push({name:'account'})">
+                                                {{$ml.get('my_account')}}
+                                            </a>
+                                        </li>
+                                        <li class="mt-3 bg-active-register" v-if="auth_user">
+                                            <a href="" @click.prevent="Logout">
+                                                {{this.$ml.get('logout')}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="container">
-            <div class="row direction header_menu_bar">
-                <div class="col-12">
-                    <ul class="list-unstyled direction list_menu text-left" :class="$ml.current">
-                        <li :class="$route.name == 'home' ? 'active' : ''">
-                            <a href="">
-                                {{$ml.get('home')}}
-                            </a>
-                        </li>
-                        <li :class="$route.name == 'about_us' ? 'active' : ''">
-                            <a href="" @click.prevent="$router.push({name:'about_us'})">
-                                {{$ml.get('about_us')}}
-                            </a>
-                        </li>
-                        <li :class="$route.name == 'search_result' ? 'active' : ''">
-                            <a href="" @click.prevent="$router.push({name:'search_result'})">
-                                {{$ml.get('search')}}
-                            </a>
-                        </li>
-                        <li :class="$route.name == 'location' ? 'active' : ''">
-                            <a href="" @click.prevent="$router.push({name:'location'})">
-                                {{$ml.get('location')}}
-                            </a>
-                        </li>
-                        <li :class="$route.name == 'register_vendor' ? 'active' : ''">
-                            <a href="" @click.prevent="$router.push({name:'register_vendor'})">
-                                {{$ml.get('contact_us')}}
-                            </a>
-                        </li>
-                    </ul>
+            <div class="container">
+                <div class="row direction text-left header_search_bar">
+                    <div class="col-2 pt-1">
+                        {{$ml.get('search')}}
+                        <img class="m-1" :src="require('@/assets/images/newImages/search.png')" width="20px"/>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="form-control form-control-alternative"
+                               @input="getApiSuggest()"
+                               @blur="hideSearch()"
+                               @keyup.enter="goToResult()"
+                               v-model="search"
+                               :placeholder="$ml.get('site_search')"
+                               :class="$ml.current == 'ar' ?  'rad_left' : 'rad_right'">
+                        <div class="autocompletes">
+                            <div class="autocomplete-items">
+                                <div v-for="(items , key) in suggestList" :key="key"
+                                     class="text-left">
+                                    <div class="category text-left font-weight-bold">
+                                        <img :src="require('@/assets/images/newImages/next.png')" width="25px" alt="">
+                                        {{$ml.get(key)}}
+                                    </div>
+                                    <div class="item text-left"
+                                         v-for="(item , key) in items"
+                                         :key="key" @click="setQuerySearch(item)">
+                                        <strong style="color:#000;">{{item}}</strong>
+                                    </div>
+                                    <div class="item text-center"
+                                         v-if="items.length == 0">
+                                        <strong>{{$ml.get('no_data')}}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row direction header_menu_bar">
+                    <div class="col-12">
+                        <ul class="list-unstyled direction list_menu text-left" :class="$ml.current">
+                            <li :class="$route.name == 'home' ? 'active' : ''">
+                                <a href="">
+                                    {{$ml.get('home')}}
+                                </a>
+                            </li>
+                            <li :class="$route.name == 'new_arrival' ? 'active' : ''">
+                                <a href="" @click.prevent="$router.push({name:'new_arrival'})">
+                                    {{$ml.get('new_arrival')}}
+                                </a>
+                            </li>
+                            <li :class="$route.name == 'best_sales' ? 'active' : ''">
+                                <a href="" @click.prevent="$router.push({name:'best_sales'})">
+                                    {{$ml.get('best_sales')}}
+                                </a>
+                            </li>
+                            <li :class="$route.name == 'search_result' ? 'active' : ''">
+                                <a href="" @click.prevent="$router.push({name:'search_result'})">
+                                    {{$ml.get('search')}}
+                                </a>
+                            </li>
+                            <li :class="$route.name == 'about_us' ? 'active' : ''">
+                                <a href="" @click.prevent="$router.push({name:'about_us'})">
+                                    {{$ml.get('about_us')}}
+                                </a>
+                            </li>
+                            <li :class="$route.name == 'location' ? 'active' : ''">
+                                <a href="" @click.prevent="$router.push({name:'location'})">
+                                    {{$ml.get('location')}}
+                                </a>
+                            </li>
+                            <li :class="$route.name == 'register_vendor' ? 'active' : ''">
+                                <a href="" @click.prevent="$router.push({name:'register_vendor'})">
+                                    {{$ml.get('contact_us')}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -238,6 +478,7 @@
                 auth_user: null,
                 suggestList: [],
                 search: '',
+                settings: null,
                 modals: {
                     modal1: false,
                     modal2: false,
@@ -249,8 +490,73 @@
             this.auth_user = localStorage.getItem('auth');
             this.checkStorage();
             this.startHeaderBG();
+            this.getAllSettings();
         },
         methods: {
+            getAllSettings() {
+                let vm = this;
+                vm.$root.$children[0].$refs.loader.show_loader = true;
+                let settings = localStorage.getItem('settings')
+                if (settings) {
+                    settings = JSON.parse(settings);
+                    vm.settings = settings;
+                    // return
+                }
+                axios.get(apiServiesRoutes.BASE_URL + apiServiesRoutes.HOME_ADS, {
+                    params: {
+                        lang: vm.lang
+                    }
+                }).then((resp) => {
+                    let status = resp.data.status;
+                    let data = resp.data.data;
+                    if (status) {
+                        let logo = '';
+                        let pointModule = '';
+                        let to_money_percent = '0';
+                        try {
+                            logo = data.setting.logo[0].path.path;
+                        } catch (e) {
+                            logo = '';
+                        }
+                        try {
+                            pointModule = data.pointSystem.point_status[0].value
+                        } catch (e) {
+                            pointModule = '';
+                        }
+                        try {
+                            to_money_percent = data.pointSystem.to_money_percent[0].value
+                        } catch (e) {
+                            to_money_percent = '';
+                        }
+                        let settings = {
+                            address_ar: data.setting.address_ar[0].value,
+                            address_en: data.setting.address_en[0].value,
+                            phone1: data.setting.phone1[0].value,
+                            phone2: data.setting.phone2[0].value,
+                            facebook: data.setting.facebook[0].value,
+                            twitter: data.setting.twitter[0].value,
+                            snapchat: data.setting.snapchat[0].value,
+                            instagram: data.setting.instagram[0].value,
+                            front_email: data.setting.front_email[0].value,
+                            pinterest: data.setting.pinterest[0].value,
+                            youtube: data.setting.youtube[0].value,
+                            googleplay: data.setting.googleplay[0].value,
+                            appstore: data.setting.appstore[0].value,
+                            delivery_cost: data.setting.delivery_cost[0].value,
+                            delivery_cost_condition: data.setting.delivery_cost_condition[0].value,
+                            logo: logo
+                        };
+                        vm.settings = settings;
+                        localStorage.setItem('settings', JSON.stringify(settings))
+                        localStorage.setItem('pointModule', JSON.stringify(pointModule))
+                        localStorage.setItem('to_money_percent', JSON.stringify(to_money_percent))
+                    }
+                    vm.$root.$children[0].$refs.loader.show_loader = false;
+                }).catch((error) => {
+                    vm.$root.$children[0].$refs.loader.show_loader = false;
+
+                })
+            },
             checkPointModule() {
                 return JSON.parse(localStorage.getItem('pointModule'))
             },
@@ -347,10 +653,10 @@
                     this.$ml.change(lang)
                 }
                 if (this.$ml.current == 'en') {
-                    // this.$ml.change('en')
+                    if (!lang) this.$ml.change('en')
                     localStorage.setItem('current_currency', 'KWD')
                 } else {
-                    // this.$ml.change('ar');
+                    if (!lang) this.$ml.change('ar');
                     localStorage.setItem('current_currency', 'دينار كويتي')
                 }
                 location.reload()
@@ -375,8 +681,13 @@
 
 <style>
     .header_bar {
-        height: 30px;
+        height: 45px;
         background: #00aeef;
+    }
+
+    .news_bar {
+        height: 45px;
+        background: #5d5d5d;
     }
 
     .header_tool_bar {
@@ -439,6 +750,14 @@
         font-weight: bold;
     }
 
+    .cart_count2 {
+        position: absolute;
+        bottom: 14px;
+        font-size: 12px;
+        left: 50%;
+        font-weight: bold;
+    }
+
     .header_menu_bar {
         border-top: 1px solid #888;
         border-bottom: 1px solid #888;
@@ -496,11 +815,62 @@
     }
 
     .rad_left {
-        border-radius: 25px 0  0 25px!important;
+        border-radius: 25px 0 0 25px !important;
     }
 
     .rad_right {
         border-radius: 0 25px 25px 0 !important;
+    }
 
+    .search_bar {
+        background: rgb(93, 93, 93);
+        width: 50px;
+        height: 47px;
+        top: -6px;
+        position: relative;
+        text-align: center;
+    }
+
+    .search-query-bar {
+        margin-top: 90px;
+    }
+
+    .autocomplete-items {
+        position: absolute;
+        border: 1px solid #d4d4d4;
+        border-bottom: none;
+        border-top: none;
+        z-index: 99999;
+        /*position the autocomplete items to be the same width as the container:*/
+        top: 100%;
+        left: 0;
+        right: 0;
+        max-height: 500px;
+        overflow: hidden;
+        overflow-y: scroll;
+    }
+
+    .autocomplete-items .category {
+        color: #00adee;
+        padding: 10px;
+        background-color: #fff;
+    }
+
+    .autocomplete-items .item {
+        padding: 10px;
+        cursor: pointer;
+        background-color: #fff;
+        border-bottom: 1px solid #d4d4d4;
+    }
+
+    .autocomplete-items div:hover {
+        /*when hovering an item:*/
+        background-color: #e9e9e9;
+    }
+
+    .autocomplete-active {
+        /*when navigating through the items using the arrow keys:*/
+        background-color: DodgerBlue !important;
+        color: #ffffff;
     }
 </style>

@@ -5,6 +5,8 @@ import AppAdminHeader from "./layout/AppAdminHeader";
 import AppNewHeader from "./layout/AppNewHeader";
 import AppFooter from "./layout/AppFooter";
 import Home from "./views/Home.vue";
+import BestSales from "./views/BestSales.vue";
+import NewArrival from "./views/NewArrival.vue";
 import AllStores from "./views/AllStores.vue";
 import FindStore from "./views/FindStore.vue";
 import Store from "./views/Store.vue";
@@ -123,6 +125,24 @@ let router = new Router({
             components: {
                 header: AppNewHeader,
                 default: Home,
+                footer: AppFooter
+            }
+        },
+        {
+            path: "/best_sales",
+            name: "best_sales",
+            components: {
+                header: AppNewHeader,
+                default: BestSales,
+                footer: AppFooter
+            }
+        },
+        {
+            path: "/new_arrival",
+            name: "new_arrival",
+            components: {
+                header: AppNewHeader,
+                default: NewArrival,
                 footer: AppFooter
             }
         },

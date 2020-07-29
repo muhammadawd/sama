@@ -1,180 +1,155 @@
 <template>
     <div class="profile-page">
-        <section class="section-profile-cover section-shaped my-0">
-            <div class="shape shape-style-1 shape-primary shape-skews alpha-4">
-                <!--                <span></span>-->
-                <!--                <span></span>-->
-                <!--                <span></span>-->
-                <!--                <span></span>-->
-                <!--                <span></span>-->
-                <!--                <span></span>-->
-                <!--                <span></span>-->
-            </div>
-        </section>
-        <section class="section section-skew" style="padding-bottom: 0">
-            <div class="container-full">
-                <card class="card-profile border-0 mb-0" no-body style="position: relative;">
+        <div class="row">
+            <div class="col-md-12 mb-2">
+                <div class="container mt-0">
                     <div class="row">
-                        <div class="col-md-12 bg-gray-50 mb-2">
-                            <div class="container mt-0">
-                                <div class="row">
-                                    <div class="col-12 mb-2" v-if="$route.query.q">
-                                        <div class="card">
-                                            <div class="card-body p-1">
-                                                <h4 class="text-left m-3">
-                                                    <b>{{$ml.get('search')}}<br></b>
-                                                    <small>{{$route.query.q}}</small>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="col-12 mb-2" v-if="$route.query.q">
+                            <div class="card">
+                                <div class="card-body p-1">
+                                    <h4 class="text-left m-3">
+                                        <b>{{$ml.get('search')}}<br></b>
+                                        <small>{{$route.query.q}}</small>
+                                    </h4>
                                 </div>
-                                <div class="row  text-left mt-3" v-if="!isMobile()">
-                                    <div class="col-md-2 mb-4">
-                                        <!--<img src="img/brand/blue.png" width="120" class="img-thumbnail" alt="">-->
-                                    </div>
-                                    <div class="col-md-10">
-                                        <h4 class="font-weight-bold text-dark">{{this.$ml.get('search_result_p')}}</h4>
-                                        <div class="row">
-                                            <!--<div class="col-md-4"></div>-->
-                                            <div class="col-md-8  text-right">
-                                                <div class="input-group mb-3">
-                                                    <!--<autocomplete-->
-                                                    <!--ref="autocomplete"-->
-                                                    <!--:url="auto_complete"-->
-                                                    <!--:source="auto_complete"-->
-                                                    <!--anchor="address"-->
-                                                    <!--input-class="form-control text-left form-control-alternative text-capitalize p-2 auto_input"-->
-                                                    <!--:classes="{ wrapper: 'form-wrapper', input: 'form-control auto-save', list: 'data-list', item: 'data-list-item' }"-->
-                                                    <!--label="writer"-->
-                                                    <!--:initValue="query"-->
-                                                    <!--name="query"-->
-                                                    <!--:results-display="formattedDisplay"-->
-                                                    <!--@selected="addDistributionGroup"-->
-                                                    <!--@nothingSelected="nothingSelectedFun"-->
-                                                    <!--results-property="data"-->
-                                                    <!--:placeholder="$ml.get('search_key')">-->
-                                                    <!--</autocomplete>-->
-                                                    <input class="form-control pr-2 pl-2" v-model="query"
-                                                           @input="getApiSuggest()"
-                                                           @blur="hideSearch()"
-                                                           @keyup.enter="searchQueryClicked()"/>
-                                                    <div class="autocompletes">
-                                                        <div id="myInputautocomplete-list" class="autocomplete-items">
-                                                            <div v-for="(items , key) in suggestList" :key="key"
-                                                                 class="text-left">
-                                                                <div class="category text-left font-weight-bold">
-                                                                    <i class="fa fa-gift fa-lg"></i>
-                                                                    {{$ml.get(key)}}
-                                                                </div>
-                                                                <div class="item text-left"
-                                                                     v-for="(item , key) in items"
-                                                                     :key="key" @click="setQuerySearch(item)">
-                                                                    <strong>{{item}}</strong>
-                                                                </div>
-                                                                <div class="item text-center"
-                                                                     v-if="items.length == 0">
-                                                                    <strong>{{$ml.get('no_data')}}</strong>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row  text-left mt-3" v-if="!isMobile()">
+                        <div class="col-md-2 mb-4">
+                            <!--<img src="img/brand/blue.png" width="120" class="img-thumbnail" alt="">-->
+                        </div>
+                        <div class="col-md-10">
+                            <h4 class="font-weight-bold text-dark">{{this.$ml.get('search_result_p')}}</h4>
+                            <div class="row">
+                                <!--<div class="col-md-4"></div>-->
+                                <div class="col-md-8  text-right">
+                                    <div class="input-group mb-3">
+                                        <!--<autocomplete-->
+                                        <!--ref="autocomplete"-->
+                                        <!--:url="auto_complete"-->
+                                        <!--:source="auto_complete"-->
+                                        <!--anchor="address"-->
+                                        <!--input-class="form-control text-left form-control-alternative text-capitalize p-2 auto_input"-->
+                                        <!--:classes="{ wrapper: 'form-wrapper', input: 'form-control auto-save', list: 'data-list', item: 'data-list-item' }"-->
+                                        <!--label="writer"-->
+                                        <!--:initValue="query"-->
+                                        <!--name="query"-->
+                                        <!--:results-display="formattedDisplay"-->
+                                        <!--@selected="addDistributionGroup"-->
+                                        <!--@nothingSelected="nothingSelectedFun"-->
+                                        <!--results-property="data"-->
+                                        <!--:placeholder="$ml.get('search_key')">-->
+                                        <!--</autocomplete>-->
+                                        <input class="form-control pr-2 pl-2" style="border: 1px solid #000" v-model="query"
+                                               @input="getApiSuggest()"
+                                               @blur="hideSearch()"
+                                               @keyup.enter="searchQueryClicked()"/>
+                                        <div class="autocompletes">
+                                            <div id="myInputautocomplete-list" class="autocomplete-items">
+                                                <div v-for="(items , key) in suggestList" :key="key"
+                                                     class="text-left">
+                                                    <div class="category text-left font-weight-bold">
+                                                        <i class="fa fa-gift fa-lg"></i>
+                                                        {{$ml.get(key)}}
                                                     </div>
-                                                    <div class="input-group-append">
-                                                        <button class="btn btn-github btn-icon"
-                                                                @click="searchQueryClicked()">
-                                                            <span class="btn-inner--icon"><i
-                                                                    class="fa fa-search"></i></span>
-                                                            <span class="btn-inner--text d-none"><span class="">  {{this.$ml.get('search_key')}}</span> {{this.$ml.get('filter')}}  </span>
-                                                        </button>
+                                                    <div class="item text-left"
+                                                         v-for="(item , key) in items"
+                                                         :key="key" @click="setQuerySearch(item)">
+                                                        <strong>{{item}}</strong>
+                                                    </div>
+                                                    <div class="item text-center"
+                                                         v-if="items.length == 0">
+                                                        <strong>{{$ml.get('no_data')}}</strong>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="mb-1">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-github btn-icon"
+                                                    @click="searchQueryClicked()">
+                                                            <span class="btn-inner--icon"><i
+                                                                    class="fa fa-search"></i></span>
+                                                <span class="btn-inner--text d-none"><span class="">  {{this.$ml.get('search_key')}}</span> {{this.$ml.get('filter')}}  </span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 d-none d-md-block" v-if="!isMobile()">
-                            <div class="row">
-                                <div class="col-md-12" dir="ltr">
-                                    <h5 class="font-weight-bold text-left text-dark p-3 mb-4">
-                                        {{this.$ml.get('price_range')}}</h5>
-                                    <div class="app-content">
-                                        <vue-slider v-model="rangeValue"
-                                                    :min="min"
-                                                    :max="max"
-                                                    :tooltip="'always'"
-                                                    @drag-end="endSlide()"
-                                                    :tooltip-formatter="formatter2"
-                                        >
-                                        </vue-slider>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 pl-3 pr-3">
-                                    <div class="card" style="border: 0;">
-                                        <div class="card-body">
-                                            <ul class="list-unstyled text-left direction">
-                                                <li v-for="(category , index) in categories_options">
-                                                    <base-checkbox type="checkbox" class="mb-3" name="categories[]"
-                                                                   v-model="checked_categories"
-                                                                   :value="category.value">
-                                                        {{category.text}}
-                                                    </base-checkbox>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 text-center">
-                                    <button class="btn btn-danger mt-2" @click="filterData()">
-                                        {{$ml.get('filter')}}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 text-left"  v-if="isMobile()">
-                            <button class="btn btn-default  m-3 btn-sm d-md-none"
-
-                                    @click="modals.modal1 = true">
-                                <i class="fa fa-filter"></i>
-                                {{$ml.get('filter')}}
-                            </button>
-                        </div>
-                        <div class="col-md-9 col-12">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-3 col-6" :style="isMobile() ? {marginBottom:'100px'}:{}"
-                                         v-for="(product ,$index) in products" :key="$index">
-                                        <oneProduct v-bind:addToCart="addToCart"
-                                                    v-bind:product="product"></oneProduct>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <infinite-loading @distance="1" @infinite="searchQuery">
-                                <div slot="no-more"></div>
-                                <div slot="no-results"></div>
-                            </infinite-loading>
-                        </div>
-                        <div class="col-md-12 mt-2 text-center" v-if="products.length == 0">
-                            <h4 class="text-uppercase display-4" v-if="loading">{{$ml.get('loading')}}</h4>
-                            <h4 class="text-uppercase display-4" v-if="no_data">{{$ml.get('no_data')}}</h4>
-                        </div>
-                    </div>
-                    <div class="px-4">
-                        <div class="row">
-                            <div class="col-md-12  mb-5">
-                                <div class="row row-grid">
-                                </div>
+                            <div class="mb-1">
                             </div>
                         </div>
                     </div>
-                </card>
+                </div>
             </div>
-        </section>
+            <div class="col-md-3 d-none d-md-block" v-if="!isMobile()">
+                <div class="row">
+                    <div class="col-md-12" dir="ltr">
+                        <h5 class="font-weight-bold text-left text-dark p-3 mb-4">
+                            {{this.$ml.get('price_range')}}</h5>
+                        <div class="app-content">
+                            <vue-slider v-model="rangeValue"
+                                        :min="min"
+                                        :max="max"
+                                        :tooltip="'always'"
+                                        @drag-end="endSlide()"
+                                        :tooltip-formatter="formatter2"
+                            >
+                            </vue-slider>
+                        </div>
+                    </div>
+                    <div class="col-md-12 pl-3 pr-3">
+                        <div class="card" style="border: 0;">
+                            <div class="card-body">
+                                <ul class="list-unstyled text-left direction">
+                                    <li v-for="(category , index) in categories_options">
+                                        <base-checkbox type="checkbox" class="mb-3" name="categories[]"
+                                                       v-model="checked_categories"
+                                                       :value="category.value">
+                                            {{category.text}}
+                                        </base-checkbox>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 text-center">
+                        <button class="btn btn-danger mt-2" @click="filterData()">
+                            {{$ml.get('filter')}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 text-left"  v-if="isMobile()">
+                <button class="btn btn-default  m-3 btn-sm d-md-none"
+
+                        @click="modals.modal1 = true">
+                    <i class="fa fa-filter"></i>
+                    {{$ml.get('filter')}}
+                </button>
+            </div>
+            <div class="col-md-9 col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-6" :style="isMobile() ? {marginBottom:'100px'}:{}"
+                             v-for="(product ,$index) in products" :key="$index">
+                            <oneProduct v-bind:addToCart="addToCart"
+                                        v-bind:product="product"></oneProduct>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <infinite-loading @distance="1" @infinite="searchQuery">
+                    <div slot="no-more"></div>
+                    <div slot="no-results"></div>
+                </infinite-loading>
+            </div>
+            <div class="col-md-12 mt-2 text-center" v-if="products.length == 0">
+                <h4 class="text-uppercase display-4" v-if="loading">{{$ml.get('loading')}}</h4>
+                <h4 class="text-uppercase display-4" v-if="no_data">{{$ml.get('no_data')}}</h4>
+            </div>
+        </div>
         <modal :show.sync="modals.modal1"
                gradient="white"
                modal-classes="modal-danger modal-dialog-centered modal-lg">

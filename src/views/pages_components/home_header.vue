@@ -1,5 +1,5 @@
 <template>
-    <section v-if="slides.length">
+    <section  v-if="slides.length">
         <agile :dots="false" :autoplay="true" :autoplay-speed="2000">
             <div v-for="(slide  ,key) in slides" class="slide" :key="key">
                 <div class="container">
@@ -60,8 +60,6 @@
                     if (length == i) i = 0;
                     vm.current_slide = vm.slides[i];
                     i += 1;
-                    console.log(i)
-                    console.log(vm.slides)
                 }, 3000)
             },
             getAllSliders() {
@@ -80,7 +78,7 @@
                             arr.push(slide.image)
                         });
                         vm.slides = data.sliders
-                        vm.slidesAction();
+                        // vm.slidesAction();
                     }
                     vm.$root.$children[0].$refs.loader.show_loader = false;
                 }).catch((error) => {

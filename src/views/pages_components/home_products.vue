@@ -2,21 +2,11 @@
     <div>
         <div class="row ">
             <div class="col-md-12 text-center" v-if="categories.length == 0">
-                <h1>{{loadingText}}</h1>
+                <h1>
+                    {{loadingText}}
+                    <i class="fa fa-spinner fa-spin fal-lg"></i>
+                </h1>
             </div>
-            <!--<div class="col-md-12">-->
-            <!--<tabs v-if="categories.length">-->
-            <!--<tab v-for="(cat , key) in categories" v-if="cat.products.length > 0" :title="cat.translated.title"-->
-            <!--:key="key">-->
-            <!--<div class="row">-->
-            <!--<div class="col-lg-3 col-md-4 col-12" v-for="(product,key) in cat.products" :key="key">-->
-            <!--<oneProduct v-bind:addToCart="addToCart"-->
-            <!--v-bind:product="product"></oneProduct>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</tab>-->
-            <!--</tabs>-->
-            <!--</div>-->
         </div>
         <div class="row">
             <div class="col-md-12 mb-4" v-if="categories.length">
@@ -26,7 +16,11 @@
                          :class="key != 0 ? 'mt-3' : ''">
                         <div class="card-body">
                             <div class="main_color float-right pull-right">
-                                <router-link class="main_color "
+                                <!--<img :src="require('@/assets/images/newImages/next.png')" class="d-inline-block swiper-button-next"-->
+                                     <!--width="25px"/>-->
+                                <!--<img :src="require('@/assets/images/newImages/prev.png')" class="d-inline-block swiper-button-prev"-->
+                                     <!--width="25px"/>-->
+                                <router-link class="main_color"
                                              :to="{name:'search_result',query: {'q': cat.translated.title}}">
                                     <h4 style="margin-top: 20px;" class="font-weight-bold">{{$ml.get('all')}}</h4>
                                 </router-link>
@@ -49,35 +43,30 @@
                     </swiper>
 
 
-                    <!--<template v-if="cat.category_ad.length == 2">-->
-                    <!--<div class="card mt-2 mb-2">-->
-                    <!--<div class="card-body p-1">-->
-                    <!--<div class="w-100">-->
-                    <!--<div class="w-50 d-inline-block p-1 text-ellipsis"-->
-                    <!--v-for="(ads , index) in cat.category_ad"-->
-                    <!--:key="index">-->
-                    <!--<a :href="ads.url">-->
-                    <!--<img :src="ads.wide_image_path" width="100%" alt=""/>-->
-                    <!--</a>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</template>-->
-                    <!--<template v-if="cat.category_ad.length == 1">-->
-                    <!--<div class="card mt-2 mb-2">-->
-                    <!--<div class="card-body p-1">-->
-                    <!--<div class="row w-100">-->
-                    <!--<div class="col-3"></div>-->
-                    <!--<div class="col-6" v-for="(ads , index) in cat.category_ad" :key="index">-->
-                    <!--<a :href="ads.url" class="mt-3">-->
-                    <!--<img :src="ads.wide_image_path" width="100%" alt=""/>-->
-                    <!--</a>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</template>-->
+                    <template v-if="cat.category_ad.length == 2">
+                        <div class="container mt-2 mb-2">
+                            <div class="w-100">
+                                <div class="w-50 d-inline-block p-1 text-ellipsis"
+                                     v-for="(ads , index) in cat.category_ad"
+                                     :key="index">
+                                    <a :href="ads.url">
+                                        <img :src="ads.wide_image_path" width="100%" alt=""/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-if="cat.category_ad.length == 1">
+                        <div class="container mt-2 mb-2">
+                            <div class="row" style="justify-content: center">
+                                <div class="col-md-6" v-for="(ads , index) in cat.category_ad" :key="index">
+                                    <a :href="ads.url" class="mt-3">
+                                        <img :src="ads.wide_image_path" width="100%" alt=""/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
 
                 </div>
             </div>
@@ -118,6 +107,8 @@
                     pagination: {
                         el: '.swiper-pagination',
                     },
+                    nextButton: '.swiper-button-next',
+                    prevButton: '.swiper-button-prev',
                     speed: 400,
                     dragSize: 5,
                     followFinger: false,
@@ -136,7 +127,7 @@
                             slidesPerView: 2
                         },
                         700: {
-                            slidesPerView: 1
+                            slidesPerView: 2
                         }
                     }
                 },
@@ -236,16 +227,21 @@
                 });
                 vm.$store.dispatch('addToCart', product);
             },
+            nextSwiper(i) {
+                // console.log(this.swiper[i].swiper.allowSlideNext());
+            }
         },
         mounted() {
             this.getAllProductsWithCategory()
-            // this.getAllProducts()
         },
         computed: {
+            swiper() {
+                return this.$refs.mySwiper
+            },
             ...mapState([
                 'auth',
                 'cart'
-            ]),
+            ])
         },
     }
 </script>
