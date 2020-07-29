@@ -15,21 +15,21 @@
                                         <h4 class="font-weight-bold main_color">{{this.$ml.get('or_sign_with')}}</h4>
                                     </div>
                                     <div class="btn-wrapper text-center">
-                                        <base-button type="new_btn" class="text-black  btn-block mb-2"
+                                        <base-button type="new_btn" class="text-black shadow2 btn-block mb-3"
                                                      @click="googleSign">
                                             <img slot="icon" src="img/icons/common/google.svg">
                                             {{this.$ml.get('google')}}
                                         </base-button>
                                     </div>
                                     <div class="btn-wrapper text-center">
-                                        <base-button type="new_btn" class="text-black btn-block mb-2"
+                                        <base-button type="new_btn" class="text-black shadow2 btn-block mb-2"
                                                      @click="twitterSign">
                                             <img slot="icon" src="img/icons/common/twitter.png">
                                             {{this.$ml.get('twitter')}}
                                         </base-button>
                                     </div>
                                     <div class="btn-wrapper text-center" v-if="cart.length">
-                                        <base-button type="new_btn" class="text-black btn-block mb-2"
+                                        <base-button type="new_btn" class="text-black shadow2 btn-block mb-2"
                                                      @click="loginGuest">
                                             <img slot="icon" src="img/icons/common/user_male2-512.png">
                                             {{this.$ml.get('guest')}}

@@ -246,9 +246,11 @@ export default new MLCreate({
             visits: 'Visits.',
             av: 'Available.',
             no_av: 'Not Available.',
+            // recommended: 'Recommended',
         }),
 
         new MLanguage('ar').create({
+            // recommended: ' موصي به',
             av: ' متوفر',
             no_av: 'غير متوفر',
             visits: 'عدد الزيارات',

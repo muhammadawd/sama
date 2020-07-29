@@ -16,14 +16,14 @@
                                 <div class="p-4">
                                     <template>
                                         <div class="btn-wrapper text-center">
-                                            <base-button type="new_btn" class="text-black btn-block mb-2"
+                                            <base-button type="new_btn" class="text-black shadow2 btn-block mb-2"
                                                          @click="googleSign">
                                                 <img slot="icon" src="img/icons/common/google.svg">
                                                 {{this.$ml.get('google')}}
                                             </base-button>
                                         </div>
                                         <div class="btn-wrapper text-center">
-                                            <base-button type="new_btn" class="text-black btn-block mb-2"
+                                            <base-button type="new_btn" class="text-black shadow2  btn-block mb-2"
                                                          @click="twitterSign">
                                                 <img slot="icon" src="img/icons/common/twitter.png">
                                                 {{this.$ml.get('twitter')}}

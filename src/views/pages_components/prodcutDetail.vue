@@ -10,7 +10,7 @@
                 <h4 class="font-weight-bold text-white">
                     {{$ml.get('author')}} : {{product.translated ? product.translated.title : ''}}
                 </h4>
-                <h4 class="text-white">
+                <h4 class="text-white" v-if="pov">
                     <b>
                         {{pov.price && parseFloat(pov.price).toFixed(3) != 0 ? (parseFloat(pov.price).toFixed(3) + ' ' )
                         :
@@ -25,7 +25,7 @@
                     <button class="btn btn-secondary" style="background: #5d5d5d;color: #fff;">
                         <i class="fa fa-book"></i>
                     </button>
-                    <button class="btn btn-secondary"
+                    <button class="btn btn-secondary" v-if="pov"
                             :disabled="pov.store_detail && (pov.store_detail.quantity - pov.store_detail.reserved == 0)"
                             @click="AddToCart()">
                         <i class="fa fa-cart-plus"></i>
@@ -35,28 +35,28 @@
         </div>
         <div class="col-md-8">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 mt-2">
                     <h3 class="main_color font-weight-bold float-left">
-                        {{product.translated.title}}
+                        {{product.translated ? product.translated.title: ''}}
                     </h3>
                     <div class="float-right">
                         <b>{{$ml.get('share')}}</b>
                         <ul class="list-unstyled p-0 m-0">
-                            <li class="list-inline-item">
+                            <li class="list-inline-item animIcons">
                                 <a href="" @click.prevent="shareWhatsapp()">
                                     <div class="btn-social">
                                         <i class="fa fa-whatsapp fa-lg"></i>
                                     </div>
                                 </a>
                             </li>
-                            <li class="list-inline-item">
+                            <li class="list-inline-item animIcons">
                                 <a href="">
                                     <div class="btn-social">
                                         <i class="fa fa-facebook fa-lg"></i>
                                     </div>
                                 </a>
                             </li>
-                            <li class="list-inline-item">
+                            <li class="list-inline-item animIcons">
                                 <a href="">
                                     <div class="btn-social">
                                         <i class="fa fa-twitter fa-lg"></i>
@@ -71,17 +71,17 @@
                     </div>
                 </div>
                 <div class="col-md-6 mt-2">
-                    <p class="lead text-left">{{product.translated.description}}</p>
+                    <p class="lead text-left">{{product.translated ? product.translated.description : ''}}</p>
                 </div>
                 <div class="col-md-6 mt-2">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" v-if="pov">
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('section')}}</td>
                             <td class="text-center"></td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('book')}}</td>
-                            <td class="text-center">{{product.translated.title}}</td>
+                            <td class="text-center">{{product.translated ? product.translated.title : ''}}</td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('author')}}</td>
@@ -93,7 +93,7 @@
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('status')}}</td>
-                            <td class="text-center">{{!(pov.store_detail && (pov.store_detail.quantity -
+                            <td class="text-center" >{{!(pov.store_detail && (pov.store_detail.quantity -
                                 pov.store_detail.reserved == 0)) ? $ml.get('av') : $ml.get('no_av')}}
                             </td>
                         </tr>
@@ -131,6 +131,9 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-12">
+            <recommend_products></recommend_products>
+        </div>
     </div>
 </template>
 
@@ -146,7 +149,7 @@
     import {Pano} from 'vuejs-vr'// require styles
     import 'swiper/css/swiper.css'
     import VueProductSpinner from 'vue-product-spinner'
-
+    import recommend_products from './recommend_products';
     import {swiper, swiperSlide} from 'vue-awesome-swiper'
 
     Vue.use(Message);
@@ -814,6 +817,7 @@
             VueProductSpinner,
             BCarousel,
             BCarouselSlide,
+            recommend_products,
             Tabs,
             Pano,
             StarRating

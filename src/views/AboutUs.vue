@@ -7,12 +7,12 @@
                     <card type="secondary" shadow
                           header-classes="bg-main pb-5"
                           body-classes="px-lsg-5 p-0 py-lsg-5"
-                          class="border-0 new_card_auth2 bg-white">
+                          class="border-0 new_card_auth2 bg-white mb-2">
                         <div class="card-header bg-main-about  mb-2">
                             {{this.$ml.get('about_us')}}
                         </div>
                         <template>
-                            <div class="col-md-12 table_over">
+                            <div class="col-md-12 ">
                                 <div>
                                     {{branch_info.translated.description}}
                                 </div>
@@ -58,8 +58,8 @@
                             </div>
                         </template>
                     </card>
-                    <div class="row">
-                        <div class="col-md-6 mt-2">
+                    <div class="row" v-if="branch_info">
+                        <div class="col-md-6 mt-2" v-if="branch_info.map_frame">
                             <card type="secondary" shadow
                                   header-classes="bg-white pb-5"
                                   class="border-0 bg-white new_card_auth">
@@ -69,12 +69,12 @@
                                           style="font-size: 18px">{{this.$ml.get('map')}}</span>
                                     </div>
                                 </template>
-                                <template v-if="branch_info">
+                                <template>
                                     <div v-html="branch_info.map_frame"></div>
                                 </template>
                             </card>
                         </div>
-                        <div class="col-md-6 mt-2">
+                        <div class="col-md-6 mt-2" v-if="branch_info.vedio_frame">
                             <card type="secondary" shadow
                                   header-classes="bg-white pb-5"
                                   class="border-0 bg-white new_card_auth">
@@ -84,7 +84,7 @@
                                           style="font-size: 18px">{{this.$ml.get('video')}}</span>
                                     </div>
                                 </template>
-                                <template v-if="branch_info">
+                                <template>
                                     <div v-html="branch_info.vedio_frame"></div>
                                 </template>
                             </card>

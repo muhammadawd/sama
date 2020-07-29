@@ -1,5 +1,5 @@
 <template>
-    <div class="card card_curve shadow shadow-lg--hover mt-0" @mouseenter="mouseEnter()" @mouseleave="mouseLeave()">
+    <div class="card card_curve shadow shadow-lg--hover mt-0 mb-3" @mouseenter="mouseEnter()" @mouseleave="mouseLeave()">
         <div class="card-body text-center p-0 m-0" :style="isMobile() ? {maxHeight: '450px'} : {minHeight: '250px'}">
             <div class="priceSales" v-on:click.stop="addToCart(product)"
                  :style="$ml.current == 'ar' ? {right:'5px',left:'auto'} : {left:'5px',right:'auto'}"

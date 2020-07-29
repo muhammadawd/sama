@@ -1,13 +1,13 @@
 <template>
     <div class="best_sales" v-if="products.length">
-        <div class="container">
+        <div class="container" style="width: 90%">
             <div class="row">
                 <div class="col-md-12">
                     <h3 class="text-white text-left font-weight-bold">{{$ml.get('best_sales')}}</h3>
                 </div>
                 <div class="col-md-12">
                     <VueSlickCarousel v-bind="settings" :arrows="true">
-                        <div class="slider__item " v-for="(product,key) in products" :key="key">
+                        <div class="slider__item " v-for="(product,key) in products" :key="key"  v-if="key < 20">
 
                             <oneProduct v-bind:addToCart="addToCart"
                                         v-bind:product="product"></oneProduct>

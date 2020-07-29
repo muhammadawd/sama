@@ -244,3 +244,22 @@ body, div, span, h1, h2, h3, h4, h5, h6, a {
 .swiper-container-horizontal > .swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {
     white-space: nowrap;
 }
+
+.shadow2 {
+    box-shadow: 4px 3px 12px #ececec;
+}
+
+.transition {
+    transition: all 0.5s ease-in-out;
+}
+.animIcons {
+    position: relative;
+    transition: all 0.5s ease-in-out;
+}
+
+.animIcons:hover {
+    position: relative;
+    transition: all 0.5s ease-in-out;
+    /*top: -10px;*/
+    transform: rotateY(360deg);
+}

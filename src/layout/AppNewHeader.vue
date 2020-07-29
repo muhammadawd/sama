@@ -161,7 +161,8 @@
                     <div class="row direction text-left">
                         <div class="col-12 text-center">
                             <div class="search_bar d-inline-block">
-                                <img class="m-1 pt-2" :src="require('@/assets/images/newImages/search.png')" width="20px"/>
+                                <img class="m-1 pt-2" :src="require('@/assets/images/newImages/search.png')"
+                                     width="20px"/>
                             </div>
                             <input type="text" class="form-control form-control-alternative d-inline-block w-75"
                                    :class="$ml.current == 'ar' ?  'rad_left' : 'rad_right'"
@@ -230,47 +231,47 @@
                             <div class="col-5 text-left">
                                 <div class="header_contact">
                                     <ul class="list-unstyled direction">
-                                        <li class="list-inline-item direction-inverse"
+                                        <li class="list-inline-item direction-inverse animIcons"
                                             v-if="$helper.getSettings().phone1">
                                             <a :href="'tel:'+$helper.getSettings().phone1">
                                                 {{$helper.getSettings().phone1}}
                                             </a>
                                         </li>
-                                        <li class="list-inline-item direction-inverse"
+                                        <li class="list-inline-item  animIcons direction-inverse"
                                             v-if="$helper.getSettings().phone2">
                                             <a :href="'tel:'+$helper.getSettings().phone2">
                                                 {{$helper.getSettings().phone2}}
                                             </a>
                                         </li>
-                                        <li class="list-inline-item" v-if="$helper.getSettings().facebook">
+                                        <li class="list-inline-item animIcons" v-if="$helper.getSettings().facebook">
                                             <a :href="$helper.getSettings().facebook">
                                                 <img :src="require('@/assets/images/newImages/facebook.png')"
                                                      width="30px"
                                                      alt="">
                                             </a>
                                         </li>
-                                        <li class="list-inline-item" v-if="$helper.getSettings().twitter">
+                                        <li class="list-inline-item animIcons" v-if="$helper.getSettings().twitter">
                                             <a :href="$helper.getSettings().twitter">
                                                 <img :src="require('@/assets/images/newImages/twitter.png')"
                                                      width="30px"
                                                      alt="">
                                             </a>
                                         </li>
-                                        <li class="list-inline-item" v-if="$helper.getSettings().snapchat">
+                                        <li class="list-inline-item animIcons" v-if="$helper.getSettings().snapchat">
                                             <a :href="$helper.getSettings().snapchat">
                                                 <img :src="require('@/assets/images/newImages/snapchat.png')"
                                                      width="30px"
                                                      alt="">
                                             </a>
                                         </li>
-                                        <li class="list-inline-item" v-if="$helper.getSettings().instagram">
+                                        <li class="list-inline-item animIcons" v-if="$helper.getSettings().instagram">
                                             <a :href="$helper.getSettings().instagram">
                                                 <img :src="require('@/assets/images/newImages/instagram.png')"
                                                      width="30px"
                                                      alt="">
                                             </a>
                                         </li>
-                                        <li class="list-inline-item" v-if="$helper.getSettings().front_email">
+                                        <li class="list-inline-item animIcons" v-if="$helper.getSettings().front_email">
                                             <a :href="'mailto:'+$helper.getSettings().front_email">
                                                 <img :src="require('@/assets/images/newImages/email.png')" width="30px"
                                                      alt="">
@@ -306,7 +307,7 @@
                                                 <div class="float-left">
                                                     <span>{{$ml.get('cart')}}</span>
                                                 </div>
-                                                <div class="position-relative float-right">
+                                                <div class="position-relative animIcons float-right">
                                                     <span class="cart_count">{{cart.length}}</span>
                                                     <img :src="require('@/assets/images/newImages/cart.png')"
                                                          width="40px"

@@ -7,10 +7,11 @@
             <div class="container-full ">
 
                 <div class="landing_cover2">
-                    <best_sales_products class="mt-5 mb-4"></best_sales_products>
                     <div class="container mb-5">
                         <home_products></home_products>
                     </div>
+                    <best_sales_products class="mt-5 mb-4"></best_sales_products>
+                    <new_arrival_products class="mt-5 mb-4"></new_arrival_products>
                 </div>
             </div>
         </section>

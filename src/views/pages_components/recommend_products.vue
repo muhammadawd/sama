@@ -1,14 +1,13 @@
 <template>
-    <div class="new_arrival" v-if="products.length">
-        <div class="container" style="width: 90%">
+    <div class="recommended" v-if="products.length">
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="text-left font-weight-bold">{{$ml.get('new_arrival')}}</h3>
+                    <h3 class="text-left font-weight-bold">{{$ml.get('recommended')}}</h3>
                 </div>
                 <div class="col-md-12">
                     <VueSlickCarousel v-bind="settings" :arrows="true">
                         <div class="slider__item " v-for="(product,key) in products" :key="key" v-if="key < 20">
-
                             <oneProduct v-bind:addToCart="addToCart"
                                         v-bind:product="product"></oneProduct>
                         </div>
@@ -63,16 +62,17 @@
                 products: [],
                 lang: this.$ml.current,
                 settings: {
-                    "dots": false,
+                    "dots": true,
                     "arrows": true,
-                    "focusOnSelect": true,
+                    // "focusOnSelect": true,
                     "centerPadding": '30px',
                     "infinite": true,
-                    "centerMode": true,
+                    // "centerMode": true,
                     "speed": 500,
                     "slidesToShow": 5,
                     "slidesToScroll": 3,
-                    "touchThreshold": 5, "responsive": [
+                    "touchThreshold": 5,
+                    "responsive": [
                         {
                             "breakpoint": 1024,
                             "settings": {
@@ -197,35 +197,35 @@
     }
 </script>
 
-<style>
+<style >
     .slick-prev:before, .slick-next:before {
         display: none;
     }
 
-    .slick-next img {
-        width: 25px;
-        position: absolute;
-        right: -10px;
-    }
+    /*.slick-next img {*/
+        /*width: 25px;*/
+        /*position: absolute;*/
+        /*right: -10px;*/
+    /*}*/
 
-    .slick-prev img {
-        width: 25px;
-        position: absolute;
-        left: -10px;
-    }
+    /*.slick-prev img {*/
+        /*width: 25px;*/
+        /*position: absolute;*/
+        /*left: -10px;*/
+    /*}*/
 
     .slick-slide > div {
-        transform: scale(.7);
-        transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+        transform: scale(0.8);
+        /*transition: transform .3s cubic-bezier(.4, 0, .2, 1);*/
     }
 
-    .slick-center > div {
-        transform: scale(1);
-    }
+    /*.slick-center > div {*/
+        /*transform: scale(1);*/
+    /*}*/
 
-    .new_arrival {
+    .recommended {
         min-height: 550px;
-        background: url("../../assets/images/newImages/new_arrival.png") left center no-repeat;
+        /*background: url("../../assets/images/newImages/new_arrival.png") left center no-repeat;*/
         background-size: contain;
         display: flex;
         flex-direction: column;

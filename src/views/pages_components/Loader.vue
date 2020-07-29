@@ -2,8 +2,8 @@
     <div class="loader_overlay" v-if="showLoader">
         <div class="content">
             <br>
-            <img :src="$helper.getLogo()" class="bounce" alt="">
-            <h5 class="display-5 p-0 m-0 text-white">{{this.$ml.get('loading')}}</h5>
+            <img :src="$helper.getLogo()" class="bounce w-50" alt="">
+            <h5 class="display-5 p-0 m-0 text-black">{{this.$ml.get('loading')}}</h5>
         </div>
     </div>
 </template>
@@ -45,7 +45,7 @@
         border-radius: 18px;
         margin: 300px auto;
         font-weight: bold;
-        background-color: #1d1d1d;
+        background-color: #fff;
     }
 
     .loader_overlay .content img {

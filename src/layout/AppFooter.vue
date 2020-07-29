@@ -34,29 +34,29 @@
                         <img :src="$helper.getLogo()" width="120px" alt="">
                     </div>
                     <div class="col-md-6 text-left pt-4">
-                        <ul class="list-unstyled site_map direction">
-                            <li class="list-inline-item">
-                                <a href="" @click.prevent="$router.push({name:'about_us'})">
+                        <ul class="list-unstyled site_map direction transition">
+                            <li class="list-inline-item transition">
+                                <a href="" class="" @click.prevent="$router.push({name:'about_us'})">
                                     {{$ml.get('about_us')}}
                                 </a>
                             </li>
-                            <li class="list-inline-item">
-                                <a href="" @click.prevent="$router.push({name:'new_arrival'})">
+                            <li class="list-inline-item transition">
+                                <a href="" class="" @click.prevent="$router.push({name:'new_arrival'})">
                                     {{$ml.get('new_arrival')}}
                                 </a>
                             </li>
-                            <li class="list-inline-item">
-                                <a href="" @click.prevent="$router.push({name:'best_sales'})">
+                            <li class="list-inline-item transition">
+                                <a href="" class="" @click.prevent="$router.push({name:'best_sales'})">
                                     {{$ml.get('best_sales')}}
                                 </a>
                             </li>
-                            <li class="list-inline-item">
-                                <a href="" @click.prevent="$router.push({name:'location'})">
+                            <li class="list-inline-item transition">
+                                <a href="" class="" @click.prevent="$router.push({name:'location'})">
                                     {{$ml.get('location')}}
                                 </a>
                             </li>
-                            <li class="list-inline-item">
-                                <a href="" @click.prevent="$router.push({name:'contact_us'})">
+                            <li class="list-inline-item transition">
+                                <a href="" class="" @click.prevent="$router.push({name:'contact_us'})">
                                     {{$ml.get('contact_us')}}
                                 </a>
                             </li>
@@ -75,8 +75,8 @@
                             </div>
                             <div class="col-7">
                                 <div class="d-flex">
-                                    <ul class="list-unstyled direction m-2 " style="margin-top: 0!important;">
-                                        <li class="list-inline-item font-weight-bold direction-inverse"
+                                    <ul class="list-unstyled direction m-2 transition" style="margin-top: 0!important;">
+                                        <li class="list-inline-item font-weight-bold direction-inverse "
                                             v-if="$helper.getSettings().phone1">
                                             <a :href="'tel:'+$helper.getSettings().phone1">
                                                 {{$helper.getSettings().phone1}}
@@ -93,26 +93,26 @@
                                          height="50px" class=""
                                          alt="">
                                 </div>
-                                <ul class="list-unstyled">
-                                    <li class="list-inline-item" v-if="$helper.getSettings().facebook">
+                                <ul class="list-unstyled transition">
+                                    <li class="list-inline-item animIcons" v-if="$helper.getSettings().facebook">
                                         <a :href="$helper.getSettings().facebook">
                                             <img :src="require('@/assets/images/newImages/facebook.png')" width="30px"
                                                  alt="">
                                         </a>
                                     </li>
-                                    <li class="list-inline-item" v-if="$helper.getSettings().twitter">
+                                    <li class="list-inline-item animIcons" v-if="$helper.getSettings().twitter">
                                         <a :href="$helper.getSettings().twitter">
                                             <img :src="require('@/assets/images/newImages/twitter.png')" width="30px"
                                                  alt="">
                                         </a>
                                     </li>
-                                    <li class="list-inline-item" v-if="$helper.getSettings().snapchat">
+                                    <li class="list-inline-item animIcons" v-if="$helper.getSettings().snapchat">
                                         <a :href="$helper.getSettings().snapchat">
                                             <img :src="require('@/assets/images/newImages/snapchat.png')" width="30px"
                                                  alt="">
                                         </a>
                                     </li>
-                                    <li class="list-inline-item" v-if="$helper.getSettings().instagram">
+                                    <li class="list-inline-item animIcons" v-if="$helper.getSettings().instagram">
                                         <a :href="$helper.getSettings().instagram">
                                             <img :src="require('@/assets/images/newImages/instagram.png')" width="30px"
                                                  alt="">
