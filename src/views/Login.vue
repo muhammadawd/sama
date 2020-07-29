@@ -1,6 +1,5 @@
 <template>
     <div class="profile-page">
-
         <div class="row">
             <div class="col-md-12">
                 <div class="container">
@@ -10,7 +9,7 @@
                             <card type="secondary" shadow
                                   header-classes="bg-white pb-5"
                                   body-classes="px-lg-5 py-lg-5"
-                                  class="border-0 new_card_auth bg-white">
+                                  class="border-0 new_card_auth mb-5 bg-white">
                                 <template>
                                     <div class="text-muted text-center mb-3">
                                         <h4 class="font-weight-bold main_color">{{this.$ml.get('or_sign_with')}}</h4>

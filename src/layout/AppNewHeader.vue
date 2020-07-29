@@ -161,7 +161,7 @@
                     <div class="row direction text-left">
                         <div class="col-12 text-center">
                             <div class="search_bar d-inline-block">
-                                <img class="m-1" :src="require('@/assets/images/newImages/search.png')" width="20px"/>
+                                <img class="m-1 pt-2" :src="require('@/assets/images/newImages/search.png')" width="20px"/>
                             </div>
                             <input type="text" class="form-control form-control-alternative d-inline-block w-75"
                                    :class="$ml.current == 'ar' ?  'rad_left' : 'rad_right'"
@@ -826,7 +826,7 @@
         background: rgb(93, 93, 93);
         width: 50px;
         height: 47px;
-        top: -6px;
+        top: -2px;
         position: relative;
         text-align: center;
     }

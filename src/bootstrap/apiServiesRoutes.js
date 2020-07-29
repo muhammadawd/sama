@@ -6,7 +6,7 @@ module.exports = {
     // BASE_URL: 'http://approc.com/~approctest/zash/back_end/api',
     // BASE_URL: 'https://zash.com.kw/back_end/api',
     // BASE_URL: 'https://rnpdelivery.com/back_end/api',
-    // BASE_URL: 'https://approc.com/back_end/api',
+    // BASE_URL: 'https://approc.com/~approctest/book/api',
     BASE_URL: 'https://zashzash.com/back_end/api',
 
     AUTH_TWITTER: '/user/get-twitter-token',
@@ -45,7 +45,7 @@ module.exports = {
     CREATE_SALE: '/sale/create',
     CREATE_SALE_GUEST: '/sale/create-admin',
     GET_USER_SALES: '/sale/user',
-    GET_SALE:'/sale/findBySerial',
+    GET_SALE: '/sale/findBySerial',
 
     CHECK_COUPON: '/offers/check-coupon',
     GET_OFFERS_COUPONS: '/branch/all-offers',

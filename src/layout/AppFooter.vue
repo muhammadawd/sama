@@ -130,7 +130,7 @@
                             </div>
                             <div class="col-5 position-relative">
                                 <img :src="require('@/assets/images/newImages/contact.png')" class="position-absolute"
-                                     style="bottom:0;left: 0;" width="150px" alt="">
+                                     style="bottom:0;left: 0;" width="150px" alt=""/>
                             </div>
                         </div>
                     </div>

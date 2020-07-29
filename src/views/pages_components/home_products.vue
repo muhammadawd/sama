@@ -42,7 +42,6 @@
 
                     </swiper>
 
-
                     <template v-if="cat.category_ad.length == 2">
                         <div class="container mt-2 mb-2">
                             <div class="w-100">

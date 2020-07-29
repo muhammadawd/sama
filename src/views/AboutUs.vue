@@ -3,20 +3,19 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-12 mt-5">
+                <div class="col-md-8 mb-5 mt-5">
                     <card type="secondary" shadow
-                          header-classes="bg-white pb-5"
-                          class="border-0 new_card_auth bg-white">
+                          header-classes="bg-main pb-5"
+                          body-classes="px-lsg-5 p-0 py-lsg-5"
+                          class="border-0 new_card_auth2 bg-white">
+                        <div class="card-header bg-main-about  mb-2">
+                            {{this.$ml.get('about_us')}}
+                        </div>
                         <template>
-                            <div class="text-muted text-center mb-3">
-                            <span class="display-4 text-black"
-                                  style="font-size: 18px">{{this.$ml.get('about_us')}}</span>
-                            </div>
-                        </template>
-                        <template>
-
                             <div class="col-md-12 table_over">
+                                <div>
+                                    {{branch_info.translated.description}}
+                                </div>
                                 <table class="table table-hover" v-if="branch_info">
                                     <tr>
                                         <td width="200px" class="text-left">
@@ -92,6 +91,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4 mt-5">
+                    <img :src="require('@/assets/images/newImages/about.png')" class="w-100" alt="">
+                </div>
             </div>
         </div>
     </div>
@@ -140,15 +142,16 @@
         width: 100% !important;
     }
 
-    .text-xs-center {
+    .bg-main-about {
         text-align: center;
+        font-weight: bold;
+        color: #fff;
+        background-color: #00adee !important;
+        border-radius: 40px 40px 0 0 !important;
+
     }
 
-    .g-recaptcha {
-        display: inline-block;
-    }
-
-    .new_card_auth {
-        border-radius: 40px 0 40px 0 !important;
+    .new_card_auth2 {
+        border-radius: 40px !important;
     }
 </style>

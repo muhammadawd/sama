@@ -9,8 +9,8 @@
                             <card type="secondary" shadow
                                   header-classes="bg-main pb-5"
                                   body-classes="px-lsg-5 p-0 py-lsg-5"
-                                  class="border-0 new_card_auth2 bg-white">
-                                <div class="card-header bg-main-register mb-2">
+                                  class="border-0 new_card_auth2 mb-5 bg-white">
+                                <div class="card-header bg-main-register  mb-2">
                                     {{this.$ml.get('register')}}
                                 </div>
                                 <div class="p-4">
