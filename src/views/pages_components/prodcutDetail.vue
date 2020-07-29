@@ -1,172 +1,136 @@
 <template>
-    <div class="p-2 row justify-content-betweens align-items-centers" v-if="product">
-        <div class="col-md-2 col-12 d-none d-md-block">
-            <!-- swiper2 Thumbs -->
-            <!--style="height: 470px!important;"-->
-            <!--d-none d-md-block-->
-            <swiper :options="isMobile() ? swiperOptionThumbsMobile : swiperOptionThumbs"
-                    :style="isMobile() ? {height: '80px!important'} : {height: '470px!important'}"
-                    class="gallery-thumbs justify-content-between align-items-end" dir="ltr"
-                    ref="swiperThumbs">
-                <swiper-slide v-for="(image , key) in selected_images" :key="key" @slideChange="image_360 = false"
-                              :style="{'backgroundImage':'url(' + image.path + ')' }"></swiper-slide>
-            </swiper>
-            <!--<div class="text-center d-md-block d-none mt-2 mb-2" v-show="!image_360">-->
-            <!--<button class="btn bg-transparent" @click="image_360 = true">-->
-            <!--<img src="/img/icons/common/pdp360-icon.png" v-if="!image_360" width="50px"-->
-            <!--style="opacity: 0.7;margin: auto" alt="">-->
-            <!--<img src="/img/icons/common/image-icon-15.jpg" v-if="image_360" width="50px"-->
-            <!--style="opacity: 0.7;margin: auto" alt="">-->
-            <!--</button>-->
-            <!--</div>-->
-        </div>
-        <div class="col-md-6 col-12" :style="isMobile() ? {height: '420px'} : {height: '700px'}">
-            <div class="text-center" v-show="image_360">
-                <div class="image_360_preview justify-content-between align-items-center" v-if="images_360.length">
-                    <!--                    <div class='photo_3d'></div>-->
-                    <VueProductSpinner
-                            :speed="1"
-                            :mouseWheel="false"
-                            :images="images_360">
-                        Loading ...
-                    </VueProductSpinner>
-                </div>
-                <div class="drag-cta" style="display: block;">Drag to 360°</div>
-            </div>
-            <!-- swiper1 -->
-            <swiper v-show="!image_360" :options="swiperOptionTop"
-                    class="gallery-top  justify-content-between align-items-center" @slideChange="image_360 = false"
-                    ref="swiperTop">
-                <swiper-slide v-for="(image , key) in selected_images" :key="key"
-                              :style="isMobile() ? {'backgroundImage':'url(' + image.path + ')',backgroundSize:'contain' } : {'backgroundImage':'url(' + image.path + ')' ,backgroundSize:'contain'}"></swiper-slide>
-            </swiper>
-            <div class="swiper-pagination horizontal d-md-none" slot="pagination"
-                 style="transform: rotateZ(-90deg);"></div>
-
-        </div>
-
-        <div class="col-md-4 text-left">
-            <h4 class="font-weight-bold"> {{product.translated ? product.translated.title : ''}}</h4>
-            <p class="small mb-0">
-                <slot v-if="pov">
-                    <div v-html="getRate(pov.rate)"></div>
-                </slot>
-                <slot v-if="!pov">
-                    <div v-html="getRate(product.rate)"></div>
-                </slot>
-            </p>
-            <p class="small "><b>{{$ml.get('price')}} </b>
-                <slot v-if="pov">
-                    <h4>
-                        <span class="badge badge-success" v-if="getPercent(pov.price,product.price_before_discount)">
-                            {{getPercent(pov.price,product.price_before_discount)}}%
-                        </span>
-                        <br>
-                        <span class="font-weight-bold ">
-                        {{pov.price && parseFloat(pov.price).toFixed(3) != 0 ? (parseFloat(pov.price).toFixed(3) + ' ' +
-                        getCurrency()) :
+    <div class="row direction" v-if="product">
+        <div class="col-md-4">
+            <div class="product_card bg-main text-center text-white">
+                <img v-for="(image , key) in selected_images" :key="key" v-if="key == 0" @
+                     :src="image.path" class="image" alt="..">
+                <h4 class="font-weight-bold text-white">
+                    {{$ml.get('book')}} : {{product.translated ? product.translated.title : ''}}
+                </h4>
+                <h4 class="font-weight-bold text-white">
+                    {{$ml.get('author')}} : {{product.translated ? product.translated.title : ''}}
+                </h4>
+                <h4 class="text-white">
+                    <b>
+                        {{pov.price && parseFloat(pov.price).toFixed(3) != 0 ? (parseFloat(pov.price).toFixed(3) + ' ' )
+                        :
                         $ml.get('undefined_price')}}
-                        </span>
-                        <!--<br>-->
-                        <!--<del class="text-danger float-left">-->
-                        <!--&lt;!&ndash;<slot v-if="product.price_before_discount">&ndash;&gt;-->
-                        <!--{{parseFloat(product.price_before_discount).toFixed(3)}}-->
-                        <!--<small>{{getCurrency()}}</small>-->
-                        <!--&lt;!&ndash;</slot>&ndash;&gt;-->
-                        <!--</del>-->
-                    </h4>
-                </slot>
-                <slot v-if="!pov">
-                    {{ $ml.get('undefined_price_p')}}
-                    <!--                    {{pov.price && parseFloat(pov.price).toFixed(3) == 0 ? parseFloat(pov.price).toFixed(3) :-->
-                    <!--                    $ml.get('undefined_price')}}-->
-                    <!--                    <br>-->
-                    <!--                    {{pov.price && parseFloat(pov.price).toFixed(3) == 0 ? parseFloat(pov.price).toFixed(3) :-->
-                    <!--                    $ml.get('undefined_price_p')}}-->
-                </slot>
-            </p>
-            <div class="form-group input-group input-group-alternative d-none">
-                <div class="input-group-prepend p-2">
-                    <button style="cursor: pointer;outline: 0"
-                            :disabled="!pov"
-                            @click="minusAmount()"
-                            class="input-group-text p-2">
-                        <i class="fa fa-minus text-primary"></i>
+                    </b> {{getCurrency()}}
+                </h4>
+                <div class="btn-group" dir="ltr">
+                    <button class="btn btn-secondary" style="background: #5d5d5d;color: #fff;">
+                        <i class="fa fa-star m-0 p-0"></i>
+                        <i class="fa fa-star m-0 p-0"></i>
                     </button>
-                </div>
-                <input aria-describedby="addon-right addon-left"
-                       @input="updateAmount($event)"
-                       :disabled="!pov"
-                       :value="pov ? pov.min_amount_needed : 1"
-                       style="height: 48px;font-size: 35px;"
-                       class="form-control text-center font-weight-bold p-2 pb-0 pt-3">
-                <div class="input-group-append p-2">
-                    <button style="cursor: pointer;outline: 0"
-                            :disabled="!pov"
-                            @click="plusAmount()"
-                            class="input-group-text p-2">
-                        <i class="fa fa-plus text-primary"></i>
+                    <button class="btn btn-secondary" style="background: #5d5d5d;color: #fff;">
+                        <i class="fa fa-book"></i>
+                    </button>
+                    <button class="btn btn-secondary"
+                            :disabled="pov.store_detail && (pov.store_detail.quantity - pov.store_detail.reserved == 0)"
+                            @click="AddToCart()">
+                        <i class="fa fa-cart-plus"></i>
                     </button>
                 </div>
             </div>
-
-            <!--                    :disabled="!pov || isOutOfStock">-->
-            <button class="btn btn-block btn-warning btn-cart mt-5 mr-0 direction-inverse text-uppercase"
-                    :disabled="pov.store_detail && (pov.store_detail.quantity - pov.store_detail.reserved == 0)"
-                    @click="AddToCart()">
-                {{this.$ml.get('add_to_cart')}} <i
-                    class="fa fa-cart-plus fa-lg"></i>
-            </button>
-            <button class="btn btn-success text-white  btn-block btn-list direction-inverse text-uppercase"
-                    @click="shareWhatsapp()">
-                {{$ml.get('share_whatsapp')}}
-                <i class="fa fa-whatsapp fa-lg"></i></button>
-            <!--            <button class="btn btn-block btn-list text-uppercase">Add to White list</button>-->
         </div>
-
-        <div class="col-md-12">
-            <tabs
-                    :tabs="tabs"
-                    :currentTab="currentTab"
-                    :wrapper-class="'default-tabs'"
-                    :tab-class="'default-tabs__item'"
-                    :tab-active-class="'default-tabs__item_active'"
-                    :line-class="'default-tabs__active-line'"
-                    @onClick="handleClick"
-            />
-            <div class="content">
-                <div v-if="currentTab === 'tab1'">
-                    <p class="small text-center" v-if="product.translated">
-                        {{product.translated.description}}
-                    </p>
-                </div>
-                <div v-if="currentTab === 'tab2'">
-                    <div class="row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div v-for="(option,key) in options" :key="key" class="col-md-6 text-center">
-                                    <b>{{option.translated.title}} : </b>
-                                    <span v-for="(option_value,key) in option.option_values" :key="key">
-                                <span class="radio-button_inner">
-                                    <small>
-                                        {{option_value.option_value_translation.title}}
-                                        {{option_value.option_value__unit_translation.title}}
-                                    </small>
-                                    <span>
-                                    </span>
-                                </span>
-                            </span>
-                                </div>
-                            </div>
-                        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="main_color font-weight-bold float-left">
+                        {{product.translated.title}}
+                    </h3>
+                    <div class="float-right">
+                        <b>{{$ml.get('share')}}</b>
+                        <ul class="list-unstyled p-0 m-0">
+                            <li class="list-inline-item">
+                                <a href="" @click.prevent="shareWhatsapp()">
+                                    <div class="btn-social">
+                                        <i class="fa fa-whatsapp fa-lg"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="">
+                                    <div class="btn-social">
+                                        <i class="fa fa-facebook fa-lg"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="">
+                                    <div class="btn-social">
+                                        <i class="fa fa-twitter fa-lg"></i>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="w-100">
+                        <hr class="m-0 mt-2">
                     </div>
                 </div>
-
+                <div class="col-md-6 mt-2">
+                    <p class="lead text-left">{{product.translated.description}}</p>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td class="font-weight-bold text-left">{{$ml.get('section')}}</td>
+                            <td class="text-center"></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold text-left">{{$ml.get('book')}}</td>
+                            <td class="text-center">{{product.translated.title}}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold text-left">{{$ml.get('author')}}</td>
+                            <td class="text-center"></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold text-left">{{$ml.get('publisher')}}</td>
+                            <td class="text-center"></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold text-left">{{$ml.get('status')}}</td>
+                            <td class="text-center">{{!(pov.store_detail && (pov.store_detail.quantity -
+                                pov.store_detail.reserved == 0)) ? $ml.get('av') : $ml.get('no_av')}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold text-left">{{$ml.get('published_at')}}</td>
+                            <td class="text-center">{{pov.barcode}}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold text-left">{{$ml.get('quantity')}}</td>
+                            <td class="text-center">{{pov.store_detail ? (pov.store_detail.quantity -
+                                pov.store_detail.reserved) : '0'}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold text-left">{{$ml.get('measurement')}}</td>
+                            <td class="text-center"></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold text-left">{{$ml.get('page_no')}}</td>
+                            <td class="text-center"></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold text-left">{{$ml.get('weight')}}</td>
+                            <td class="text-center"></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold text-left">{{$ml.get('product_no')}}</td>
+                            <td class="text-center">{{pov.barcode}}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold text-left">{{$ml.get('visits')}}</td>
+                            <td class="text-center"></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <hr>
         </div>
-
     </div>
 </template>
 
@@ -269,17 +233,17 @@
             let vm = this;
             let id = this.$route.params.id;
             let branch_id = this.$route.params.branch_id;
-            setTimeout(() => {
-                this.$nextTick(() => {
-                    const swiperTop = vm.$refs.swiperTop.swiper
-                    const swiperThumbs = vm.$refs.swiperThumbs.swiper
-                    swiperTop.controller.control = swiperThumbs
-                    swiperThumbs.controller.control = swiperTop
-
-                    swiperTop.slideTo(2, 1000, false)
-
-                })
-            }, 1500);
+            // setTimeout(() => {
+            //     this.$nextTick(() => {
+            //         const swiperTop = vm.$refs.swiperTop.swiper
+            //         const swiperThumbs = vm.$refs.swiperThumbs.swiper
+            //         swiperTop.controller.control = swiperThumbs
+            //         swiperThumbs.controller.control = swiperTop
+            //
+            //         swiperTop.slideTo(2, 1000, false)
+            //
+            //     })
+            // }, 1500);
 
             vm.getProductDetails(id, branch_id);
             // vm.getRotateImage('https://www.jqueryscript.net/demo/Minimal-3D-Image-Rotator-Viewer-Plugin-With-jQuery-rotate3D/img/', 22, '.jpg')
@@ -856,161 +820,29 @@
         }
     }
 </script>
+
 <style scoped>
-    .btn-cart {
-        border-radius: 0;
-        /*background: #f44336 !important;*/
-        /*border-color: #f44336 !important;*/
-        /*color: #eee;*/
-        font-size: 15px;
-        font-weight: bold !important;
-        padding-top: 15px;
-        padding-bottom: 15px;
+
+    .product_card {
+        border-radius: 40px 0 40px 0;
+        min-height: 350px;
+        padding: 25px;
+        background-color: #00aeef;
     }
 
-    .btn-list {
-        border-radius: 0;
-        color: #333;
-        font-size: 15px;
-        font-weight: bold !important;
-        padding-top: 15px;
-        padding-bottom: 15px;
+    .product_card .image {
+        width: 100%;
+        min-height: 200px;
+        background: #fff;
     }
 
-    .drag-cta {
-        margin-top: -10px;
-        text-transform: uppercase;
-        font-size: 12px;
+    .btn-social {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        color: #5d5d5d;
         text-align: center;
-        display: none;
-    }
-
-    .drag-cta:before {
-        content: "";
-        display: block;
-        width: 240px;
-        height: 35px;
-        border-radius: 100%;
-        border-bottom: 1px dotted #212121;
-        margin: 0 auto 10px;
-    }
-
-    .image_360_preview {
-        min-height: 300px;
-        width: 100%;
-        overflow: scroll;
-        zoom: 80%;
-    }
-
-    .image_360_preview img {
-        width: 100%;
-    }
-</style>
-<style lang="scss">
-    .swiper-container {
-        background-color: transparent!important;
-    }
-
-    .swiper-slide {
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
-
-    }
-
-    .gallery-top {
-        height: 80% !important;
-        width: 100%;
-
-    }
-
-    .gallery-thumbs {
-        height: 100% !important;
-        width: 100% !important;
-        box-sizing: border-box;
-        padding: 10px 0;
-    }
-
-    .gallery-thumbs .swiper-slide {
-        width: 150px;
-        height: 150px;
-        opacity: 0.4;
-    }
-
-    @media only screen and (max-width: 600px) {
-        .gallery-thumbs .swiper-slide {
-            width: 50px;
-            height: 50px;
-        }
-    }
-
-    .gallery-thumbs .swiper-slide-active {
-        opacity: 1;
-    }
-</style>
-<style lang="scss">
-    .default-tabs {
-        position: relative;
-        margin: 0 auto;
-        text-align: center;
-
-        &__item {
-            display: inline-block;
-            margin: 0 5px;
-            padding: 10px;
-            padding-bottom: 8px;
-            font-size: 16px;
-            letter-spacing: 0.8px;
-            color: gray;
-            text-decoration: none;
-            border: none;
-            background-color: transparent;
-            border-bottom: 2px solid transparent;
-            cursor: pointer;
-            transition: all 0.25s;
-            font-weight: bold;
-            text-transform: uppercase;
-
-            &_active {
-                color: black;
-            }
-
-            &:hover {
-                border-bottom: 2px solid gray;
-                color: black;
-            }
-
-            &:focus {
-                outline: none;
-                border-bottom: 2px solid gray;
-                color: black;
-            }
-
-            &:first-child {
-                margin-left: 0;
-            }
-
-            &:last-child {
-                margin-right: 0;
-            }
-        }
-
-        &__active-line {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 3px;
-            background-color: #00adee;
-            transition: transform 0.4s ease, width 0.4s ease;
-        }
-    }
-
-    .vue-product-spinner-wrapper img {
-        max-height: 700px;
-    }
-
-    .content {
-        margin-top: 30px;
-        font-size: 20px;
+        border-radius: 7px;
+        border: 1px solid #5d5d5d;
     }
 </style>

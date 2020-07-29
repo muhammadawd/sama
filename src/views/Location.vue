@@ -2,7 +2,7 @@
     <div class="profile-page">
         <div class="row">
             <div class="col-md-3"></div>
-            <div class="col-md-12 mt-5">
+            <div class="col-md-12 mb-5 mt-5">
                 <div class="row">
                     <div class="col-md-12">
                         <card type="secondary" shadow
