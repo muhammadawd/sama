@@ -8,7 +8,7 @@
                     {{$ml.get('book')}} : {{product.translated ? product.translated.title : ''}}
                 </h4>
                 <h4 class="font-weight-bold text-white">
-                    {{$ml.get('author')}} : {{product.translated ? product.translated.title : ''}}
+                    {{$ml.get('author')}} : {{product.author ? product.author.translated.title : ''}}
                 </h4>
                 <h4 class="text-white" v-if="pov">
                     <b>
@@ -85,7 +85,7 @@
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('author')}}</td>
-                            <td class="text-center">{{product.author ? product.author.name : ''}}</td>
+                            <td class="text-center">{{product.author ? product.author.translated.title : ''}}</td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('publisher')}}</td>
@@ -93,7 +93,7 @@
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('status')}}</td>
-                            <td class="text-center" >{{!(pov.store_detail && (pov.store_detail.quantity -
+                            <td class="text-center">{{!(pov.store_detail && (pov.store_detail.quantity -
                                 pov.store_detail.reserved == 0)) ? $ml.get('av') : $ml.get('no_av')}}
                             </td>
                         </tr>
