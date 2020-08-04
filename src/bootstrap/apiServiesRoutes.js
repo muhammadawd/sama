@@ -55,6 +55,10 @@ module.exports = {
     DELETE_CART: '/shopping-cart-db/remove',
     GET_ALL_CART: '/shopping-cart-db',
 
+    SYNC_FAV: '/user/sync-wishlist',
+    DELETE_FAV: '/user/delete-wishlist',
+    GET_ALL_FAV: '/user/wishlist',
+
     CREATE_CLIENT_ADDRESS: '/client/update-address',
     DELETE_CLIENT_ADDRESS: '/client/delete-address',
     GET_CLIENT_ADDRESS: '/client/get-address',

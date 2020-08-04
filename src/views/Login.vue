@@ -184,7 +184,7 @@
                             return;
                         }
                         vm.$router.push({name: 'home'})
-                        location.reload()
+                        // location.reload()
                     })
                     .catch((err) => {
                         vm.$root.$children[0].$refs.loader.show_loader = false;

@@ -9,13 +9,14 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
+        favourites: [],
         cart: [],
         offers: [],
         auth: null,
         currency: 'د.ك',
         total_offers: 0,
         selected_offers: [],
-        dataFields: ['cart', 'offers', 'auth']
+        dataFields: ['cart', 'favourites', 'offers', 'auth']
     },
     getters: {
         getCurrency: state => {
@@ -33,6 +34,7 @@ export const store = new Vuex.Store({
         setState(state, {field, data}) {
             Vue.set(state, field, data)
         },
+
         addToOffers(state, newTodo) {
             state.offers.push(newTodo)
         },
@@ -41,15 +43,25 @@ export const store = new Vuex.Store({
                 state.cart.push(newTodo)
             }
         },
+        addToFavourite(state, newTodo) {
+            if (newTodo != undefined) {
+                state.favourites.push(newTodo)
+            }
+        },
+
         clearCart(state) {
             state.cart = [];
         },
-        setTotalOffers(state, data) {
-            state.total_offers = data.total;
-            state.selected_offers = data.offers;
+        clearFavourite(state) {
+            state.favourites = [];
         },
         clearOffers(state) {
             state.offers = [];
+        },
+
+        setTotalOffers(state, data) {
+            state.total_offers = data.total;
+            state.selected_offers = data.offers;
         },
         updateToCart(state, newTodo, index) {
             // console.log(index)
@@ -59,6 +71,15 @@ export const store = new Vuex.Store({
         deleteToCart(state, todoIndex) {
             state.cart.splice(todoIndex, 1)
         },
+        updateToFavourite(state, newTodo, index) {
+            // console.log(index)
+            // console.log(newTodo)
+            // console.log(state.cart)
+        },
+        deleteToFavourite(state, todoIndex) {
+            state.favourites.splice(todoIndex, 1)
+        },
+
         addAuthUser(state, authUser) {
             state.auth = authUser
         },
@@ -71,6 +92,10 @@ export const store = new Vuex.Store({
             commit('clearCart');
             dispatch('clearToCart');
         },
+        clearFavourite({commit, dispatch}) {
+            commit('clearFavourite');
+            dispatch('clearToFavourite');
+        },
         clearOffers({commit, dispatch}) {
             commit('clearOffers');
             dispatch('clearToOffers');
@@ -79,6 +104,11 @@ export const store = new Vuex.Store({
             commit('addToCart', newTodo);
             dispatch('saveToCart');
             dispatch('syncCart')
+        },
+        addToFavourite({commit, dispatch}, newTodo) {
+            commit('addToFavourite', newTodo);
+            dispatch('saveToFavourites');
+            dispatch('syncFav')
         },
         saveToOffersWithoutSync({commit, dispatch}, newTodo) {
             commit('addToCart', newTodo);
@@ -98,9 +128,20 @@ export const store = new Vuex.Store({
             dispatch('saveToCart');
             dispatch('syncDeleteCart', todoInfo.element)
         },
+        updateToFavourites({commit, dispatch}, newTodo) {
+            commit('updateToFavourite', newTodo);
+            dispatch('saveToFavourites');
+            dispatch('syncFav')
+        },
+        deleteToFavourites({commit, dispatch}, todoInfo) {
+            commit('deleteToFavourite', todoInfo.key);
+            dispatch('saveToFavourites');
+            dispatch('syncDeleteFav', todoInfo.element)
+        },
         addAuthUser({commit, dispatch}, authUser) {
             commit('addAuthUser', authUser);
             dispatch('syncGetCart');
+            dispatch('syncGetFav');
             dispatch('saveAuthUser')
         },
         deleteAuthUser({commit, dispatch}) {
@@ -122,6 +163,9 @@ export const store = new Vuex.Store({
                             data = null
                         }
                         if (field === 'cart') {
+                            data = []
+                        }
+                        if (field === 'favourites') {
                             data = []
                         }
                         if (field === 'offers') {
@@ -153,6 +197,15 @@ export const store = new Vuex.Store({
                 ls.saveToStorage('offers', state['offers'])
             }
         },
+        async saveToFavourites({state}) {
+            try {
+                // await Promise.all(idbs.saveToStorage('offers', state['offers']));
+                await Promise.all(state.dataFields.map(field => idbs.saveToStorage(field, state[field])))
+                // state.dataFields.forEach(field => ls.saveToStorage(field, state[field]))
+            } catch (e) {
+                ls.saveToStorage('favourites', state['favourites'])
+            }
+        },
         async saveAuthUser({state}) {
             try {
                 await Promise.all(state.dataFields.map(field => idbs.saveToStorage(field, state[field])))
@@ -167,6 +220,14 @@ export const store = new Vuex.Store({
                 // state.dataFields.forEach(field => ls.saveToStorage(field, state[field]))
             } catch (e) {
                 ls.clearAllStorage('cart')
+            }
+        },
+        async clearToFavourite({state}) {
+            try {
+                await Promise.all(idbs.clearAllStorage('favourites'))
+                // state.dataFields.forEach(field => ls.saveToStorage(field, state[field]))
+            } catch (e) {
+                ls.clearAllStorage('favourites')
             }
         },
         async clearToOffers({state}) {
@@ -327,6 +388,106 @@ export const store = new Vuex.Store({
                                 dispatch('addToCart', prepared_data);
                             })
                         }
+
+                    }
+                });
+
+            }
+        },
+
+        syncDeleteFav({state, dispatch}, toDeleteInfo) {
+
+            let pov_id = toDeleteInfo.pov.id;
+            // sync cart data post request
+            let auth = JSON.parse(JSON.stringify(state.auth));
+
+
+            if (auth) {
+                let token = auth.token;
+
+                axios.post(apiServiesRoutes.BASE_URL + apiServiesRoutes.DELETE_FAV, {
+                    product_option_value_ids: [pov_id],
+                }, {
+                    headers: {Authorization: "Bearer " + token}
+                }).then((response) => {
+                    console.log(response.data)
+                }).catch((error) => {
+
+                })
+            }
+        },
+        syncFav({state, dispatch}) {
+            // sync cart data post request
+            let favourites = JSON.parse(JSON.stringify(state.favourites));
+            let auth = JSON.parse(JSON.stringify(state.auth));
+
+            // let branch_ids = [];
+            // let prices = [];
+            let product_option_value_ids = [];
+            // let quantities = [];
+            // let store_ids = [];
+            // let purchases = [];
+
+            $.each(favourites, function (index, item) {
+                // branch_ids.push(item.branch_id);
+                // store_ids.push(item.store_id);
+                // prices.push(item.pov.price);
+                product_option_value_ids.push(item.pov.id);
+                // quantities.push(item.min_amount_needed);
+            });
+
+            if (auth) {
+                let token = auth.token;
+
+                axios.post(apiServiesRoutes.BASE_URL + apiServiesRoutes.SYNC_FAV, {
+                    // branch_ids: branch_ids,
+                    // store_ids: store_ids,
+                    // prices: prices,
+                    product_option_value_ids: product_option_value_ids,
+                    // quantities: quantities,
+                }, {
+                    headers: {Authorization: "Bearer " + token}
+                }).then((response) => {
+                    let status = response.data.status;
+                    let data = response.data.data;
+                    // console.log(data)
+                    if (status) {
+
+                        if (data.wishlists) {
+                            state.favourites = [];
+                            // dispatch('saveToFavourites');
+                            // $.each(data.wishlists, function (index, item) {
+                            //     dispatch('addToFavourite', item);
+                            // });
+                        }
+                    }
+                });
+                return;
+            }
+        },
+        syncGetFav({state, dispatch}) {
+            let auth = JSON.parse(JSON.stringify(state.auth));
+            if (auth) {
+                let token = auth.token;
+                // get cart data
+                axios.get(apiServiesRoutes.BASE_URL + apiServiesRoutes.GET_ALL_FAV, {
+                    headers: {Authorization: "Bearer " + token}
+                }).then((response) => {
+                    let status = response.data.status;
+                    let data = response.data.data;
+                    if (status) {
+                        state.favourites = [];
+                        $.each(data.wishlists, function (index, item) {
+                            let prepared_data = {
+                                product_id: item.product.product_option_value.product_id,
+                                branch_id: item.branch_id,
+                                store_id: item.store_id,
+                                product_translation: item.product.translated,
+                                min_amount_needed: item.quantity,
+                                pov: item.product.product_option_value
+                            };
+                            dispatch('addToFavourite', prepared_data);
+                        })
 
                     }
                 });

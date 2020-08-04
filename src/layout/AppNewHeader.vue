@@ -30,8 +30,11 @@
                                     |
                                 </li>
                                 <li class="list-inline-item">
-                                    <a href="" class="text-white">
-                                        <i class="fa fa-star"></i>
+                                    <a href="" @click.prevent="modals.modal1 = true" class="text-white">
+                                        <div class="position-relative">
+                                            <span class="cart_count2">{{favourites.length}}</span>
+                                            <i class="fa fa-star"></i>
+                                        </div>
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
@@ -285,19 +288,22 @@
                                 <div class="header_fav_cart">
                                     <ul class="list-unstyled direction">
                                         <li class="text-left mt-2">
-                                            <a href="">
+                                            <a href="" @click.prevent="modals.modal1 = true">
+                                                <div class="position-relative animIcons float-right">
+                                                    <span class="cart_count" style="left: 20px;top: -20px;">{{favourites.length}}</span>
+                                                </div>
                                                 <div class="float-left">
-                                                <span>
-                                                    {{$ml.get('favourite')}}
-                                                 </span>
+                                                    <span>
+                                                        {{$ml.get('favourite')}}
+                                                     </span>
                                                 </div>
                                                 <div class="float-right">
-                                            <span>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-empty"></i>
-                                        </span>
+                                                    <span>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-half-empty"></i>
+                                                    </span>
                                                 </div>
                                                 <div class="clearfix"></div>
                                             </a>
@@ -461,6 +467,25 @@
             <!--                    {{this.$ml.get('close')}}-->
             <!--                </base-button>-->
             <!--            </template>-->
+        </modal>
+        <modal :show.sync="modals.modal1"
+               gradient="white"
+               modal-classes="modal-danger modal-dialog-centered modal-lg">
+            <h6 slot="header" class="modal-title font-weight-bold text-left display-4 text-black direction">
+                {{this.$ml.get('favourites')}}</h6>
+
+            <div class="py-3 text-center">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body text-dark">
+                                {{favourites}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </modal>
     </div>
 </template>
@@ -642,6 +667,7 @@
                 // localStorage.removeItem('current_address');
                 await this.$store.dispatch('deleteAuthUser')
                 await this.$store.dispatch('clearCart')
+                await this.$store.dispatch('clearFavourite')
                 await this.$store.dispatch('clearOffers')
                 await localStorage.removeItem('auth');
                 setTimeout(() => {
@@ -666,6 +692,7 @@
         computed: {
             ...mapState([
                 'auth',
+                'favourites',
                 'cart'
             ]),
         },

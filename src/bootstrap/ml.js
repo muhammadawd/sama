@@ -246,11 +246,17 @@ export default new MLCreate({
             visits: 'Visits.',
             av: 'Available.',
             no_av: 'Not Available.',
+            added_to_fav: 'added to fav',
+            already_added_fv: 'added to fav',
+            favourites: 'favourites',
             // recommended: 'Recommended',
         }),
 
         new MLanguage('ar').create({
             // recommended: ' موصي به',
+            favourites: 'المفضلة',
+            already_added_fv: 'مضاف من قبل',
+            added_to_fav: ' تمت الاضافة الى المفضلة',
             av: ' متوفر',
             no_av: 'غير متوفر',
             visits: 'عدد الزيارات',

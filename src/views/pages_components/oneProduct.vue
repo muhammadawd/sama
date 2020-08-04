@@ -1,5 +1,6 @@
 <template>
-    <div class="card card_curve shadow shadow-lg--hover mt-0 mb-3" @mouseenter="mouseEnter()" @mouseleave="mouseLeave()">
+    <div class="card card_curve shadow shadow-lg--hover mt-0 mb-3" @mouseenter="mouseEnter()"
+         @mouseleave="mouseLeave()">
         <div class="card-body text-center p-0 m-0" :style="isMobile() ? {maxHeight: '450px'} : {minHeight: '250px'}">
             <div class="priceSales" v-on:click.stop="addToCart(product)"
                  :style="$ml.current == 'ar' ? {right:'5px',left:'auto'} : {left:'5px',right:'auto'}"
@@ -22,7 +23,7 @@
 
                         <h3 class="text-black text-center w-100" style="font-size: 14px">
                             {{$ml.get('book')}} : {{product.translated.title}} <br>
-                            {{$ml.get('author')}} : {{product.translated.description}}
+                            {{$ml.get('author')}} : {{product.author ? product.author.translated.title : ''}}
                         </h3>
                         <div class="row mt-2">
                             <div class="col-12" style="color: #000;">
@@ -36,17 +37,20 @@
                             <div class="col-12 text-center">
                                 <div class="btn-group direction-inverse">
                                     <button class="btn btn-secondary btn-sm"
+                                            v-on:click.prevent="addToFavourite(product)"
                                             :style="$ml.current == 'ar' ? {left:'5px',right:'auto'}: {right:'5px',left:'auto'}">
                                         <span class="day">
                                             <i class="fa fa-star fa-lg"></i>
                                         </span>
                                     </button>
-                                    <button class="btn btn-secondary btn-sm"
-                                            :style="$ml.current == 'ar' ? {left:'5px',right:'auto'}: {right:'5px',left:'auto'}">
+                                    <a class="btn btn-secondary btn-sm" :href="product.book_file_path"
+                                       :disabled="!product.book_file_path"
+                                       target="_blank" :class="!product.book_file_path ? 'disabled' : ''"
+                                       :style="$ml.current == 'ar' ? {left:'5px',right:'auto'}: {right:'5px',left:'auto'}">
                                         <span class="day">
                                             <i class="fa fa-book fa-lg"></i>
                                         </span>
-                                    </button>
+                                    </a>
                                     <button class="btn btn-info btn-sm" v-on:click.prevent="addToCart(product)"
                                             v-if="!(product.product_option_values[0].store_detail && (product.product_option_values[0].store_detail.quantity - product.product_option_values[0].store_detail.reserved == 0))"
                                             :style="$ml.current == 'ar' ? {left:'5px',right:'auto'}: {right:'5px',left:'auto'}">
@@ -66,6 +70,10 @@
 </template>
 
 <script>
+    import Vue from 'vue'
+    import {mapState, mapActions} from 'vuex'
+    import Message from 'vue-m-message'
+    Vue.use(Message);
     export default {
         name: "one_product",
         data() {
@@ -77,7 +85,14 @@
         },
         props: {
             product: Object,
-            addToCart: Function
+            addToCart: Function,
+        },
+        computed: {
+            ...mapState([
+                'cart',
+                'favourites',
+                'auth',
+            ])
         },
         mounted() {
             // if (this.product.product_option_values[0].files.length) {
@@ -100,6 +115,58 @@
             });
         },
         methods: {
+            addToFavourite(product) {
+                let vm = this;
+                let pov = product.product_option_values[0];
+                let normal_product = vm.prepareProductToCart(product, pov);
+                console.log(normal_product)
+                vm.bindToFavourite(normal_product);
+            },
+            prepareProductToCart(master, pov) {
+                return {
+                    product_id: master.id,
+                    branch_id: master.branch_id,
+                    store_id: pov.store_detail ? pov.store_detail.store_id : null,
+                    product_translation: master.translated,
+                    min_amount_needed: pov.min_amount_needed ? pov.min_amount_needed : 1,
+                    pov: pov
+                };
+            },
+            bindToFavourite(product) {
+                let vm = this;
+                let found = false;
+                let product_id = product.pov.id;
+                vm.favourites.filter((value, index, arr) => {
+                    if (product_id == value.pov.id) {
+                        found = true;
+                    }
+                });
+                if (found) {
+
+                    Message({
+                        title: vm.$ml.get('error'),
+                        message: vm.$ml.get('already_added_fv'),
+                        className: 'bg-gray text-white',
+                        zIndex: 9999999,
+                        iconImg: require('@/assets/error.png'),
+                        position: 'bottom-center',
+                        // type: 'error',
+                        showClose: true
+                    })
+                    return;
+                }
+                Message({
+                    title: vm.$ml.get('success'),
+                    message: vm.$ml.get('added_to_fav'),
+                    className: 'bg-success text-white',
+                    zIndex: 9999999,
+                    iconImg: require('@/assets/success.png'),
+                    position: 'bottom-center',
+                    // type: 'error',
+                    showClose: true
+                });
+                vm.$store.dispatch('addToFavourite', product);
+            },
             isMobile() {
                 if (screen.width <= 760) {
                     return true;

@@ -4,7 +4,7 @@ const dbPromise = _ => {
     if (!('indexedDB' in window)) {
         throw new Error('Browser does not support IndexedDB')
     }
-    return openDb('ZASHShoppingDB', 1, upgradeDb => {
+    return openDb('SamaShoppingDB', 1, upgradeDb => {
         if (!upgradeDb.objectStoreNames.contains('cart')) {
             upgradeDb.createObjectStore('cart')
         }
@@ -13,6 +13,9 @@ const dbPromise = _ => {
         }
         if (!upgradeDb.objectStoreNames.contains('offers')) {
             upgradeDb.createObjectStore('offers')
+        }
+        if (!upgradeDb.objectStoreNames.contains('favourites')) {
+            upgradeDb.createObjectStore('favourites')
         }
 
     });

@@ -1,5 +1,5 @@
 <template>
-    <div class="recommended" v-if="products.length">
+    <div class="recommended" v-if="getProducts.length">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-md-12">
                     <VueSlickCarousel v-bind="settings" :arrows="true">
-                        <div class="slider__item " v-for="(product,key) in products" :key="key" v-if="key < 20">
+                        <div class="slider__item " v-for="(product,key) in getProducts" :key="key" v-if="key < 20">
                             <oneProduct v-bind:addToCart="addToCart"
                                         v-bind:product="product"></oneProduct>
                         </div>
@@ -52,10 +52,11 @@
     Vue.use(Message);
 
     export default {
-        name: "new_arrival_products",
+        name: "recommended_products",
         components: {
             oneProduct, VueSlickCarousel
         },
+        props: ['related_products'],
         data() {
             return {
                 loadingText: this.$ml.get('loading'),
@@ -186,9 +187,16 @@
             },
         },
         mounted() {
-            this.getAllProducts()
+            let vm = this;
+            setInterval(() => {
+                vm.products = vm.related_products
+            }, 1000)
+            // this.getAllProducts()
         },
         computed: {
+            getProducts() {
+                return this.products;
+            },
             ...mapState([
                 'auth',
                 'cart'
@@ -197,21 +205,21 @@
     }
 </script>
 
-<style >
+<style>
     .slick-prev:before, .slick-next:before {
         display: none;
     }
 
     /*.slick-next img {*/
-        /*width: 25px;*/
-        /*position: absolute;*/
-        /*right: -10px;*/
+    /*width: 25px;*/
+    /*position: absolute;*/
+    /*right: -10px;*/
     /*}*/
 
     /*.slick-prev img {*/
-        /*width: 25px;*/
-        /*position: absolute;*/
-        /*left: -10px;*/
+    /*width: 25px;*/
+    /*position: absolute;*/
+    /*left: -10px;*/
     /*}*/
 
     .slick-slide > div {
@@ -220,7 +228,7 @@
     }
 
     /*.slick-center > div {*/
-        /*transform: scale(1);*/
+    /*transform: scale(1);*/
     /*}*/
 
     .recommended {

@@ -18,13 +18,15 @@
                     </b> {{getCurrency()}}
                 </h4>
                 <div class="btn-group" dir="ltr">
-                    <button class="btn btn-secondary" style="background: #5d5d5d;color: #fff;">
+                    <button class="btn btn-secondary" @click="addToFavourite(product)"
+                            style="background: #5d5d5d;color: #fff;">
                         <i class="fa fa-star m-0 p-0"></i>
                         <i class="fa fa-star m-0 p-0"></i>
                     </button>
-                    <button class="btn btn-secondary" style="background: #5d5d5d;color: #fff;">
+                    <a class="btn btn-secondary" :href="product.book_file_path" :disabled="!product.book_file_path"
+                       target="_blank" :class="!product.book_file_path ? 'disabled' : ''">
                         <i class="fa fa-book"></i>
-                    </button>
+                    </a>
                     <button class="btn btn-secondary" v-if="pov"
                             :disabled="pov.store_detail && (pov.store_detail.quantity - pov.store_detail.reserved == 0)"
                             @click="AddToCart()">
@@ -89,7 +91,7 @@
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('publisher')}}</td>
-                            <td class="text-center"></td>
+                            <td class="text-center"> {{product.translated ? product.translated.publisher : ''}}</td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('status')}}</td>
@@ -99,7 +101,7 @@
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('published_at')}}</td>
-                            <td class="text-center">{{pov.barcode}}</td>
+                            <td class="text-center">{{pov.publish_year}}</td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('quantity')}}</td>
@@ -109,15 +111,15 @@
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('measurement')}}</td>
-                            <td class="text-center"></td>
+                            <td class="text-center" dir="ltr">{{pov.size}}</td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('page_no')}}</td>
-                            <td class="text-center"></td>
+                            <td class="text-center">{{pov.page_number}}</td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('weight')}}</td>
-                            <td class="text-center"></td>
+                            <td class="text-center">{{pov.weight}}</td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold text-left">{{$ml.get('product_no')}}</td>
@@ -131,8 +133,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
-            <recommend_products></recommend_products>
+        <div class="col-md-12" v-if="related_products.length">
+            <recommend_products :related_products="related_products"></recommend_products>
         </div>
     </div>
 </template>
@@ -159,12 +161,13 @@
         name: "prodcutDetail",
         data() {
             return {
+                related_products: [],
                 tabs: [
                     {title: this.$ml.get('description'), value: 'tab1'},
                     // {title: this.$ml.get('more_details'), value: 'tab2'}
                 ],
                 currentTab: 'tab1',
-                product: true,
+                product: null,
                 swiperOptionTop: {
                     direction: 'vertical',
                     spaceBetween: 10,
@@ -250,14 +253,71 @@
 
             vm.getProductDetails(id, branch_id);
             // vm.getRotateImage('https://www.jqueryscript.net/demo/Minimal-3D-Image-Rotator-Viewer-Plugin-With-jQuery-rotate3D/img/', 22, '.jpg')
+        }, watch: {
+            '$route'(to, from) {
+                location.reload()
+            }
         },
         computed: {
             ...mapState([
                 'cart',
+                'favourites',
                 'auth',
             ])
         },
         methods: {
+            addToFavourite(product) {
+                let vm = this;
+                let pov = product.product_option_values[0];
+                let normal_product = vm.prepareProductToCart(product, pov);
+                console.log(normal_product)
+                vm.bindToFavourite(normal_product);
+            },
+            prepareProductToCart(master, pov) {
+                return {
+                    product_id: master.id,
+                    branch_id: master.branch_id,
+                    store_id: pov.store_detail ? pov.store_detail.store_id : null,
+                    product_translation: master.translated,
+                    min_amount_needed: pov.min_amount_needed ? pov.min_amount_needed : 1,
+                    pov: pov
+                };
+            },
+            bindToFavourite(product) {
+                let vm = this;
+                let found = false;
+                let product_id = product.pov.id;
+                vm.favourites.filter((value, index, arr) => {
+                    if (product_id == value.pov.id) {
+                        found = true;
+                    }
+                });
+                if (found) {
+
+                    Message({
+                        title: vm.$ml.get('error'),
+                        message: vm.$ml.get('already_added_fv'),
+                        className: 'bg-gray text-white',
+                        zIndex: 9999999,
+                        iconImg: require('@/assets/error.png'),
+                        position: 'bottom-center',
+                        // type: 'error',
+                        showClose: true
+                    })
+                    return;
+                }
+                Message({
+                    title: vm.$ml.get('success'),
+                    message: vm.$ml.get('added_to_fav'),
+                    className: 'bg-success text-white',
+                    zIndex: 9999999,
+                    iconImg: require('@/assets/success.png'),
+                    position: 'bottom-center',
+                    // type: 'error',
+                    showClose: true
+                });
+                vm.$store.dispatch('addToFavourite', product);
+            },
             getCurrency() {
                 return this.$store.getters.getCurrency
             },
@@ -730,6 +790,7 @@
                     let data = resp.data.data;
                     if (status) {
                         vm.product = data.product;
+                        vm.related_products = data.related_products;
                         vm.pov = data.product.product_option_values[0];
 
                         // vm.selected_images = vm.pov.files;
