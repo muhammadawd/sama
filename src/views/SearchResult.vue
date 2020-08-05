@@ -41,7 +41,8 @@
                                         <!--results-property="data"-->
                                         <!--:placeholder="$ml.get('search_key')">-->
                                         <!--</autocomplete>-->
-                                        <input class="form-control pr-2 pl-2" style="border: 1px solid #000" v-model="query"
+                                        <input class="form-control pr-2 pl-2" style="border: 1px solid #000"
+                                               v-model="query"
                                                @input="getApiSuggest()"
                                                @blur="hideSearch()"
                                                @keyup.enter="searchQueryClicked()"/>
@@ -120,7 +121,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 text-left"  v-if="isMobile()">
+            <div class="col-12 text-left" v-if="isMobile()">
                 <button class="btn btn-default  m-3 btn-sm d-md-none"
 
                         @click="modals.modal1 = true">
@@ -131,7 +132,7 @@
             <div class="col-md-9 col-12">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3 col-6" :style="isMobile() ? {marginBottom:'100px'}:{}"
+                        <div class="col-md-3 col-6" :style="isMobile() ? {marginBottom:'20px'}:{}"
                              v-for="(product ,$index) in products" :key="$index">
                             <oneProduct v-bind:addToCart="addToCart"
                                         v-bind:product="product"></oneProduct>
@@ -278,7 +279,9 @@
         mounted() {
             let vm = this;
             vm.query = vm.$route.query.q;
-
+            if (vm.$route.query.category_id) {
+                vm.checked_categories.push(vm.$route.query.category_id)
+            }
             // vm.getAllAddresses();
             vm.getAllCategories();
             // vm.getAllBranches();
@@ -286,6 +289,11 @@
         watch: {
             $route(to, from) {
                 this.query = this.$route.query.q;
+                if (this.$route.query.category_id) {
+                    this.checked_categories = [];
+                    this.checked_categories.push(this.$route.query.category_id)
+                }
+                this.searchQueryClicked()
             },
             query(newVal) {
                 // this.searchQueryClicked();
@@ -339,7 +347,8 @@
                     store_id: pov.store_detail ? pov.store_detail.store_id : null,
                     product_translation: master.translated,
                     min_amount_needed: pov.min_amount_needed ? pov.min_amount_needed : 1,
-                    pov: pov
+                    pov: pov,
+                    product: master,
                 };
             },
             bindToCart(product) {

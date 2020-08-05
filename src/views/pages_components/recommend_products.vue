@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="text-left font-weight-bold">{{$ml.get('recommended')}}</h3>
+                    <h3 class="text-left font-weight-bold">{{this.title}}</h3>
                 </div>
                 <div class="col-md-12">
                     <VueSlickCarousel v-bind="settings" :arrows="true">
@@ -56,7 +56,7 @@
         components: {
             oneProduct, VueSlickCarousel
         },
-        props: ['related_products'],
+        props: ['related_products','title'],
         data() {
             return {
                 loadingText: this.$ml.get('loading'),
@@ -147,7 +147,8 @@
                     store_id: pov.store_detail ? pov.store_detail.store_id : null,
                     product_translation: master.translated,
                     min_amount_needed: pov.min_amount_needed ? pov.min_amount_needed : 1,
-                    pov: pov
+                    pov: pov,
+                    product: master,
                 };
             },
             bindToCart(product) {

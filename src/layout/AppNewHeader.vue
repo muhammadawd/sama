@@ -32,7 +32,7 @@
                                 <li class="list-inline-item">
                                     <a href="" @click.prevent="modals.modal1 = true" class="text-white">
                                         <div class="position-relative">
-                                            <span class="cart_count2">{{favourites.length}}</span>
+                                            <span class="cart_count2">{{$store.getters['getFavourites'].length}}</span>
                                             <i class="fa fa-star"></i>
                                         </div>
                                     </a>
@@ -289,15 +289,15 @@
                                     <ul class="list-unstyled direction">
                                         <li class="text-left mt-2">
                                             <a href="" @click.prevent="modals.modal1 = true">
-                                                <div class="position-relative animIcons float-right">
-                                                    <span class="cart_count" style="left: 20px;top: -20px;">{{favourites.length}}</span>
+                                                <div class="position-relative  float-right">
+                                                    <span class="cart_count" style="left: 20px;top: -20px;">{{$store.getters['getFavourites'].length}}</span>
                                                 </div>
                                                 <div class="float-left">
                                                     <span>
                                                         {{$ml.get('favourite')}}
                                                      </span>
                                                 </div>
-                                                <div class="float-right">
+                                                <div class="float-right animIcons">
                                                     <span>
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
@@ -404,6 +404,17 @@
                                     {{$ml.get('home')}}
                                 </a>
                             </li>
+                            <li :class="$route.name == 'home' ? 'active' : ''">
+                                <div class="dropdown">
+                                    <button class="dropbtn">{{$ml.get('categories')}}</button>
+                                    <div class="dropdown-content">
+                                        <a v-for="(cat, key) in categories" href="#"
+                                           @click.prevent="$router.push({name:'search_result',query:{q:(cat.translated.title ? cat.translated.title.toLowerCase() : ''),category_id:cat.id}})">
+                                            {{cat.translated.title}}
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
                             <li :class="$route.name == 'new_arrival' ? 'active' : ''">
                                 <a href="" @click.prevent="$router.push({name:'new_arrival'})">
                                     {{$ml.get('new_arrival')}}
@@ -412,6 +423,11 @@
                             <li :class="$route.name == 'best_sales' ? 'active' : ''">
                                 <a href="" @click.prevent="$router.push({name:'best_sales'})">
                                     {{$ml.get('best_sales')}}
+                                </a>
+                            </li>
+                            <li :class="$route.name == 'authors' ? 'active' : ''">
+                                <a href="" @click.prevent="$router.push({name:'authors'})">
+                                    {{$ml.get('authors')}}
                                 </a>
                             </li>
                             <li :class="$route.name == 'search_result' ? 'active' : ''">
@@ -424,6 +440,11 @@
                                     {{$ml.get('about_us')}}
                                 </a>
                             </li>
+                            <li :class="$route.name == 'events' ? 'active' : ''">
+                                <a href="" @click.prevent="$router.push({name:'events'})">
+                                    {{$ml.get('events')}}
+                                </a>
+                            </li>
                             <li :class="$route.name == 'location' ? 'active' : ''">
                                 <a href="" @click.prevent="$router.push({name:'location'})">
                                     {{$ml.get('location')}}
@@ -432,6 +453,11 @@
                             <li :class="$route.name == 'register_vendor' ? 'active' : ''">
                                 <a href="" @click.prevent="$router.push({name:'register_vendor'})">
                                     {{$ml.get('contact_us')}}
+                                </a>
+                            </li>
+                            <li :class="$route.name == 'offers' ? 'active' : ''">
+                                <a href="" @click.prevent="$router.push({name:'offers'})">
+                                    {{$ml.get('offers')}}
                                 </a>
                             </li>
                         </ul>
@@ -479,7 +505,53 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body text-dark">
-                                {{favourites}}
+                                <div class="table-responsive mb-2">
+                                    <table class="table new_table">
+                                        <thead>
+                                        <tr>
+                                            <th width="100px">{{$ml.get('image')}}</th>
+                                            <th>{{$ml.get('product_name')}}</th>
+                                            <th>{{$ml.get('category')}}</th>
+                                            <th>{{$ml.get('price')}}</th>
+                                            <th width="100px" style="background: transparent;border: 0;"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-if="$store.getters['getFavourites'].length == 0">
+                                            <td colspan="5" class="text-center">
+                                                {{$ml.get('no_data')}}
+                                            </td>
+                                        </tr>
+                                        <tr v-for="(fav , k) in $store.getters['getFavourites']" :key="k">
+                                            <td class="text-center">
+                                                <img v-if="fav.product" :src="fav.product.main_image" class="w-100"
+                                                     alt="">
+                                            </td>
+                                            <td class="text-center">
+                                                {{fav.product_translation ? fav.product_translation.title : ''}}
+                                            </td>
+                                            <td class="text-center">{{fav.product ? fav.product.category ?
+                                                fav.product.category.translated.title : '' : ''}}
+                                            </td>
+                                            <td class="text-center">
+                                                <b>{{fav.pov ? fav.pov.price : ''}}</b>
+                                            </td>
+                                            <td style="background: transparent;border: 0;">
+                                                <div class="btn-group" dir="ltr">
+                                                    <button class="btn btn-danger btn-sm"
+                                                            @click="removeFavourites(fav,k)">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                    <button class="btn btn-neutral btn-sm" @click="AddToCart(fav,k)">
+                                                        <img :src="require('@/assets/images/newImages/cart.png')"
+                                                             style="width:30px" alt="">
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -497,12 +569,16 @@
     import CloseButton from "@/components/CloseButton";
     import cart from '../views/pages_components/cart'
     import {mapState, mapActions} from 'vuex'
+    import Vue from 'vue'
+    import Message from 'vue-m-message'
 
+    Vue.use(Message)
     export default {
         data() {
             return {
                 auth_user: null,
                 suggestList: [],
+                categories: [],
                 search: '',
                 settings: null,
                 modals: {
@@ -517,8 +593,91 @@
             this.checkStorage();
             this.startHeaderBG();
             this.getAllSettings();
+            this.getAllCategory();
         },
         methods: {
+            getAllCategory() {
+                let vm = this;
+                vm.$root.$children[0].$refs.loader.show_loader = true;
+                axios.get(apiServiesRoutes.BASE_URL + apiServiesRoutes.FIND_CATEGORIES, {
+                    params: {
+                        lang: vm.lang
+                    }
+                }).then((resp) => {
+                    let status = resp.data.status;
+                    let data = resp.data.data;
+                    vm.$root.$children[0].$refs.loader.show_loader = false;
+                    if (status) {
+                        vm.categories = data.categories
+                        return;
+                    }
+                    vm.categories = [];
+                }).catch((error) => {
+                    vm.$root.$children[0].$refs.loader.show_loader = false;
+                    vm.categories = [];
+                })
+            },
+            removeFavourites(element, key) {
+                let vm = this;
+                let product_id = element.pov.id;
+                let filtered_cart = vm.favourites.filter((value, index, arr) => {
+                    if (product_id == value.pov.id) {
+                        return false
+                    }
+                    return true;
+                });
+                // console.log(key)
+                vm.$store.dispatch('deleteToFavourites', {key: key, element: element});
+            },
+            AddToCart(prepared_data, k) {
+                let vm = this;
+                // let prepared_data = {
+                //     product_id: vm.product.id,
+                //     branch_id: vm.product.branch_id,
+                //     store_id: pov.store_detail ? pov.store_detail.store_id : null,
+                //     product_translation: vm.product.translated,
+                //     min_amount_needed: pov.min_amount_needed ? vm.pov.min_amount_needed : 1,
+                //     pov: pov
+                // };
+                vm.bindToCart(prepared_data)
+                vm.removeFavourites(prepared_data, k)
+            },
+            bindToCart(product) {
+                let vm = this;
+                let found = false;
+                let product_id = product.pov.id;
+                vm.cart.filter((value, index, arr) => {
+                    if (product_id == value.pov.id) {
+                        found = true;
+                    }
+                });
+                if (found) {
+
+                    Message({
+                        title: vm.$ml.get('error'),
+                        message: vm.$ml.get('already_added'),
+                        className: 'bg-gray text-white',
+                        zIndex: 9999999,
+                        iconImg: require('@/assets/error.png'),
+                        position: 'bottom-center',
+                        // type: 'error',
+                        showClose: true
+                    })
+                    return;
+                }
+                Message({
+                    title: vm.$ml.get('success'),
+                    message: vm.$ml.get('added_to_cart'),
+                    className: 'bg-success text-white',
+                    zIndex: 9999999,
+                    // iconImg: './img/icons/common/success.png',
+                    iconImg: require('@/assets/success.png'),
+                    position: 'bottom-center',
+                    // type: 'error',
+                    showClose: true
+                });
+                vm.$store.dispatch('addToCart', product);
+            },
             getAllSettings() {
                 let vm = this;
                 vm.$root.$children[0].$refs.loader.show_loader = true;
@@ -900,5 +1059,64 @@
         /*when navigating through the items using the arrow keys:*/
         background-color: DodgerBlue !important;
         color: #ffffff;
+    }
+
+    .new_table {
+        border-spacing: 7px;
+        border-collapse: separate;
+        min-width: 600px;
+    }
+
+    .dropbtn {
+        background-color: #5d5d5d;
+        color: white;
+        padding: 5px 17px 5px 17px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropbtn:after {
+        content: '↓';
+        position: absolute;
+        left: 5px;
+        z-index: 99;
+
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        z-index: 9999;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        max-height: 400px;
+        overflow-y: scroll;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        color: #f1f1f1;
+        background-color: #00adee
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #00adee;
     }
 </style>

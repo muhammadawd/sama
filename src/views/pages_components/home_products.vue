@@ -17,11 +17,11 @@
                         <div class="card-body">
                             <div class="main_color float-right pull-right">
                                 <!--<img :src="require('@/assets/images/newImages/next.png')" class="d-inline-block swiper-button-next"-->
-                                     <!--width="25px"/>-->
+                                <!--width="25px"/>-->
                                 <!--<img :src="require('@/assets/images/newImages/prev.png')" class="d-inline-block swiper-button-prev"-->
-                                     <!--width="25px"/>-->
+                                <!--width="25px"/>-->
                                 <router-link class="main_color"
-                                             :to="{name:'search_result',query: {'q': cat.translated.title}}">
+                                             :to="{name:'search_result',query: {'q': cat.translated.title,'category_id': cat.id}}">
                                     <h4 style="margin-top: 20px;" class="font-weight-bold">{{$ml.get('all')}}</h4>
                                 </router-link>
                             </div>
@@ -188,7 +188,8 @@
                     store_id: pov.store_detail ? pov.store_detail.store_id : null,
                     product_translation: master.translated,
                     min_amount_needed: pov.min_amount_needed ? pov.min_amount_needed : 1,
-                    pov: pov
+                    pov: pov,
+                    product: master,
                 };
             },
             bindToCart(product) {

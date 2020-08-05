@@ -47,6 +47,12 @@ module.exports = {
     GET_USER_SALES: '/sale/user',
     GET_SALE: '/sale/findBySerial',
 
+    FIND_EVENTS: '/event',
+    FIND_EVENT: '/event',
+
+    FIND_AUTHORS: '/author',
+    FIND_AUTHOR: '/author/find',
+
     CHECK_COUPON: '/offers/check-coupon',
     GET_OFFERS_COUPONS: '/branch/all-offers',
     CHECK_FOR_PROMOTION: '/offers/check-offers',

@@ -177,14 +177,18 @@
                             return;
                         }
                         localStorage.setItem('auth', JSON.stringify(data));
-                        vm.$store.dispatch('addAuthUser', data);
-                        if (vm.$route.query.nextUrl) {
-                            vm.$router.push({name: vm.$route.query.nextUrl});
-                            location.reload()
-                            return;
-                        }
-                        vm.$router.push({name: 'home'})
-                        // location.reload()
+                        vm.$store.dispatch('addAuthUser', data)
+                            .then(() => {
+                                if (vm.$route.query.nextUrl) {
+                                    vm.$router.push({name: vm.$route.query.nextUrl});
+                                    location.reload();
+                                    return;
+                                }
+                                vm.$router.push({name: 'home'});
+                                location.reload()
+                            }).catch(() => {
+
+                        });
                     })
                     .catch((err) => {
                         vm.$root.$children[0].$refs.loader.show_loader = false;
@@ -328,6 +332,6 @@
     }
 
     .new_card_auth {
-        border-radius: 40px 0 40px 0!important;
+        border-radius: 40px 0 40px 0 !important;
     }
 </style>

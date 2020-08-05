@@ -20,6 +20,11 @@ import Argon from "./plugins/argon-kit";
 
 import './registerServiceWorker'
 
+import VueSocialSharing from 'vue-social-sharing'
+Vue.use(VueSocialSharing);
+
+
+
 Vue.config.productionTip = false;
 
 Vue.use(Argon);

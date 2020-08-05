@@ -9,13 +9,14 @@
 
                             <card type="secondary" shadow
                                   header-classes="bg-white pb-5"
-                                  body-classes="px-lg-5 py-lg-5"
-                                  class="border-0 new_card_auth bg-white">
+                                  body-classes="p-0"
+                                  class="border-0 p-0 new_card_auth2 bg-white">
+                                <div class="card-header bg-main-register  mb-2">
+                                    {{this.$ml.get('contact_us')}}
+                                </div>
                                 <template>
                                     <div class="text-center text-muted mb-4"></div>
-                                    <h3 class="display-4 text-left">
-                                        {{$ml.get('contact_us')}}</h3>
-                                    <form role="form">
+                                    <form class=" p-3" role="form">
                                         <base-input alternative
                                                     class="mb-3"
                                                     type="text"
@@ -230,5 +231,17 @@
 
     .new_card_auth {
         border-radius: 40px 0 40px 0 !important;
+    }
+    .bg-main-register {
+        text-align: center;
+        font-weight: bold;
+        color: #fff;
+        background-color: #00adee;
+        border-radius: 40px 40px 0 0 !important;
+
+    }
+
+    .new_card_auth2 {
+        border-radius: 40px !important;
     }
 </style>

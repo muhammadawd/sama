@@ -28,6 +28,9 @@ export const store = new Vuex.Store({
         },
         getTotalOffers: state => {
             return state.total_offers;
+        },
+        getFavourites: state => {
+            return state.favourites;
         }
     },
     mutations: {
@@ -109,6 +112,10 @@ export const store = new Vuex.Store({
             commit('addToFavourite', newTodo);
             dispatch('saveToFavourites');
             dispatch('syncFav')
+        },
+        addToFavouriteWithoutSync({commit, dispatch}, newTodo) {
+            commit('addToFavourite', newTodo);
+            dispatch('saveToFavourites');
         },
         saveToOffersWithoutSync({commit, dispatch}, newTodo) {
             commit('addToCart', newTodo);
@@ -246,6 +253,7 @@ export const store = new Vuex.Store({
                 ls.clearAllStorage('auth')
             }
         },
+
         syncDeleteCart({state, dispatch}, toDeleteInfo) {
 
             let pov_id = toDeleteInfo.pov.id;
@@ -314,7 +322,8 @@ export const store = new Vuex.Store({
                                     store_id: item.store_id,
                                     product_translation: item.product.translated,
                                     min_amount_needed: item.quantity,
-                                    pov: item.product.product_option_value
+                                    pov: item.product.product_option_value,
+                                    product: item.product
                                 };
                                 let local_exsit = false;
                                 $.each(state.cart, function (index, local_item) {
@@ -383,7 +392,8 @@ export const store = new Vuex.Store({
                                     store_id: item.store_id,
                                     product_translation: item.product.translated,
                                     min_amount_needed: item.quantity,
-                                    pov: item.product.product_option_value
+                                    pov: item.product.product_option_value,
+                                    product: item.product
                                 };
                                 dispatch('addToCart', prepared_data);
                             })
@@ -454,11 +464,11 @@ export const store = new Vuex.Store({
                     if (status) {
 
                         if (data.wishlists) {
-                            state.favourites = [];
+                            // state.favourites = [];
                             // dispatch('saveToFavourites');
-                            // $.each(data.wishlists, function (index, item) {
-                            //     dispatch('addToFavourite', item);
-                            // });
+                            $.each(data.wishlists, function (index, item) {
+                                // dispatch('addToFavourite', item);
+                            });
                         }
                     }
                 });
@@ -475,19 +485,24 @@ export const store = new Vuex.Store({
                 }).then((response) => {
                     let status = response.data.status;
                     let data = response.data.data;
+                    console.log(data)
                     if (status) {
                         state.favourites = [];
                         $.each(data.wishlists, function (index, item) {
                             let prepared_data = {
-                                product_id: item.product.product_option_value.product_id,
-                                branch_id: item.branch_id,
-                                store_id: item.store_id,
+                                product_id: item.product_id,
+                                branch_id: item.product.branch_id,
+                                store_id: 1,
                                 product_translation: item.product.translated,
-                                min_amount_needed: item.quantity,
-                                pov: item.product.product_option_value
+                                min_amount_needed: 1,
+                                pov: item.product.product_option_value,
+                                product: item.product
                             };
-                            dispatch('addToFavourite', prepared_data);
-                        })
+                            // state.favourites.push(prepared_data)
+                            // console.log(prepared_data)
+                            dispatch('addToFavouriteWithoutSync', prepared_data)
+                        });
+                        // dispatch('addToFavourite', prepared_data);
 
                     }
                 });
@@ -495,4 +510,4 @@ export const store = new Vuex.Store({
             }
         },
     }
-})
+});

@@ -1947,7 +1947,7 @@ tbody.collapse.show {
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
-    background-color: #62daa7
+    background-color: #00aeef
 }
 
 .nav-fill .nav-item {
@@ -2304,8 +2304,8 @@ tbody.collapse.show {
 .page-item.active .page-link {
     z-index: 1;
     color: #fff;
-    background-color: #000;
-    border-color: #000
+    background-color: #49a9e2;
+    border-color: #00BCD4;
 }
 
 .page-item.disabled .page-link {

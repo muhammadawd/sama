@@ -37,6 +37,7 @@
                             <div class="col-12 text-center">
                                 <div class="btn-group direction-inverse">
                                     <button class="btn btn-secondary btn-sm"
+                                            v-if="!(product.product_option_values[0].store_detail && (product.product_option_values[0].store_detail.quantity - product.product_option_values[0].store_detail.reserved == 0))"
                                             v-on:click.prevent="addToFavourite(product)"
                                             :style="$ml.current == 'ar' ? {left:'5px',right:'auto'}: {right:'5px',left:'auto'}">
                                         <span class="day">
@@ -73,6 +74,7 @@
     import Vue from 'vue'
     import {mapState, mapActions} from 'vuex'
     import Message from 'vue-m-message'
+
     Vue.use(Message);
     export default {
         name: "one_product",
@@ -129,7 +131,8 @@
                     store_id: pov.store_detail ? pov.store_detail.store_id : null,
                     product_translation: master.translated,
                     min_amount_needed: pov.min_amount_needed ? pov.min_amount_needed : 1,
-                    pov: pov
+                    pov: pov,
+                    product: master,
                 };
             },
             bindToFavourite(product) {

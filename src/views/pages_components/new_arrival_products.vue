@@ -146,7 +146,8 @@
                     store_id: pov.store_detail ? pov.store_detail.store_id : null,
                     product_translation: master.translated,
                     min_amount_needed: pov.min_amount_needed ? pov.min_amount_needed : 1,
-                    pov: pov
+                    pov: pov,
+                    product: master,
                 };
             },
             bindToCart(product) {

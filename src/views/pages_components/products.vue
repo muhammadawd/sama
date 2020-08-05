@@ -510,14 +510,15 @@
                 vm.modals.modal2 = false;
             },
             prepareProductToCart(master, pov) {
-                console.log(pov)
+                // console.log(pov)
                 return {
                     product_id: master.id,
                     branch_id: master.branch_id,
                     store_id: pov.store_detail ? pov.store_detail.store_id : null,
                     product_translation: master.translated,
                     min_amount_needed: pov.min_amount_needed ? pov.min_amount_needed : 1,
-                    pov: pov
+                    pov: pov,
+                    product: master,
                 };
             },
             getStoreProducts(id) {

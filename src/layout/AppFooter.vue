@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                             <div class="col-7">
-                                <div class="d-flex">
+                                <div class="d-flex justify-content-end">
                                     <ul class="list-unstyled direction m-2 transition" style="margin-top: 0!important;">
                                         <li class="list-inline-item font-weight-bold direction-inverse "
                                             v-if="$helper.getSettings().phone1">

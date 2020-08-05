@@ -52,17 +52,33 @@
                                 </a>
                             </li>
                             <li class="list-inline-item animIcons">
-                                <a href="">
-                                    <div class="btn-social">
-                                        <i class="fa fa-facebook fa-lg"></i>
-                                    </div>
+                                <a href="" @click.prevent>
+                                    <ShareNetwork
+                                            network="facebook"
+                                            :url="getShareData(product).url"
+                                            :title="getShareData(product).title"
+                                            :description="getShareData(product).description"
+                                            :quote="getShareData(product).description"
+                                            hashtags="shopping_books">
+                                        <div class="btn-social">
+                                            <i class="fa fa-facebook fa-lg"></i>
+                                        </div>
+                                    </ShareNetwork>
                                 </a>
                             </li>
                             <li class="list-inline-item animIcons">
-                                <a href="">
-                                    <div class="btn-social">
-                                        <i class="fa fa-twitter fa-lg"></i>
-                                    </div>
+                                <a href="" @click.prevent>
+                                    <ShareNetwork
+                                            network="twitter"
+                                            :url="getShareData(product).url"
+                                            :title="getShareData(product).title"
+                                            :description="getShareData(product).description"
+                                            :quote="getShareData(product).description"
+                                            hashtags="shopping_books">
+                                        <div class="btn-social">
+                                            <i class="fa fa-twitter fa-lg"></i>
+                                        </div>
+                                    </ShareNetwork>
                                 </a>
                             </li>
                         </ul>
@@ -134,7 +150,8 @@
             </div>
         </div>
         <div class="col-md-12" v-if="related_products.length">
-            <recommend_products :related_products="related_products"></recommend_products>
+            <recommend_products :related_products="related_products"
+                                :title="$ml.get('recommended')"></recommend_products>
         </div>
     </div>
 </template>
@@ -280,7 +297,8 @@
                     store_id: pov.store_detail ? pov.store_detail.store_id : null,
                     product_translation: master.translated,
                     min_amount_needed: pov.min_amount_needed ? pov.min_amount_needed : 1,
-                    pov: pov
+                    pov: pov,
+                    product: master,
                 };
             },
             bindToFavourite(product) {
@@ -342,6 +360,13 @@
                 let current = window.location.href;
                 window.location.href = `https://api.whatsapp.com/send?text=${current}`;
             },
+            getShareData(product) {
+                return {
+                    url: window.location.href,
+                    title: 'تسوق افضل الكتب الان',
+                    description: product.translated.title + ' ' + (product.translated.description ? product.translated.description : ''),
+                }
+            },
             handleClick(newTab) {
                 this.currentTab = newTab;
             },
@@ -363,13 +388,6 @@
                     pov: vm.pov
                 };
                 vm.bindToCart(prepared_data)
-            },
-            isMobile() {
-                if (screen.width <= 760) {
-                    return true;
-                } else {
-                    return false;
-                }
             },
             bindToCart(product) {
                 let vm = this;
@@ -406,6 +424,13 @@
                     showClose: true
                 });
                 vm.$store.dispatch('addToCart', product);
+            },
+            isMobile() {
+                if (screen.width <= 760) {
+                    return true;
+                } else {
+                    return false;
+                }
             },
             minusAmount() {
                 let vm = this;

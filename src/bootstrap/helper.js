@@ -1,8 +1,38 @@
-﻿// import moment from 'moment'
+﻿import moment from 'moment'
 //
 // const CryptoJS = require("crypto-js");
 
 export const helper = {
+    dateInBetween(start_date, end_date) {
+        // return true;
+
+        var fDate, lDate, cDate;
+        fDate = Date.parse(start_date);
+        lDate = Date.parse(end_date);
+        cDate = Date.parse(new Date());
+
+        if ((cDate <= lDate && cDate >= fDate)) {
+            return true;
+        }
+        return false;
+    },
+    getOfferCountDown(to_date) {
+        to_date = moment(to_date);
+        let startTime = moment(new Date());
+        let duration = moment.duration(to_date.diff(startTime));
+        let hours = duration.asHours();
+        let days = duration.asDays();
+        let percent = ((hours / 24) - parseInt(hours / 24));
+
+        let days_digits = parseInt(days).toString().split('').reverse();
+        let hours_digits = parseInt(percent * 24).toString().split('').reverse();
+        return {
+            _days: parseInt(days),
+            _hours: parseInt(percent * 24),
+            days: days_digits,
+            hours: hours_digits,
+        };
+    },
     getLogo() {
         let defaultlogo = require('@/assets/images/white.png');
 

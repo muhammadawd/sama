@@ -7,6 +7,10 @@ import AppFooter from "./layout/AppFooter";
 import Home from "./views/Home.vue";
 import BestSales from "./views/BestSales.vue";
 import NewArrival from "./views/NewArrival.vue";
+import AuthorFind from "./views/AuthorFind.vue";
+import Authors from "./views/Authors.vue";
+import Events from "./views/Events.vue";
+import EventFind from "./views/EventFind.vue";
 import AllStores from "./views/AllStores.vue";
 import FindStore from "./views/FindStore.vue";
 import Store from "./views/Store.vue";
@@ -143,6 +147,42 @@ let router = new Router({
             components: {
                 header: AppNewHeader,
                 default: NewArrival,
+                footer: AppFooter
+            }
+        },
+        {
+            path: "/events/:id",
+            name: "event_find",
+            components: {
+                header: AppNewHeader,
+                default: EventFind,
+                footer: AppFooter
+            }
+        },
+        {
+            path: "/events",
+            name: "events",
+            components: {
+                header: AppNewHeader,
+                default: Events,
+                footer: AppFooter
+            }
+        },
+        {
+            path: "/authors",
+            name: "authors",
+            components: {
+                header: AppNewHeader,
+                default: Authors,
+                footer: AppFooter
+            }
+        },
+        {
+            path: "/authors/:id",
+            name: "find_author",
+            components: {
+                header: AppNewHeader,
+                default: AuthorFind,
                 footer: AppFooter
             }
         },

@@ -52,6 +52,14 @@
                                 </router-link>
                             </li>
                             <li class="nav-item p-1">
+                                <router-link :to="{name:'authors'}" class="nav-link get-toggle-button">
+                                    <span class="nav-link-inner--text font-weight-bold text-capitalize">
+                                        <i class="fa fa-user"></i>
+                                        {{this.$ml.get('authors')}}
+                                    </span>
+                                </router-link>
+                            </li>
+                            <li class="nav-item p-1">
                                 <router-link :to="{name:'register_vendor'}" class="nav-link get-toggle-button">
                                     <span class="nav-link-inner--text font-weight-bold text-capitalize">
                                         <i class="fa fa-phone"></i>
@@ -119,7 +127,7 @@
                         </ul>
                     </div>
                     <div class="col-12 pt-0 pl-4" v-for="(cat , key) in categories" :key="key"
-                         @click="$router.push({name:'search_result',query:{q:(cat.translated.title ? cat.translated.title.toLowerCase() : '')}})">
+                         @click="$router.push({name:'search_result',query:{q:(cat.translated.title ? cat.translated.title.toLowerCase() : ''),category_id:cat.id}})">
                         <div class="text-left p-1 pb-0 pt-0">
                             <h3 class="font-weight-bold pt-2"
                                 style="font-size: 14px;white-space: nowrap;text-overflow: ellipsis">
@@ -283,14 +291,14 @@
 
 <style>
     .bm-burger-button {
-        position: absolute!important;
+        position: absolute !important;
         width: 24px !important;
         height: 18px !important;
         /*right: 0!important;*/
         top: 28px;
         cursor: pointer;
-        left: 15px!important;;
-        right: auto!important;
+        left: 15px !important;;
+        right: auto !important;
     }
 
     .bm-burger-bars {
@@ -299,8 +307,8 @@
 
     .bm-menu {
         background-color: #fff !important;
-        left: 0!important;;
-        right: auto!important;
+        left: 0 !important;;
+        right: auto !important;
     }
 
     .bm-item-list {
