@@ -60,6 +60,14 @@
                                 </router-link>
                             </li>
                             <li class="nav-item p-1">
+                                <router-link :to="{name:'events'}" class="nav-link get-toggle-button">
+                                    <span class="nav-link-inner--text font-weight-bold text-capitalize">
+                                        <i class="fa fa-gift"></i>
+                                        {{this.$ml.get('events')}}
+                                    </span>
+                                </router-link>
+                            </li>
+                            <li class="nav-item p-1">
                                 <router-link :to="{name:'register_vendor'}" class="nav-link get-toggle-button">
                                     <span class="nav-link-inner--text font-weight-bold text-capitalize">
                                         <i class="fa fa-phone"></i>
