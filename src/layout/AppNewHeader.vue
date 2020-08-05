@@ -460,6 +460,11 @@
                                     {{$ml.get('offers')}}
                                 </a>
                             </li>
+                            <li v-if="auth && checkPointModule()" :class="$route.name == 'my_points' ? 'active' : ''">
+                                <a href="" @click.prevent="$router.push({name:'my_points'})">
+                                    {{$ml.get('my_points')}}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
