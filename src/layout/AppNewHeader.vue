@@ -201,155 +201,157 @@
             </div>
         </div>
         <div class="d-none d-md-block">
-            <div class="container">
+            <div class="w-100">
                 <div class="header_bar"></div>
-                <div class="row direction header_tool_bar">
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-1">
-                                <div class="header_logo">
-                                    <a href="">
-                                        <img :src="$helper.getLogo()" width="120px" alt="">
-                                    </a>
+                <div class="container-fluid">
+                    <div class="row direction header_tool_bar">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-1">
+                                    <div class="header_logo">
+                                        <a href="">
+                                            <img :src="$helper.getLogo()" width="120px" alt="">
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="header_lang">
-                                    <ul class="list-unstyled list-inline direction-inverse">
-                                        <li class="list-inline-item">
-                                            <a :class="$ml.current == 'ar' ? 'active' : ''" href=""
-                                               @click.prevent="changeLang('ar')">عربي</a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            |
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a :class="$ml.current == 'en' ? 'active' : ''" href=""
-                                               @click.prevent="changeLang('en')">English</a>
-                                        </li>
-                                    </ul>
-                                    <div class="current_currency">{{$store.getters.getCurrency}}</div>
+                                <div class="col-2">
+                                    <div class="header_lang">
+                                        <ul class="list-unstyled list-inline direction-inverse">
+                                            <li class="list-inline-item">
+                                                <a :class="$ml.current == 'ar' ? 'active' : ''" href=""
+                                                   @click.prevent="changeLang('ar')">عربي</a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                |
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a :class="$ml.current == 'en' ? 'active' : ''" href=""
+                                                   @click.prevent="changeLang('en')">English</a>
+                                            </li>
+                                        </ul>
+                                        <div class="current_currency">{{$store.getters.getCurrency}}</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-5 text-left">
-                                <div class="header_contact">
-                                    <ul class="list-unstyled direction">
-                                        <li class="list-inline-item direction-inverse animIcons"
-                                            v-if="$helper.getSettings().phone1">
-                                            <a :href="'tel:'+$helper.getSettings().phone1">
-                                                {{$helper.getSettings().phone1}}
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item  animIcons direction-inverse"
-                                            v-if="$helper.getSettings().phone2">
-                                            <a :href="'tel:'+$helper.getSettings().phone2">
-                                                {{$helper.getSettings().phone2}}
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item animIcons" v-if="$helper.getSettings().facebook">
-                                            <a :href="$helper.getSettings().facebook">
-                                                <img :src="require('@/assets/images/newImages/facebook.png')"
-                                                     width="30px"
-                                                     alt="">
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item animIcons" v-if="$helper.getSettings().twitter">
-                                            <a :href="$helper.getSettings().twitter">
-                                                <img :src="require('@/assets/images/newImages/twitter.png')"
-                                                     width="30px"
-                                                     alt="">
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item animIcons" v-if="$helper.getSettings().snapchat">
-                                            <a :href="$helper.getSettings().snapchat">
-                                                <img :src="require('@/assets/images/newImages/snapchat.png')"
-                                                     width="30px"
-                                                     alt="">
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item animIcons" v-if="$helper.getSettings().instagram">
-                                            <a :href="$helper.getSettings().instagram">
-                                                <img :src="require('@/assets/images/newImages/instagram.png')"
-                                                     width="30px"
-                                                     alt="">
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item animIcons" v-if="$helper.getSettings().front_email">
-                                            <a :href="'mailto:'+$helper.getSettings().front_email">
-                                                <img :src="require('@/assets/images/newImages/email.png')" width="30px"
-                                                     alt="">
-                                            </a>
-                                        </li>
-                                        <li></li>
-                                    </ul>
+                                <div class="col-5 text-left">
+                                    <div class="header_contact">
+                                        <ul class="list-unstyled direction">
+                                            <li class="list-inline-item direction-inverse animIcons"
+                                                v-if="$helper.getSettings().phone1">
+                                                <a :href="'tel:'+$helper.getSettings().phone1">
+                                                    {{$helper.getSettings().phone1}}
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item  animIcons direction-inverse"
+                                                v-if="$helper.getSettings().phone2">
+                                                <a :href="'tel:'+$helper.getSettings().phone2">
+                                                    {{$helper.getSettings().phone2}}
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item animIcons" v-if="$helper.getSettings().facebook">
+                                                <a :href="$helper.getSettings().facebook">
+                                                    <img :src="require('@/assets/images/newImages/facebook.png')"
+                                                         width="30px"
+                                                         alt="">
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item animIcons" v-if="$helper.getSettings().twitter">
+                                                <a :href="$helper.getSettings().twitter">
+                                                    <img :src="require('@/assets/images/newImages/twitter.png')"
+                                                         width="30px"
+                                                         alt="">
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item animIcons" v-if="$helper.getSettings().snapchat">
+                                                <a :href="$helper.getSettings().snapchat">
+                                                    <img :src="require('@/assets/images/newImages/snapchat.png')"
+                                                         width="30px"
+                                                         alt="">
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item animIcons" v-if="$helper.getSettings().instagram">
+                                                <a :href="$helper.getSettings().instagram">
+                                                    <img :src="require('@/assets/images/newImages/instagram.png')"
+                                                         width="30px"
+                                                         alt="">
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item animIcons" v-if="$helper.getSettings().front_email">
+                                                <a :href="'mailto:'+$helper.getSettings().front_email">
+                                                    <img :src="require('@/assets/images/newImages/email.png')" width="30px"
+                                                         alt="">
+                                                </a>
+                                            </li>
+                                            <li></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="header_fav_cart">
-                                    <ul class="list-unstyled direction">
-                                        <li class="text-left mt-2">
-                                            <a href="" @click.prevent="modals.modal1 = true">
-                                                <div class="position-relative  float-right">
-                                                    <span class="cart_count" style="left: 20px;top: -20px;">{{$store.getters['getFavourites'].length}}</span>
-                                                </div>
-                                                <div class="float-left">
+                                <div class="col-2">
+                                    <div class="header_fav_cart">
+                                        <ul class="list-unstyled direction">
+                                            <li class="text-left mt-2">
+                                                <a href="" @click.prevent="modals.modal1 = true">
+                                                    <div class="position-relative  float-right">
+                                                        <span class="cart_count" style="left: 20px;top: -20px;">{{$store.getters['getFavourites'].length}}</span>
+                                                    </div>
+                                                    <div class="float-left">
                                                     <span>
                                                         {{$ml.get('favourite')}}
                                                      </span>
-                                                </div>
-                                                <div class="float-right animIcons">
+                                                    </div>
+                                                    <div class="float-right animIcons">
                                                     <span>
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star-half-empty"></i>
                                                     </span>
-                                                </div>
-                                                <div class="clearfix"></div>
-                                            </a>
-                                        </li>
-                                        <li class="text-left mt-4">
-                                            <a href="" @click.prevent="modals.modal2 = true">
-                                                <div class="float-left">
-                                                    <span>{{$ml.get('cart')}}</span>
-                                                </div>
-                                                <div class="position-relative animIcons float-right">
-                                                    <span class="cart_count">{{cart.length}}</span>
-                                                    <img :src="require('@/assets/images/newImages/cart.png')"
-                                                         width="40px"
-                                                         alt="">
-                                                </div>
-                                                <div class="clearfix"></div>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </a>
+                                            </li>
+                                            <li class="text-left mt-4">
+                                                <a href="" @click.prevent="modals.modal2 = true">
+                                                    <div class="float-left">
+                                                        <span>{{$ml.get('cart')}}</span>
+                                                    </div>
+                                                    <div class="position-relative animIcons float-right">
+                                                        <span class="cart_count">{{cart.length}}</span>
+                                                        <img :src="require('@/assets/images/newImages/cart.png')"
+                                                             width="40px"
+                                                             alt="">
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="header_fav_cart">
-                                    <ul class="list-unstyled text-center direction">
-                                        <li class="mt-2 bg-active-login" v-if="!auth_user">
-                                            <a class="text-white" href="" @click.prevent="$router.push({name:'login'})">
-                                                {{$ml.get('login')}}
-                                            </a>
-                                        </li>
-                                        <li class="mt-3 bg-active-register" v-if="!auth_user">
-                                            <a href="" @click.prevent="$router.push({name:'register'})">
-                                                {{$ml.get('register')}}
-                                            </a>
-                                        </li>
-                                        <li class="mt-2 bg-active-login" v-if="auth_user">
-                                            <a class="text-white" href=""
-                                               @click.prevent="$router.push({name:'account'})">
-                                                {{$ml.get('my_account')}}
-                                            </a>
-                                        </li>
-                                        <li class="mt-3 bg-active-register" v-if="auth_user">
-                                            <a href="" @click.prevent="Logout">
-                                                {{this.$ml.get('logout')}}
-                                            </a>
-                                        </li>
-                                    </ul>
+                                <div class="col-2">
+                                    <div class="header_fav_cart">
+                                        <ul class="list-unstyled text-center direction">
+                                            <li class="mt-2 bg-active-login" v-if="!auth_user">
+                                                <a class="text-white" href="" @click.prevent="$router.push({name:'login'})">
+                                                    {{$ml.get('login')}}
+                                                </a>
+                                            </li>
+                                            <li class="mt-3 bg-active-register" v-if="!auth_user">
+                                                <a href="" @click.prevent="$router.push({name:'register'})">
+                                                    {{$ml.get('register')}}
+                                                </a>
+                                            </li>
+                                            <li class="mt-2 bg-active-login" v-if="auth_user">
+                                                <a class="text-white" href=""
+                                                   @click.prevent="$router.push({name:'account'})">
+                                                    {{$ml.get('my_account')}}
+                                                </a>
+                                            </li>
+                                            <li class="mt-3 bg-active-register" v-if="auth_user">
+                                                <a href="" @click.prevent="Logout">
+                                                    {{this.$ml.get('logout')}}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -357,7 +359,7 @@
                 </div>
             </div>
 
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row direction text-left header_search_bar">
                     <div class="col-2 pt-1">
                         {{$ml.get('search')}}
@@ -393,9 +395,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="container">
                 <div class="row direction header_menu_bar">
                     <div class="col-12">
                         <ul class="list-unstyled direction list_menu text-left" :class="$ml.current">
@@ -404,7 +403,7 @@
                                     {{$ml.get('home')}}
                                 </a>
                             </li>
-                            <li :class="$route.name == 'home' ? 'active' : ''">
+                            <li>
                                 <div class="dropdown">
                                     <button class="dropbtn">{{$ml.get('categories')}}</button>
                                     <div class="dropdown-content">
@@ -1073,8 +1072,8 @@
     }
 
     .dropbtn {
-        background-color: #5d5d5d;
-        color: white;
+        background-color: transparent;
+        /*color: white;*/
         padding: 5px 17px 5px 17px;
         font-size: 16px;
         border: none;

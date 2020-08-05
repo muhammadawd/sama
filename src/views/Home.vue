@@ -1,6 +1,6 @@
 <template>
     <div class="profile-page" style="margin-top: 70px">
-        <div class="container">
+        <div class="container-fluid">
             <home_header></home_header>
         </div>
         <section class=" sesction-skew" style="padding-bottom: 0">

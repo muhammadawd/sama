@@ -8,25 +8,25 @@
                          style="width: 70%;margin-right: auto;" @click="goHome"/> -->
                     <div style="display: inline-block;margin-top:20px ">
                         <div style="width: 50%;display: inline-block">
-                            <div style="background: #a14a9f;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
+                            <div style="background: #f44336;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
                                 <i class="fa fa-facebook"></i>
                             </div>
                             {{$helper.getSettings().facebook}}
                         </div>
                         <div style="width: 50%;display: inline-block">
-                            <div style="background: #a14a9f;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
+                            <div style="background: #f44336;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
                                 <i class="fa fa-twitter"></i>
                             </div>
                             {{$helper.getSettings().twitter}}
                         </div>
                         <div style="width: 50%;display: inline-block">
-                            <div style="background: #a14a9f;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
+                            <div style="background: #f44336;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
                                 <i class="fa fa-envelope"></i>
                             </div>
                             {{$helper.getSettings().front_email}}
                         </div>
                         <div style="width: 50%;display: inline-block">
-                            <div style="background: #a14a9f;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
+                            <div style="background: #f44336;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
                                 <i class="fa fa-instagram"></i>
                             </div>
                             {{$helper.getSettings().instagram}}

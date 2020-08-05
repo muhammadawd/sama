@@ -17,7 +17,7 @@
                     <div class="image"
                          v-lazy-container="{ selector: 'img', error:'img/icons/common/no_image.png', loading: 'img/icons/common/restricted.gif' }">
                         <img v-if="current_image" :data-src="current_image" width="100%"
-                             alt="pr-sample23"/>
+                             alt="..."/>
                     </div>
                     <figcaption>
 
@@ -215,7 +215,7 @@
     .addtoCartbtn {
         width: 40px;
         height: 40px;
-        /*background-color: #a14a9f;*/
+        /*background-color: #f44336;*/
         background-color: #dcdcdc;
         border: 0.5px solid #aaa;
         color: #fff;
@@ -234,7 +234,7 @@
     .priceSales {
         width: 60px;
         height: 30px;
-        background-color: #a14a9f;
+        background-color: #f44336;
         color: #fff;
         line-height: 30px;
         text-align: center;

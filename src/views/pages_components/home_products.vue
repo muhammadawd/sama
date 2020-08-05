@@ -22,7 +22,7 @@
                                 <!--width="25px"/>-->
                                 <router-link class="main_color"
                                              :to="{name:'search_result',query: {'q': cat.translated.title,'category_id': cat.id}}">
-                                    <h4 style="margin-top: 20px;" class="font-weight-bold">{{$ml.get('all')}}</h4>
+                                    <h4 style="margin-top: 25px;" class="font-weight-bold">{{$ml.get('all')}}</h4>
                                 </router-link>
                             </div>
                             <h4 class="float-left pull-left  text-left mt-3 p-2 font-weight-bold">
@@ -258,7 +258,7 @@
     }
 
     .vue-tab[aria-selected="true"] {
-        background: #a14a9f;
+        background: #f44336;
         color: #fff;
         /*padding: 10px 5px 5px 5px;*/
     }
@@ -298,7 +298,7 @@
     /*}*/
 
     /*.tabs input[type="radio"]:checked + label {*/
-    /*background: #a14a9f;*/
+    /*background: #f44336;*/
     /*color: #fff;*/
     /*}*/
 
@@ -367,7 +367,7 @@
     /*position: relative;*/
     /*color: #fff;*/
     /*font-weight: bold;*/
-    /*background: #a14a9f;*/
+    /*background: #f44336;*/
     /*!*border: 1px solid #bbb;*!*/
     /*!*border-bottom: 1px solid #fff;*!*/
     /*border-radius: 0;*/
@@ -392,7 +392,7 @@
     /*#content21, #content22, #content23, #content24,*/
     /*#content25, #content26, #content27, #content28, #content29, #content30 {*/
     /*display: none;*/
-    /*border-top: 2px solid #a14a9f;*/
+    /*border-top: 2px solid #f44336;*/
     /*padding: 15px;*/
     /*}*/
 
