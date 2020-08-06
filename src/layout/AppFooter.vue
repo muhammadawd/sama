@@ -89,8 +89,8 @@
                                             </a>
                                         </li>
                                     </ul>
-                                    <img :src="require('@/assets/images/newImages/phone.png')" width="50px"
-                                         height="50px" class=""
+                                    <img :src="require('@/assets/images/newImages/phone.png')" width="30px"
+                                         height="30px" class=""
                                          alt="">
                                 </div>
                                 <ul class="list-unstyled transition">

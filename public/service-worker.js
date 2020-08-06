@@ -7,7 +7,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerRoute(/^https:\/\/zashzash.com\/back_end\/api\//, workbox.strategies.networkFirst({
+workbox.routing.registerRoute(/^https:\/\/darsamakw.com\/back_end\/api\//, workbox.strategies.networkFirst({
     "cacheName": "api-cache",
     "networkTimeoutSeconds": 20,
     plugins: [new workbox.cacheableResponse.Plugin({"statuses": [0, 200]})]
@@ -45,7 +45,7 @@ const networkWithBackgroundSync = new workbox.strategies.NetworkOnly({
 });
 
 workbox.routing.registerRoute(
-    /^https:\/\/zashzash.com\/back_end\/api\//,
+    /^https:\/\/darsamakw.com\/back_end\/api\//,
     networkWithBackgroundSync,
     'POST'
 );
