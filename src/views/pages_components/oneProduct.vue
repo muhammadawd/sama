@@ -52,7 +52,7 @@
                                             <i class="fa fa-book fa-lg"></i>
                                         </span>
                                     </a>
-                                    <button class="btn btn-info btn-sm" v-on:click.prevent="addToCart(product)"
+                                    <button class="btn btn-secondary btn-sm" v-on:click.prevent="addToCart(product)"
                                             v-if="!(product.product_option_values[0].store_detail && (product.product_option_values[0].store_detail.quantity - product.product_option_values[0].store_detail.reserved == 0))"
                                             :style="$ml.current == 'ar' ? {left:'5px',right:'auto'}: {right:'5px',left:'auto'}">
                                         <span class="day">

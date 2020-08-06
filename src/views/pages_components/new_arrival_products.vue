@@ -243,7 +243,7 @@
     @media only screen and (max-width: 768px) {
 
         .w_90l_80sm {
-            width: 80% !important;
+            width: 70% !important;
         }
     }
 </style>
