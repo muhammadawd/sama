@@ -5,11 +5,14 @@
                 <div class="col-md-12">
                     <h3 class="text-left font-weight-bold">{{this.title}}</h3>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12 ">
                     <VueSlickCarousel v-bind="settings" :arrows="true">
                         <div class="slider__item " v-for="(product,key) in getProducts" :key="key" v-if="key < 20">
-                            <oneProduct v-bind:addToCart="addToCart"
-                                        v-bind:product="product"></oneProduct>
+                            <div class="w_90l_80sm text-center m-auto">
+
+                                <oneProduct v-bind:addToCart="addToCart"
+                                            v-bind:product="product"></oneProduct>
+                            </div>
                         </div>
                         <template #prevArrow="arrowOption">
                             <div class="custom-arrow">
@@ -56,7 +59,7 @@
         components: {
             oneProduct, VueSlickCarousel
         },
-        props: ['related_products','title'],
+        props: ['related_products', 'title'],
         data() {
             return {
                 loadingText: this.$ml.get('loading'),
@@ -93,6 +96,7 @@
                             "breakpoint": 480,
                             "settings": {
                                 "slidesToShow": 1,
+                                "initialSlide": 1,
                                 "slidesToScroll": 1
                             }
                         }
@@ -224,7 +228,7 @@
     /*}*/
 
     .slick-slide > div {
-        transform: scale(0.8);
+        /*transform: scale(0.8);*/
         /*transition: transform .3s cubic-bezier(.4, 0, .2, 1);*/
     }
 
@@ -240,5 +244,16 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+    }
+
+    .w_90l_80sm {
+        width: 90% !important;
+    }
+
+    @media only screen and (max-width: 768px) {
+
+        .w_90l_80sm {
+            width: 75% !important;
+        }
     }
 </style>

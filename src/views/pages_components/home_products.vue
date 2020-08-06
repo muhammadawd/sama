@@ -22,7 +22,7 @@
                                 <!--width="25px"/>-->
                                 <router-link class="main_color"
                                              :to="{name:'search_result',query: {'q': cat.translated.title,'category_id': cat.id}}">
-                                    <h4 style="margin-top: 25px;" class="font-weight-bold">{{$ml.get('all')}}</h4>
+                                    <h5 style="margin-top: 25px;" class="font-weight-bold">{{$ml.get('all')}}</h5>
                                 </router-link>
                             </div>
                             <h4 class="float-left pull-left  text-left mt-3 p-2 font-weight-bold">
