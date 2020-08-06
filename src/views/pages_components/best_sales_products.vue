@@ -1,13 +1,13 @@
 <template>
     <div class="best_sales" v-if="products.length">
-        <div class="container" style="width: 90%">
+        <div class="container w_90l_80sm">
             <div class="row">
                 <div class="col-md-12">
                     <h3 class="text-white text-left font-weight-bold">{{$ml.get('best_sales')}}</h3>
                 </div>
                 <div class="col-md-12">
                     <VueSlickCarousel v-bind="settings" :arrows="true">
-                        <div class="slider__item " v-for="(product,key) in products" :key="key"  v-if="key < 20">
+                        <div class="slider__item " v-for="(product,key) in products" :key="key" v-if="key < 20">
 
                             <oneProduct v-bind:addToCart="addToCart"
                                         v-bind:product="product"></oneProduct>
@@ -70,13 +70,14 @@
                     "autoplaySpeed": 1500,
                     "cssEase": "linear",
                     "focusOnSelect": true,
-                    "centerPadding": '30px',
+                    "centerPadding": '24px',
                     "infinite": true,
                     "centerMode": true,
                     "speed": 500,
                     "slidesToShow": 5,
                     "slidesToScroll": 3,
-                    "touchThreshold": 5, "responsive": [
+                    "touchThreshold": 5,
+                    "responsive": [
                         {
                             "breakpoint": 1024,
                             "settings": {
@@ -95,9 +96,9 @@
                         {
                             "breakpoint": 480,
                             "settings": {
-                                "slidesToShow": 2,
-                                "slidesToScroll": 2,
-                                "initialSlide": 2
+                                "slidesToShow": 1,
+                                "slidesToScroll": 1,
+                                "initialSlide": 1
                             }
                         }
                     ]
@@ -221,12 +222,12 @@
     }
 
     .slick-slide > div {
-        transform: scale(.7);
-        transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+        /*transform: scale(.7);*/
+        /*transition: transform .3s cubic-bezier(.4, 0, .2, 1);*/
     }
 
     .slick-center > div {
-        transform: scale(1);
+        /*transform: scale(1);*/
     }
 
     .best_sales {
@@ -237,5 +238,16 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+    }
+
+    .w_90l_80sm {
+        width: 90% !important;
+    }
+
+    @media only screen and (max-width: 768px) {
+
+        .w_90l_80sm {
+            width: 80% !important;
+        }
     }
 </style>
