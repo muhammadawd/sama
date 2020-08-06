@@ -77,7 +77,7 @@
 
                         <div class="row" slot="content-header" slot-scope="{closeMenu}">
                             <div class="col-6 collapse-brand text-left" style="text-align:right;">
-                                <a href="">
+                                <a href="./">
                                     <img :src="$helper.getLogo()">
                                 </a>
                             </div>
@@ -209,7 +209,7 @@
                             <div class="row">
                                 <div class="col-1">
                                     <div class="header_logo">
-                                        <a href="">
+                                        <a href="./">
                                             <img :src="$helper.getLogo()" width="120px" alt="">
                                         </a>
                                     </div>
@@ -399,7 +399,7 @@
                     <div class="col-12">
                         <ul class="list-unstyled direction list_menu text-left" :class="$ml.current">
                             <li :class="$route.name == 'home' ? 'active' : ''">
-                                <a href="">
+                                <a href="./">
                                     {{$ml.get('home')}}
                                 </a>
                             </li>
