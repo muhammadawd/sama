@@ -10,7 +10,7 @@
 # Remove www from any URLs that have them:
 # RewriteEngine on
 # RewriteCond %{HTTP_HOST} ^www\.
-# RewriteRule ^(.*)$ https://zashzash.com/$1 [R=301,L]
+# RewriteRule ^(.*)$ https://darsamakw.com/$1 [R=301,L]
 
 # handle https
 RewriteEngine On
