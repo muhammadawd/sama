@@ -43,7 +43,7 @@ Vue.use(Router);
 let router = new Router({
     linkExactActiveClass: "active",
     // mode: 'history','hash',
-    mode: 'hash',
+    mode: 'history',
     routes: [
         {
             path: '/auth/twitter/callback',
