@@ -1,6 +1,6 @@
 <template>
     <div class="new_arrival" v-if="products.length">
-        <div class="container" style="width: 90%">
+        <div class="container w_90l_80sm">
             <div class="row">
                 <div class="col-md-12">
                     <h3 class="text-left font-weight-bold">{{$ml.get('new_arrival')}}</h3>
@@ -66,13 +66,14 @@
                     "dots": false,
                     "arrows": true,
                     "focusOnSelect": true,
-                    "centerPadding": '30px',
+                    "centerPadding": '24px',
                     "infinite": true,
                     "centerMode": true,
                     "speed": 500,
                     "slidesToShow": 5,
                     "slidesToScroll": 3,
-                    "touchThreshold": 5, "responsive": [
+                    "touchThreshold": 5,
+                    "responsive": [
                         {
                             "breakpoint": 1024,
                             "settings": {
@@ -92,7 +93,8 @@
                             "breakpoint": 480,
                             "settings": {
                                 "slidesToShow": 1,
-                                "slidesToScroll": 1
+                                "slidesToScroll": 1,
+                                "initialSlide": 1
                             }
                         }
                     ]
@@ -216,12 +218,12 @@
     }
 
     .slick-slide > div {
-        transform: scale(.7);
-        transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+        /*transform: scale(.7);*/
+        /*transition: transform .3s cubic-bezier(.4, 0, .2, 1);*/
     }
 
     .slick-center > div {
-        transform: scale(1);
+        /*transform: scale(1);*/
     }
 
     .new_arrival {
@@ -232,5 +234,16 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+    }
+
+    .w_90l_80sm {
+        width: 90% !important;
+    }
+
+    @media only screen and (max-width: 768px) {
+
+        .w_90l_80sm {
+            width: 80% !important;
+        }
     }
 </style>
