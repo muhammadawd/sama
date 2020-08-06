@@ -13,8 +13,8 @@
                             <input aria-describedby="addon-left addon-left" v-model="subscribe"
                                    :placeholder="this.$ml.get('subscribe_holder')"
                                    class="form-control p-1 text-left border_rad">
-                            <div class="input-group-append">
-                                <button class="btn btn-info border_rad" :class="'sub_'+$ml.current"
+                            <div class="input-group-append position-absolute" :class="'sub_'+$ml.current">
+                                <button class="btn btn-info border_rad"
                                         @click="saveSubscribe()">
                                     {{this.$ml.get('subscribe')}}
                                 </button>
@@ -30,107 +30,122 @@
         <footer class="footer" v-if="settings">
             <div class="container-fluid">
                 <div class="row direction">
-                    <div class="col-md-2 text-center">
+                    <div class="col-md-2 text-center d-none d-md-block">
                         <img :src="$helper.getLogo()" width="120px" alt="">
                     </div>
-                    <div class="col-md-6 text-left pt-4">
+                    <div class="col-md-6 text-left pt-md-4">
                         <ul class="list-unstyled site_map direction transition">
-                            <li class="list-inline-item transition">
+                            <li class="list-inline-item transition mb-3">
                                 <a href="" class="" @click.prevent="$router.push({name:'about_us'})">
                                     {{$ml.get('about_us')}}
                                 </a>
                             </li>
-                            <li class="list-inline-item transition">
+                            <li class="list-inline-item transition mb-3">
                                 <a href="" class="" @click.prevent="$router.push({name:'new_arrival'})">
                                     {{$ml.get('new_arrival')}}
                                 </a>
                             </li>
-                            <li class="list-inline-item transition">
+                            <li class="list-inline-item transition mb-3">
                                 <a href="" class="" @click.prevent="$router.push({name:'best_sales'})">
                                     {{$ml.get('best_sales')}}
                                 </a>
                             </li>
-                            <li class="list-inline-item transition">
+                            <li class="list-inline-item transition mb-3">
                                 <a href="" class="" @click.prevent="$router.push({name:'location'})">
                                     {{$ml.get('location')}}
                                 </a>
                             </li>
-                            <li class="list-inline-item transition">
+                            <li class="list-inline-item transition mb-3">
                                 <a href="" class="" @click.prevent="$router.push({name:'contact_us'})">
                                     {{$ml.get('contact_us')}}
                                 </a>
                             </li>
                         </ul>
+                        <hr class="p-0 m-0 d-md-none">
                     </div>
                     <div class="col-md-4" :class="'border_'+$ml.current">
                         <div class="row">
                             <div class="col-md-12">
-                                <h5 class="text-center font-weight-bold">
+                                <h5 class="text-center d-none d-md-block font-weight-bold">
                                     {{$ml.get('contact_us')}}
                                 </h5>
                                 <div class="text-center">
-                                    <p>{{$ml.get('dar_sama')}}</p>
-                                    <p>{{$ml.get('kuwait')}}</p>
+                                    <p class="font-weight-bold text-md-center text-left">{{$ml.get('dar_sama')}}</p>
+                                    <p class="font-weight-bold text-md-center text-left p-0 m-0">
+                                        {{$ml.get('kuwait')}}</p>
                                 </div>
                             </div>
-                            <div class="col-7">
-                                <div class="d-flex justify-content-end">
-                                    <ul class="list-unstyled direction m-2 transition" style="margin-top: 0!important;">
-                                        <li class="list-inline-item font-weight-bold direction-inverse "
-                                            v-if="$helper.getSettings().phone1">
-                                            <a :href="'tel:'+$helper.getSettings().phone1">
-                                                {{$helper.getSettings().phone1}}
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item font-weight-bold direction-inverse"
-                                            v-if="$helper.getSettings().phone2">
-                                            <a :href="'tel:'+$helper.getSettings().phone2">
-                                                {{$helper.getSettings().phone2}}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <img :src="require('@/assets/images/newImages/phone.png')" width="30px"
-                                         height="30px" class=""
-                                         alt="">
-                                </div>
-                                <ul class="list-unstyled transition">
-                                    <li class="list-inline-item animIcons" v-if="$helper.getSettings().facebook">
-                                        <a :href="$helper.getSettings().facebook">
-                                            <img :src="require('@/assets/images/newImages/facebook.png')" width="30px"
+                            <div class="col-12">
+                                <div class="row direction-inverse-mobile">
+                                    <div class="col-7 direction">
+                                        <div class="d-flex justify-content-end">
+                                            <ul class="list-unstyled direction m-2 transition"
+                                                style="margin-top: 0!important;">
+                                                <li class="list-inline-item font-weight-bold direction-inverse "
+                                                    v-if="$helper.getSettings().phone1">
+                                                    <a :href="'tel:'+$helper.getSettings().phone1">
+                                                        {{$helper.getSettings().phone1}}
+                                                    </a>
+                                                </li>
+                                                <li class="list-inline-item font-weight-bold direction-inverse"
+                                                    v-if="$helper.getSettings().phone2">
+                                                    <a :href="'tel:'+$helper.getSettings().phone2">
+                                                        {{$helper.getSettings().phone2}}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <img :src="require('@/assets/images/newImages/phone.png')" width="30px"
+                                                 height="30px" class=""
                                                  alt="">
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item animIcons" v-if="$helper.getSettings().twitter">
-                                        <a :href="$helper.getSettings().twitter">
-                                            <img :src="require('@/assets/images/newImages/twitter.png')" width="30px"
-                                                 alt="">
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item animIcons" v-if="$helper.getSettings().snapchat">
-                                        <a :href="$helper.getSettings().snapchat">
-                                            <img :src="require('@/assets/images/newImages/snapchat.png')" width="30px"
-                                                 alt="">
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item animIcons" v-if="$helper.getSettings().instagram">
-                                        <a :href="$helper.getSettings().instagram">
-                                            <img :src="require('@/assets/images/newImages/instagram.png')" width="30px"
-                                                 alt="">
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div>
-                                    <a :href="'mailto:'+$helper.getSettings().front_email">
+                                        </div>
+                                        <ul class="list-unstyled transition">
+                                            <li class="list-inline-item animIcons"
+                                                v-if="$helper.getSettings().facebook">
+                                                <a :href="$helper.getSettings().facebook">
+                                                    <img :src="require('@/assets/images/newImages/facebook.png')"
+                                                         width="30px"
+                                                         alt="">
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item animIcons" v-if="$helper.getSettings().twitter">
+                                                <a :href="$helper.getSettings().twitter">
+                                                    <img :src="require('@/assets/images/newImages/twitter.png')"
+                                                         width="30px"
+                                                         alt="">
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item animIcons"
+                                                v-if="$helper.getSettings().snapchat">
+                                                <a :href="$helper.getSettings().snapchat">
+                                                    <img :src="require('@/assets/images/newImages/snapchat.png')"
+                                                         width="30px"
+                                                         alt="">
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item animIcons"
+                                                v-if="$helper.getSettings().instagram">
+                                                <a :href="$helper.getSettings().instagram">
+                                                    <img :src="require('@/assets/images/newImages/instagram.png')"
+                                                         width="30px"
+                                                         alt="">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div>
+                                            <a :href="'mailto:'+$helper.getSettings().front_email">
                                         <span class="p-1"
                                               style="font-size: 12px">{{$helper.getSettings().front_email}}</span>
-                                        <img :src="require('@/assets/images/newImages/email.png')" width="30px"
-                                             alt="">
-                                    </a>
+                                                <img :src="require('@/assets/images/newImages/email.png')" width="30px"
+                                                     alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-5 position-relative">
+                                        <img :src="require('@/assets/images/newImages/contact.png')"
+                                             class="position-absolute"
+                                             style="bottom:0;left: 0;" width="150px" alt=""/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-5 position-relative">
-                                <img :src="require('@/assets/images/newImages/contact.png')" class="position-absolute"
-                                     style="bottom:0;left: 0;" width="150px" alt=""/>
                             </div>
                         </div>
                     </div>
@@ -253,16 +268,16 @@
     }
 
     .sub_ar {
-        left: 100px;
-        padding: 11px;
+        left: 5px;
+        /*padding: 11px;*/
         height: 37px;
         line-height: 0;
         top: 5px;
     }
 
     .sub_en {
-        right: 100px;
-        padding: 11px;
+        right: 5px;
+        /*padding: 11px;*/
         height: 37px;
         line-height: 0;
         top: 5px;
@@ -284,5 +299,11 @@
 
     .border_en {
         border-left: 1px solid #ccc;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .direction-inverse-mobile {
+            direction: ltr !important;
+        }
     }
 </style>
