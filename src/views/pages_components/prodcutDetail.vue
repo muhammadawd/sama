@@ -1,10 +1,61 @@
 <template>
     <div class="row direction" v-if="product">
         <div class="col-md-4">
+            <div class="col-md-12 d-md-none mt-2">
+                <h3 class="main_color font-weight-bold float-left">
+                    {{product.translated ? product.translated.title: ''}}
+                </h3>
+                <div class="float-right">
+                    <b>{{$ml.get('share')}}</b>
+                    <ul class="list-unstyled p-0 m-0">
+                        <li class="list-inline-item animIcons">
+                            <a href="" @click.prevent="shareWhatsapp()">
+                                <div class="btn-social">
+                                    <i class="fa fa-whatsapp fa-lg"></i>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="list-inline-item animIcons">
+                            <a href="" @click.prevent>
+                                <ShareNetwork
+                                        network="facebook"
+                                        :url="getShareData(product).url"
+                                        :title="getShareData(product).title"
+                                        :description="getShareData(product).description"
+                                        :quote="getShareData(product).description"
+                                        hashtags="shopping_books">
+                                    <div class="btn-social">
+                                        <i class="fa fa-facebook fa-lg"></i>
+                                    </div>
+                                </ShareNetwork>
+                            </a>
+                        </li>
+                        <li class="list-inline-item animIcons">
+                            <a href="" @click.prevent>
+                                <ShareNetwork
+                                        network="twitter"
+                                        :url="getShareData(product).url"
+                                        :title="getShareData(product).title"
+                                        :description="getShareData(product).description"
+                                        :quote="getShareData(product).description"
+                                        hashtags="shopping_books">
+                                    <div class="btn-social">
+                                        <i class="fa fa-twitter fa-lg"></i>
+                                    </div>
+                                </ShareNetwork>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+                <div class="w-100">
+                    <hr class="m-0 mt-2">
+                </div>
+            </div>
             <div class="product_card bg-main text-center text-white">
                 <img v-for="(image , key) in selected_images" :key="key" v-if="key == 0" @
                      :src="image.path" class="image" alt="..">
-                <h4 class="font-weight-bold text-white">
+                <h4 class="font-weight-bold mt-2 text-white">
                     {{$ml.get('book')}} : {{product.translated ? product.translated.title : ''}}
                 </h4>
                 <h4 class="font-weight-bold text-white">
@@ -18,26 +69,25 @@
                     </b> {{getCurrency()}}
                 </h4>
                 <div class="btn-group" dir="ltr">
-                    <button class="btn btn-secondary" @click="addToFavourite(product)"
-                            style="background: #5d5d5d;color: #fff;">
-                        <i class="fa fa-star m-0 p-0"></i>
-                        <i class="fa fa-star m-0 p-0"></i>
+                    <button class="btn btn-secondary" @click="addToFavourite(product)">
+                        <i class="fa fa-star fa-lg m-0 p-0"></i>
+                        <i class="fa fa-star fa-lg m-0 p-0"></i>
                     </button>
                     <a class="btn btn-secondary" :href="product.book_file_path" :disabled="!product.book_file_path"
                        target="_blank" :class="!product.book_file_path ? 'disabled' : ''">
-                        <i class="fa fa-book"></i>
+                        <i class="fa fa-book fa-lg"></i>
                     </a>
                     <button class="btn btn-secondary" v-if="pov"
                             :disabled="pov.store_detail && (pov.store_detail.quantity - pov.store_detail.reserved == 0)"
                             @click="AddToCart()">
-                        <i class="fa fa-cart-plus"></i>
+                        <i class="fa fa-cart-plus fa-lg"></i>
                     </button>
                 </div>
             </div>
         </div>
         <div class="col-md-8">
             <div class="row">
-                <div class="col-md-12 mt-2">
+                <div class="col-md-12 d-none d-md-block mt-2">
                     <h3 class="main_color font-weight-bold float-left">
                         {{product.translated ? product.translated.title: ''}}
                     </h3>
