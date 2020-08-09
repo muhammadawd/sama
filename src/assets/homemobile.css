@@ -253,17 +253,21 @@ body, div, span, h1, h2, h3, h4, h5, h6 {
     /*border: 1px solid #888;*/
 }
 
-.product_card_book .image,
+.product_card_book .image {
+    border: 1px solid #aaa;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
 .product_card_book_slicker .image {
     border: 1px solid #aaa;
-    /*border-radius: 10px;*/
     overflow: hidden;
 }
 
 .product_card_book img,
 .product_card_book_slicker img {
-    height: 300px;
-    min-height: 300px;
+    height: 200px;
+    min-height: 200px;
 }
 
 .bg-dark-gray {

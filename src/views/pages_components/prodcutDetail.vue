@@ -199,7 +199,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12" v-if="related_products.length">
+        <div class="col-md-12 mt-3" v-if="related_products.length">
             <recommend_products :related_products="related_products"
                                 :title="$ml.get('recommended')"></recommend_products>
         </div>
