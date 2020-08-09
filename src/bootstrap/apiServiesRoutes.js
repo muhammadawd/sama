@@ -6,7 +6,8 @@ module.exports = {
     // BASE_URL: 'http://approc.com/~approctest/zash/back_end/api',
     // BASE_URL: 'https://zash.com.kw/back_end/api',
     // BASE_URL: 'https://rnpdelivery.com/back_end/api',
-    BASE_URL: 'https://approc.com/~approctest/book/api',
+    // BASE_URL: 'https://approc.com/~approctest/book/api',
+    BASE_URL: 'https://darsamakw.com/back_end/api',
     // BASE_URL: 'https://zashzash.com/back_end/api',
 
     AUTH_TWITTER: '/user/get-twitter-token',

@@ -60,8 +60,9 @@
                         <div class="col-12 text-left">
                             <marquee behavior="scroll" class="text-white pt-2"
                                      :direction="$ml.current == 'ar' ? 'right' : 'left'">
-                                يمكنك متابعة اخر الاخبار يمكنك متابعة اخر الاخبار يمكنك متابعة اخر الاخبار
-                                يمكنك متابعة اخر الاخبار يمكنك متابعة اخر الاخبار يمكنك متابعة اخر الاخبار
+                                يمكنك متابعة اخر الاخبار عن طريق الاشتراك فى خدمات البريد الالكتروني
+                                يمكنك متابعة اخر الاخبار عن طريق الاشتراك فى خدمات البريد الالكتروني
+                                يمكنك متابعة اخر الاخبار عن طريق الاشتراك فى خدمات البريد الالكتروني 
                             </marquee>
                         </div>
                     </div>
@@ -633,7 +634,8 @@
                             {{$ml.get('continue_shopping')}}
                         </button>
                     </div>
-                    <div class="col-md-6 mt-2 text-center text-md-right"  @click="modals.modal1 = false;modals.modal2 = true;">
+                    <div class="col-md-6 mt-2 text-center text-md-right"
+                         @click="modals.modal1 = false;modals.modal2 = true;">
                         <button class="btn btn-info">
                             {{$ml.get('open_cart')}}
                         </button>

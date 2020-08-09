@@ -118,7 +118,7 @@
             getAllProducts() {
                 let vm = this;
                 vm.$root.$children[0].$refs.loader.show_loader = true;
-                axios.get(apiServiesRoutes.BASE_URL + apiServiesRoutes.SITE_PRODUCTS, {
+                axios.get(apiServiesRoutes.BASE_URL + apiServiesRoutes.HOME_ADS, {
                     params: {
                         lang: vm.lang
                     }
@@ -126,7 +126,7 @@
                     let status = resp.data.status;
                     let data = resp.data.data;
                     if (status) {
-                        vm.products = data.products
+                        vm.products = data.recent_products
                     }
                     vm.$root.$children[0].$refs.loader.show_loader = false;
                 }).catch((error) => {

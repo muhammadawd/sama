@@ -1,6 +1,6 @@
 <template>
     <section  v-if="slides.length">
-        <agile :dots="false" :autoplay="true" :autoplay-speed="2000">
+        <agile :dots="false" :autoplay="true" :autoplay-speed="7000">
             <div v-for="(slide  ,key) in slides" class="slide" :key="key">
                 <div class="container">
                     <div class="row">
