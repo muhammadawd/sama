@@ -1,17 +1,17 @@
 <template>
     <div class="recommended" v-if="getProducts.length">
-        <div class="container">
+        <div class="container w_90l_80sm">
             <div class="row">
                 <div class="col-md-12">
                     <h3 class="text-left font-weight-bold">{{this.title}}</h3>
                 </div>
                 <div class="col-md-12 ">
-                    <VueSlickCarousel v-bind="settings" :arrows="true">
+                    <VueSlickCarousel id="recommended" v-if="products.length > 0" class="recommended center" v-bind="settings" :arrows="true">
                         <div class="slider__item " v-for="(product,key) in getProducts" :key="key" v-if="key < 20">
-                            <div class="w_90l_80sm text-center m-auto">
+                            <div class="text-center m-auto">
 
-                                <oneProduct v-bind:addToCart="addToCart"
-                                            v-bind:product="product"></oneProduct>
+                                <newOneProductSlicker v-bind:addToCart="addToCart"
+                                            v-bind:product="product"></newOneProductSlicker>
                             </div>
                         </div>
                         <template #prevArrow="arrowOption">
@@ -39,7 +39,7 @@
 
 <script>
     import apiServiesRoutes from '../../bootstrap/apiServiesRoutes'
-    import oneProduct from '../pages_components/oneProduct'
+    import newOneProductSlicker from '../pages_components/newOneProductSlicker'
     import Vue from 'vue';
     import Message from 'vue-m-message'
     import {mapState, mapActions} from 'vuex'
@@ -57,7 +57,7 @@
     export default {
         name: "recommended_products",
         components: {
-            oneProduct, VueSlickCarousel
+            newOneProductSlicker, VueSlickCarousel
         },
         props: ['related_products', 'title'],
         data() {
@@ -211,39 +211,46 @@
 </script>
 
 <style>
+
     .slick-prev:before, .slick-next:before {
         display: none;
     }
 
-    /*.slick-next img {*/
-    /*width: 25px;*/
-    /*position: absolute;*/
-    /*right: -10px;*/
-    /*}*/
-
-    /*.slick-prev img {*/
-    /*width: 25px;*/
-    /*position: absolute;*/
-    /*left: -10px;*/
-    /*}*/
-
-    .slick-slide > div {
-        /*transform: scale(0.8);*/
-        /*transition: transform .3s cubic-bezier(.4, 0, .2, 1);*/
+    .recommended .slick-next img {
+        width: 25px;
+        position: absolute;
+        right: 10px;
     }
 
-    /*.slick-center > div {*/
-    /*transform: scale(1);*/
-    /*}*/
+    .recommended .slick-prev img {
+        width: 25px;
+        position: absolute;
+        left: 10px;
+        text-align: center;
+    }
 
-    .recommended {
-        min-height: 550px;
-        /*background: url("../../assets/images/newImages/new_arrival.png") left center no-repeat;*/
-        background-size: contain;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+
+    .recommended.center {
+        margin-left: -40px;
+        margin-right: -40px;
+    }
+
+
+    .recommended .slick-slide {
+        /*background: #fff;*/
+        opacity: 0.7;
+        transition: all 300ms ease;
+        transform: scale(0.75);
+    }
+
+    .recommended.center .slick-slide.slick-active {
+        transform: scale(.8);
+        opacity: 0.7;
+    }
+
+    .recommended.center .slick-slide.slick-center {
+        transform: scale(1);
+        opacity: 1;
     }
 
     .w_90l_80sm {
@@ -253,7 +260,8 @@
     @media only screen and (max-width: 768px) {
 
         .w_90l_80sm {
-            width: 75% !important;
+            width: 70% !important;
         }
     }
+
 </style>
