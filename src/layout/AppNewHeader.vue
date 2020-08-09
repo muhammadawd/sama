@@ -1258,4 +1258,8 @@
         text-align: center;
         overflow: hidden;
     }
+
+    .new_table td{
+        vertical-align: middle !important;
+    }
 </style>
