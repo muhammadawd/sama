@@ -134,8 +134,8 @@
                     <div class="row">
                         <div class="col-md-3 col-6" :style="isMobile() ? {marginBottom:'20px'}:{}"
                              v-for="(product ,$index) in products" :key="$index">
-                            <oneProduct v-bind:addToCart="addToCart"
-                                        v-bind:product="product"></oneProduct>
+                            <newOneProduct v-bind:addToCart="addToCart"
+                                        v-bind:product="product"></newOneProduct>
                         </div>
                     </div>
                 </div>
@@ -220,7 +220,7 @@
     import {mapState, mapActions} from 'vuex'
     import apiServiesRoutes from '../bootstrap/apiServiesRoutes'
 
-    import oneProduct from '../views/pages_components/oneProduct'
+    import newOneProduct from '../views/pages_components/newOneProduct'
 
     import 'vue-range-component/dist/vue-range-slider.css'
     import VueRangeSlider from 'vue-range-component'
@@ -565,7 +565,7 @@
         }
         ,
         components: {
-            oneProduct,
+            newOneProduct,
             VueRangeSlider,
             VueSlideBar,
             VueSlider,
