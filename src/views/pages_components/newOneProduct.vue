@@ -20,7 +20,7 @@
                 </template>
             </div>
         </div>
-        <div class="row p-1">
+        <div class="row p-2">
             <div class="col-4 p-1">
                 <button class="btn btn-info p-1 pr-2 pl-2 btn-block radius-0"
                         v-on:click.prevent="addToCart(product)"
@@ -37,9 +37,9 @@
             </div>
             <div class="col-4 p-1">
                 <a :href="product.book_file_path"
-                   :disabled="!product.book_file_path"
-                   target="_blank" :class="!product.book_file_path ? 'disabled' : ''"
-                   class="btn btn-info bg-dark-gray p-1 btn-block pr-2 pl-2 radius-0">
+                   v-if="!product.book_file_path"
+                   target="_blank"
+                   class="btn text-white btn-info bg-dark-gray p-1 btn-block pr-2 pl-2 radius-0">
                     <i class="fa fa-book"></i>
                 </a>
             </div>

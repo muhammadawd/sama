@@ -3,27 +3,48 @@
         <div class="container w_90l_80sm">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="text-white text-left font-weight-bold">{{$ml.get('best_sales')}}</h3>
+                    <h3 class="text-white text-left font-weight-bold mt-5">{{$ml.get('best_sales')}}</h3>
                 </div>
-                <div class="col-md-12">
-                    <VueSlickCarousel id="bestSales" v-if="products.length > 0" class="bestSales center" v-bind="settings" :arrows="true">
-                        <div class="slider_item" v-for="(product,key) in products" :key="key"
-                             v-if="key < 20">
-                            <newOneProductSlicker v-bind:addToCart="addToCart"
-                                        v-bind:product="product"></newOneProductSlicker>
+            </div>
+            <div class="d-none d-md-block mt-5">
+                <div class="mycontrols">
+                    <div class="left">
+                        <img :src="require('@/assets/images/newImages/prev-white.png')" class="right"
+                             @click="triggerNav('prev')"
+                             alt="">
+                    </div>
+                    <div class="right">
+                        <img :src="require('@/assets/images/newImages/next-white.png')" @click="triggerNav('next')"
+                             alt="">
+                    </div>
+                </div>
+                <carousel-3d :autoplay="true" :display="5" :controls-visible="true" :perspective="10" :space="320"  style="transform: scale(0.8)"
+                             :loop="true" :controls-prev-html="' '" :controls-next-html="' '">
+                    <slide v-for="(product,key) in products" :index="key">
+                        <newOneProductSlicker v-bind:addToCart="addToCart"
+                                              v-bind:product="product"></newOneProductSlicker>
+                    </slide>
+                </carousel-3d>
+            </div>
+            <div class="d-md-none">
+                <VueSlickCarousel id="bestSales" v-if="products.length > 0" class="bestSales center" v-bind="settings"
+                                  :arrows="true">
+                    <div class="slider_item" v-for="(product,key) in products" :key="key"
+                         v-if="key < 20">
+                        <newOneProductSlicker v-bind:addToCart="addToCart"
+                                              v-bind:product="product"></newOneProductSlicker>
+                    </div>
+                    <template #prevArrow="arrowOption">
+                        <div class="custom-arrow">
+                            <img :src="require('@/assets/images/newImages/prev-white.png')" alt="">
                         </div>
-                        <template #prevArrow="arrowOption">
-                            <div class="custom-arrow">
-                                <img :src="require('@/assets/images/newImages/prev-white.png')" alt="">
-                            </div>
-                        </template>
-                        <template #nextArrow="arrowOption">
-                            <div class="custom-arrow">
-                                <img :src="require('@/assets/images/newImages/next-white.png')" alt="">
-                            </div>
-                        </template>
-                    </VueSlickCarousel>
-                </div>
+                    </template>
+                    <template #nextArrow="arrowOption">
+                        <div class="custom-arrow">
+                            <img :src="require('@/assets/images/newImages/next-white.png')" alt="">
+                        </div>
+                    </template>
+                </VueSlickCarousel>
             </div>
         </div>
         <!--<VueSlickCarousel v-bind="settings">-->
@@ -41,6 +62,7 @@
     import Vue from 'vue';
     import Message from 'vue-m-message'
     import {mapState, mapActions} from 'vuex'
+    import {Carousel3d, Slide} from 'vue-carousel-3d';
     //
     // import Slick from 'vue-slick';
     // import 'slick-carousel/slick/slick.css';
@@ -55,7 +77,7 @@
     export default {
         name: "best_sales_products",
         components: {
-            newOneProductSlicker, VueSlickCarousel
+            newOneProductSlicker, VueSlickCarousel, Carousel3d, Slide
         },
         data() {
             return {
@@ -97,6 +119,10 @@
             }
         },
         methods: {
+            triggerNav(sel) {
+                $(`a.${sel}`).trigger('click')
+                $(`a.${sel} span`).trigger('click')
+            },
             next() {
                 this.$refs.slick.next();
             },
@@ -197,6 +223,7 @@
 
 <style>
     .best_sales {
+        position: relative;
         min-height: 700px;
         background: url("../../assets/images/newImages/best_sales.png") center center no-repeat;
         background-size: cover;
@@ -252,5 +279,47 @@
     .bestSales.center .slick-slide.slick-center {
         transform: scale(1);
         opacity: 1;
+    }    .carousel-3d-container {
+             height: 600px !important;
+         }
+
+    .carousel-3d-container .carousel-3d-slide {
+        padding: 0 !important;
+        min-height: 600px;
+        background: #fff;
+    }
+
+    .mycontrols {
+        position: absolute;
+        top: 40%;
+        height: 0;
+        margin-top: -10px;
+        width: 90%;
+        z-index: 1000;
+        cursor: pointer;
+    }
+
+    .mycontrols .left {
+        left: 0;
+        position: absolute;
+    }
+
+    .mycontrols .right {
+        right: 0;
+        position: absolute;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .mycontrols {
+            width: 80%;
+        }
+
+        .mycontrols .right {
+            right: 7px;
+        }
+
+        .best_sales {
+            min-height: 500px;
+        }
     }
 </style>

@@ -9,9 +9,8 @@
                     <VueSlickCarousel id="recommended" v-if="products.length > 0" class="recommended center" v-bind="settings" :arrows="true">
                         <div class="slider__item " v-for="(product,key) in getProducts" :key="key" v-if="key < 20">
                             <div class="text-center m-auto">
-
-                                <newOneProductSlicker v-bind:addToCart="addToCart"
-                                            v-bind:product="product"></newOneProductSlicker>
+                                <newOneProduct v-bind:addToCart="addToCart"
+                                            v-bind:product="product"></newOneProduct>
                             </div>
                         </div>
                         <template #prevArrow="arrowOption">
@@ -39,7 +38,7 @@
 
 <script>
     import apiServiesRoutes from '../../bootstrap/apiServiesRoutes'
-    import newOneProductSlicker from '../pages_components/newOneProductSlicker'
+    import newOneProduct from '../pages_components/newOneProduct'
     import Vue from 'vue';
     import Message from 'vue-m-message'
     import {mapState, mapActions} from 'vuex'
@@ -57,7 +56,7 @@
     export default {
         name: "recommended_products",
         components: {
-            newOneProductSlicker, VueSlickCarousel
+            newOneProduct, VueSlickCarousel
         },
         props: ['related_products', 'title'],
         data() {
@@ -71,9 +70,9 @@
                     // "focusOnSelect": true,
                     "centerPadding": '30px',
                     "infinite": true,
-                    // "centerMode": true,
+                    "centerMode": true,
                     "speed": 500,
-                    "slidesToShow": 5,
+                    "slidesToShow": 4,
                     "slidesToScroll": 3,
                     "touchThreshold": 5,
                     "responsive": [
@@ -240,16 +239,16 @@
         /*background: #fff;*/
         opacity: 0.7;
         transition: all 300ms ease;
-        transform: scale(0.75);
+        /*transform: scale(0.75);*/
     }
 
     .recommended.center .slick-slide.slick-active {
-        transform: scale(.8);
+        /*transform: scale(.8);*/
         opacity: 0.7;
     }
 
     .recommended.center .slick-slide.slick-center {
-        transform: scale(1);
+        /*transform: scale(1);*/
         opacity: 1;
     }
 

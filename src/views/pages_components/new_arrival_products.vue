@@ -3,26 +3,49 @@
         <div class="container w_90l_80sm">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="text-left font-weight-bold">{{$ml.get('new_arrival')}}</h3>
+                    <h3 class="text-left font-weight-bold mt-5">{{$ml.get('new_arrival')}}</h3>
                 </div>
             </div>
-            <VueSlickCarousel id="newArrival" v-if="products.length > 0" class="newArrival center" v-bind="settings"
-                              :arrows="true">
-                <div class="slide_item" v-for="(product,key) in products" :key="key">
-                    <newOneProductSlicker v-bind:addToCart="addToCart"
-                                   v-bind:product="product"></newOneProductSlicker>
+
+            <div class="d-none d-md-block" >
+                <div class="mycontrols">
+                    <div class="left">
+                        <img :src="require('@/assets/images/newImages/prev.png')" class="right"
+                             @click="triggerNav('prev')"
+                             alt="">
+                    </div>
+                    <div class="right">
+                        <img :src="require('@/assets/images/newImages/next.png')" @click="triggerNav('next')"
+                             alt="">
+                    </div>
                 </div>
-                <template #prevArrow="arrowOption">
-                    <div class="custom-arrow">
-                        <img :src="require('@/assets/images/newImages/prev.png')" alt="">
+                <carousel-3d :autoplay="true" :display="5" :controls-visible="true" :perspective="10" :space="320" style="transform: scale(0.8)"
+                             :loop="true" :controls-prev-html="' '" :controls-next-html="' '">
+                    <slide v-for="(product,key) in products" :index="key">
+                        <newOneProductSlicker v-bind:addToCart="addToCart"
+                                              v-bind:product="product"></newOneProductSlicker>
+                    </slide>
+                </carousel-3d>
+            </div>
+            <div class="d-md-none">
+                <VueSlickCarousel id="newArrival" v-if="products.length > 0" class="newArrival center" v-bind="settings"
+                                  :arrows="true">
+                    <div class="slide_item" v-for="(product,key) in products" :key="key">
+                        <newOneProductSlicker v-bind:addToCart="addToCart"
+                                              v-bind:product="product"></newOneProductSlicker>
                     </div>
-                </template>
-                <template #nextArrow="arrowOption">
-                    <div class="custom-arrow">
-                        <img :src="require('@/assets/images/newImages/next.png')" alt="">
-                    </div>
-                </template>
-            </VueSlickCarousel>
+                    <template #prevArrow="arrowOption">
+                        <div class="custom-arrow">
+                            <img :src="require('@/assets/images/newImages/prev.png')" alt="">
+                        </div>
+                    </template>
+                    <template #nextArrow="arrowOption">
+                        <div class="custom-arrow">
+                            <img :src="require('@/assets/images/newImages/next.png')" alt="">
+                        </div>
+                    </template>
+                </VueSlickCarousel>
+            </div>
         </div>
         <!--<VueSlickCarousel v-bind="settings">-->
         <!--<div class="p-1" v-for="(product,key) in products" :key="key">-->
@@ -45,12 +68,14 @@
     // optional style for arrows & dots
     import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 
+    import {Carousel3d, Slide} from 'vue-carousel-3d';
+
     Vue.use(Message);
 
     export default {
         name: "new_arrival_products",
         components: {
-            newOneProductSlicker, VueSlickCarousel
+            newOneProductSlicker, VueSlickCarousel, Carousel3d, Slide
         },
         data() {
             return {
@@ -92,6 +117,10 @@
             }
         },
         methods: {
+            triggerNav(sel) {
+                $(`a.${sel}`).trigger('click')
+                $(`a.${sel} span`).trigger('click')
+            },
             next() {
                 this.$refs.slick.next();
             },
@@ -195,6 +224,7 @@
 <style>
     .new_arrival {
         min-height: 650px;
+        position: relative;
         background: url("../../assets/images/newImages/new_arrival.png") left center no-repeat;
         background-size: contain;
         display: flex;
@@ -257,4 +287,47 @@
         opacity: 1;
     }
 
+    .carousel-3d-container {
+        height: 650px !important;
+    }
+
+    .carousel-3d-container .carousel-3d-slide {
+        padding: 0 !important;
+        min-height: 600px;
+        background: #fff;
+    }
+
+    .mycontrols {
+        position: absolute;
+        top: 40%;
+        height: 0;
+        margin-top: -10px;
+        width: 90%;
+        z-index: 1000;
+        cursor: pointer;
+    }
+
+    .mycontrols .left {
+        left: 0;
+        position: absolute;
+    }
+
+    .mycontrols .right {
+        right: 0;
+        position: absolute;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .mycontrols {
+            width: 80%;
+        }
+
+        .mycontrols .right {
+            right: 7px;
+        }
+
+        .new_arrival {
+            min-height: 500px;
+        }
+    }
 </style>

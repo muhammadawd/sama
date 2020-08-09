@@ -6,36 +6,22 @@
             <img v-if="current_image" :data-src="current_image" width="100%"
                  alt="..."/>
         </div>
-        <h3 class="text-black text-center w-100 mt-2" style="font-size: 14px">
-            {{$ml.get('book')}} : {{product.translated.title}} <br>
-            {{$ml.get('author')}} : {{product.author ? product.author.translated.title : ''}}
-        </h3>
-        <div class="row">
-            <div class="col-12" style="color: #000;">
-                <template>
-                    <p class="font-weight-bold text-center" style="font-size: 18px;">
-                        {{parseFloat(product.minimum_price).toFixed(3)}}
-                        <small style="font-size: 12px">{{getCurrency()}}</small>
-                    </p>
-                </template>
-            </div>
-        </div>
-        <div class="row p-1">
-            <div class="col-4 p-1">
+        <div class="row p-1 justify-content-center">
+            <div class="col-3 p-1">
                 <button class="btn btn-info bg-dark-gray p-1 btn-block pr-2 pl-2 radius-0"
                         v-on:click.prevent="addToCart(product)"
                         v-if="!(product.product_option_values[0].store_detail && (product.product_option_values[0].store_detail.quantity - product.product_option_values[0].store_detail.reserved == 0))">
                     {{$ml.get('buy')}}
                 </button>
             </div>
-            <div class="col-4 p-1">
+            <div class="col-3 p-1">
                 <button v-if="!(product.product_option_values[0].store_detail && (product.product_option_values[0].store_detail.quantity - product.product_option_values[0].store_detail.reserved == 0))"
                         v-on:click.prevent="addToFavourite(product)"
                         class="btn btn-info bg-dark-gray p-1 btn-block pr-2 pl-2 radius-0">
                     <i class="fa fa-star fa-lg"></i>
                 </button>
             </div>
-            <div class="col-4 p-1">
+            <div class="col-3 p-1">
                 <a :href="product.book_file_path"
                    v-if="!product.book_file_path"
                    target="_blank"
