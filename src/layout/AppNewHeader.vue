@@ -62,7 +62,7 @@
                                      :direction="$ml.current == 'ar' ? 'right' : 'left'">
                                 يمكنك متابعة اخر الاخبار عن طريق الاشتراك فى خدمات البريد الالكتروني
                                 يمكنك متابعة اخر الاخبار عن طريق الاشتراك فى خدمات البريد الالكتروني
-                                يمكنك متابعة اخر الاخبار عن طريق الاشتراك فى خدمات البريد الالكتروني 
+                                يمكنك متابعة اخر الاخبار عن طريق الاشتراك فى خدمات البريد الالكتروني
                             </marquee>
                         </div>
                     </div>
@@ -421,6 +421,11 @@
                                     </div>
                                 </div>
                             </li>
+                            <li :class="$route.name == 'search_result' ? 'active' : ''">
+                                <a href="" @click.prevent="$router.push({name:'search_result'})">
+                                    {{$ml.get('search')}}
+                                </a>
+                            </li>
                             <li :class="$route.name == 'new_arrival' ? 'active' : ''">
                                 <a href="" @click.prevent="$router.push({name:'new_arrival'})">
                                     {{$ml.get('new_arrival')}}
@@ -434,11 +439,6 @@
                             <li :class="$route.name == 'authors' ? 'active' : ''">
                                 <a href="" @click.prevent="$router.push({name:'authors'})">
                                     {{$ml.get('authors')}}
-                                </a>
-                            </li>
-                            <li :class="$route.name == 'search_result' ? 'active' : ''">
-                                <a href="" @click.prevent="$router.push({name:'search_result'})">
-                                    {{$ml.get('search')}}
                                 </a>
                             </li>
                             <li :class="$route.name == 'about_us' ? 'active' : ''">
