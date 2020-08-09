@@ -59,7 +59,7 @@
                 lang: this.$ml.current,
                 settings: {
                     centerMode: true,
-                    centerPadding: '60px',
+                    centerPadding: '20px',
                     slidesToShow: 5,
                     infinite: true,
                     autoplay: true,
@@ -193,37 +193,6 @@
 </script>
 
 <style>
-    .slick-prev:before, .slick-next:before {
-        display: none;
-    }
-
-    .newArrival .slick-next img {
-        width: 25px;
-        position: absolute;
-        right: 10px;
-    }
-
-    .newArrival .slick-prev img {
-        width: 25px;
-        position: absolute;
-        left: 10px;
-        text-align: center;
-    }
-
-    /*.slick-slide {*/
-    /*padding: 50px;*/
-    /*}*/
-
-    /*.slick-slide > div {*/
-    /*min-height: 200px;*/
-    /*transform: scale(.7);*/
-    /*transition: transform .3s cubic-bezier(.4, 0, .2, 1);*/
-    /*}*/
-
-    /*.slick-center > div {*/
-    /*transform: scale(1);*/
-    /*}*/
-
     .new_arrival {
         min-height: 650px;
         background: url("../../assets/images/newImages/new_arrival.png") left center no-repeat;
@@ -247,6 +216,23 @@
         }
     }
 
+    .slick-prev:before, .slick-next:before {
+        display: none;
+    }
+
+    .newArrival .slick-next img {
+        width: 25px;
+        position: absolute;
+        right: 10px;
+    }
+
+    .newArrival .slick-prev img {
+        width: 25px;
+        position: absolute;
+        left: 10px;
+        text-align: center;
+    }
+
 
     .newArrival.center {
         margin-left: -40px;
@@ -256,9 +242,9 @@
 
     .newArrival .slick-slide {
         /*background: #fff;*/
-        opacity: 0.5;
+        opacity: 0.7;
         transition: all 300ms ease;
-        transform: scale(0.7);
+        transform: scale(0.75);
     }
 
     .newArrival.center .slick-slide.slick-active {

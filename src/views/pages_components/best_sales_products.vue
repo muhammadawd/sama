@@ -6,12 +6,11 @@
                     <h3 class="text-white text-left font-weight-bold">{{$ml.get('best_sales')}}</h3>
                 </div>
                 <div class="col-md-12">
-                    <VueSlickCarousel v-bind="settings" :arrows="true">
-                        <div class="slider__item pr-2 pl-2" v-for="(product,key) in products" :key="key"
+                    <VueSlickCarousel id="bestSales" v-if="products.length > 0" class="bestSales center" v-bind="settings" :arrows="true">
+                        <div class="slider_item" v-for="(product,key) in products" :key="key"
                              v-if="key < 20">
-
-                            <oneProduct v-bind:addToCart="addToCart"
-                                        v-bind:product="product"></oneProduct>
+                            <newOneProductSlicker v-bind:addToCart="addToCart"
+                                        v-bind:product="product"></newOneProductSlicker>
                         </div>
                         <template #prevArrow="arrowOption">
                             <div class="custom-arrow">
@@ -38,7 +37,7 @@
 
 <script>
     import apiServiesRoutes from '../../bootstrap/apiServiesRoutes'
-    import oneProduct from '../pages_components/oneProduct'
+    import newOneProductSlicker from '../pages_components/newOneProductSlicker'
     import Vue from 'vue';
     import Message from 'vue-m-message'
     import {mapState, mapActions} from 'vuex'
@@ -56,7 +55,7 @@
     export default {
         name: "best_sales_products",
         components: {
-            oneProduct, VueSlickCarousel
+            newOneProductSlicker, VueSlickCarousel
         },
         data() {
             return {
@@ -64,41 +63,33 @@
                 products: [],
                 lang: this.$ml.current,
                 settings: {
-                    "dots": false,
-                    "arrows": true,
-                    "autoplay": true,
-                    "speed": 2000,
-                    "autoplaySpeed": 1500,
-                    "cssEase": "linear",
-                    "focusOnSelect": true,
-                    "centerPadding": '24px',
-                    "infinite": true,
-                    "centerMode": true,
-                    "slidesToShow": 5,
-                    "slidesToScroll": 3,
-                    "touchThreshold": 5,
-                    "responsive": [
+                    centerMode: true,
+                    centerPadding: '20px',
+                    slidesToShow: 5,
+                    infinite: true,
+                    autoplay: true,
+                    autoplaySpeed: 2000,
+                    slidesToScroll: 5,
+                    arrows: true,
+                    dots: false,
+                    focusOnSelect: true,
+                    responsive: [
                         {
-                            "breakpoint": 1024,
-                            "settings": {
-                                "slidesToShow": 3,
-                                "slidesToScroll": 3,
+                            breakpoint: 768,
+                            settings: {
+                                arrows: true,
+                                centerMode: true,
+                                centerPadding: '40px',
+                                slidesToShow: 2
                             }
                         },
                         {
-                            "breakpoint": 600,
-                            "settings": {
-                                "slidesToShow": 2,
-                                "slidesToScroll": 2,
-                                "initialSlide": 2
-                            }
-                        },
-                        {
-                            "breakpoint": 480,
-                            "settings": {
-                                "slidesToShow": 1,
-                                "slidesToScroll": 1,
-                                "initialSlide": 1
+                            breakpoint: 480,
+                            settings: {
+                                arrows: true,
+                                centerMode: true,
+                                centerPadding: '40px',
+                                slidesToShow: 1
                             }
                         }
                     ]
@@ -205,39 +196,8 @@
 </script>
 
 <style>
-    /*.slick-prev:before, .slick-next:before {*/
-        /*display: none;*/
-    /*}*/
-
-    /*.slick-next img {*/
-        /*width: 25px;*/
-        /*position: absolute;*/
-        /*right: -10px;*/
-    /*}*/
-
-    /*.slick-prev img {*/
-        /*width: 25px;*/
-        /*position: absolute;*/
-        /*left: -10px;*/
-    /*}*/
-
-    /*.slick-slide {*/
-        /*background: #fff;*/
-        /*min-height: 200px;*/
-        /*margin: 5px;*/
-    /*}*/
-
-    /*.slick-slide > div {*/
-        /*!*transform: scale(.7);*!*/
-        /*!*transition: transform .3s cubic-bezier(.4, 0, .2, 1);*!*/
-    /*}*/
-
-    /*.slick-center > div {*/
-        /*!*transform: scale(1);*!*/
-    /*}*/
-
     .best_sales {
-        min-height: 550px;
+        min-height: 700px;
         background: url("../../assets/images/newImages/best_sales.png") center center no-repeat;
         background-size: cover;
         display: flex;
@@ -255,5 +215,42 @@
         .w_90l_80sm {
             width: 70% !important;
         }
+    }
+
+    .bestSales .slick-next img {
+        width: 25px;
+        position: absolute;
+        right: 10px;
+    }
+
+    .bestSales .slick-prev img {
+        width: 25px;
+        position: absolute;
+        left: 10px;
+        text-align: center;
+    }
+
+
+    .bestSales.center {
+        margin-left: -40px;
+        margin-right: -40px;
+    }
+
+
+    .bestSales .slick-slide {
+        /*background: #fff;*/
+        opacity: 0.7;
+        transition: all 300ms ease;
+        transform: scale(0.75);
+    }
+
+    .bestSales.center .slick-slide.slick-active {
+        transform: scale(.8);
+        opacity: 0.7;
+    }
+
+    .bestSales.center .slick-slide.slick-center {
+        transform: scale(1);
+        opacity: 1;
     }
 </style>
