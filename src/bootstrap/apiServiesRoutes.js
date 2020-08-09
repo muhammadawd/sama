@@ -7,8 +7,7 @@ module.exports = {
     // BASE_URL: 'https://zash.com.kw/back_end/api',
     // BASE_URL: 'https://rnpdelivery.com/back_end/api',
     BASE_URL: 'https://darsamakw.com/back_end/api',
-    // BASE_URL: 'https://zashzash.com/back_end/api',
-
+ 
     AUTH_TWITTER: '/user/get-twitter-token',
     VERIFY_TWITTER: '/user/twitterLogin',
     REGISTER: '/user/register',
