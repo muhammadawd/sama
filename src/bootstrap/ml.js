@@ -261,9 +261,11 @@ export default new MLCreate({
             continue_shopping: 'continue shopping',
             open_cart: 'open cart',
             removecart: 'remove cart',
+            buy: 'Buy',
         }),
 
         new MLanguage('ar').create({
+            buy: 'اشتر',
             removecart: 'حذف من السلة',
             continue_shopping: 'متابعة التسوق',
             open_cart: '  سلة المشتريات',

@@ -252,6 +252,7 @@ body, div, span, h1, h2, h3, h4, h5, h6, a {
 .transition {
     transition: all 0.5s ease-in-out;
 }
+
 .animIcons {
     position: relative;
     transition: all 0.5s ease-in-out;
@@ -262,4 +263,43 @@ body, div, span, h1, h2, h3, h4, h5, h6, a {
     transition: all 0.5s ease-in-out;
     /*top: -10px;*/
     transform: rotateY(360deg);
+}
+
+.product_card_book {
+    min-height: 400px;
+    background: #fff;
+    padding: 10px;
+    cursor: pointer;
+    border: 8px solid #00adee;
+    margin: 5px;
+    border-radius: 0 40px 0 40px;
+}
+
+.product_card_book_slicker {
+    min-height: 400px;
+    background: #fff;
+    padding: 10px;
+    cursor: pointer;
+    margin: 5px;
+    border: 1px solid #888;
+}
+
+.product_card_book .image,
+.product_card_book_slicker .image {
+    border: 1px solid #aaa;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.product_card_book img,
+.product_card_book_slicker img {
+    min-height: 300px;
+}
+
+.bg-dark-gray {
+    background: #5d5d5d;
+}
+
+.radius-0 {
+    border-radius: 0;
 }

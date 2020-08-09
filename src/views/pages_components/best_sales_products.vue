@@ -7,7 +7,8 @@
                 </div>
                 <div class="col-md-12">
                     <VueSlickCarousel v-bind="settings" :arrows="true">
-                        <div class="slider__item pr-2 pl-2" v-for="(product,key) in products" :key="key" v-if="key < 20">
+                        <div class="slider__item pr-2 pl-2" v-for="(product,key) in products" :key="key"
+                             v-if="key < 20">
 
                             <oneProduct v-bind:addToCart="addToCart"
                                         v-bind:product="product"></oneProduct>
@@ -73,7 +74,6 @@
                     "centerPadding": '24px',
                     "infinite": true,
                     "centerMode": true,
-                    "speed": 500,
                     "slidesToShow": 5,
                     "slidesToScroll": 3,
                     "touchThreshold": 5,
@@ -205,30 +205,36 @@
 </script>
 
 <style>
-    .slick-prev:before, .slick-next:before {
-        display: none;
-    }
+    /*.slick-prev:before, .slick-next:before {*/
+        /*display: none;*/
+    /*}*/
 
-    .slick-next img {
-        width: 25px;
-        position: absolute;
-        right: -10px;
-    }
+    /*.slick-next img {*/
+        /*width: 25px;*/
+        /*position: absolute;*/
+        /*right: -10px;*/
+    /*}*/
 
-    .slick-prev img {
-        width: 25px;
-        position: absolute;
-        left: -10px;
-    }
+    /*.slick-prev img {*/
+        /*width: 25px;*/
+        /*position: absolute;*/
+        /*left: -10px;*/
+    /*}*/
 
-    .slick-slide > div {
-        /*transform: scale(.7);*/
-        /*transition: transform .3s cubic-bezier(.4, 0, .2, 1);*/
-    }
+    /*.slick-slide {*/
+        /*background: #fff;*/
+        /*min-height: 200px;*/
+        /*margin: 5px;*/
+    /*}*/
 
-    .slick-center > div {
-        /*transform: scale(1);*/
-    }
+    /*.slick-slide > div {*/
+        /*!*transform: scale(.7);*!*/
+        /*!*transition: transform .3s cubic-bezier(.4, 0, .2, 1);*!*/
+    /*}*/
+
+    /*.slick-center > div {*/
+        /*!*transform: scale(1);*!*/
+    /*}*/
 
     .best_sales {
         min-height: 550px;

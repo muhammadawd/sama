@@ -5,25 +5,24 @@
                 <div class="col-md-12">
                     <h3 class="text-left font-weight-bold">{{$ml.get('new_arrival')}}</h3>
                 </div>
-                <div class="col-md-12">
-                    <VueSlickCarousel v-bind="settings" :arrows="true">
-                        <div class="slider__item  pr-2 pl-2" v-for="(product,key) in products" :key="key" v-if="key < 20">
-                            <oneProduct v-bind:addToCart="addToCart"
-                                        v-bind:product="product"></oneProduct>
-                        </div>
-                        <template #prevArrow="arrowOption">
-                            <div class="custom-arrow">
-                                <img :src="require('@/assets/images/newImages/prev.png')" alt="">
-                            </div>
-                        </template>
-                        <template #nextArrow="arrowOption">
-                            <div class="custom-arrow">
-                                <img :src="require('@/assets/images/newImages/next.png')" alt="">
-                            </div>
-                        </template>
-                    </VueSlickCarousel>
-                </div>
             </div>
+            <VueSlickCarousel id="newArrival" v-if="products.length > 0" class="newArrival center" v-bind="settings"
+                              :arrows="true">
+                <div class="slide_item" v-for="(product,key) in products" :key="key">
+                    <newOneProductSlicker v-bind:addToCart="addToCart"
+                                   v-bind:product="product"></newOneProductSlicker>
+                </div>
+                <template #prevArrow="arrowOption">
+                    <div class="custom-arrow">
+                        <img :src="require('@/assets/images/newImages/prev.png')" alt="">
+                    </div>
+                </template>
+                <template #nextArrow="arrowOption">
+                    <div class="custom-arrow">
+                        <img :src="require('@/assets/images/newImages/next.png')" alt="">
+                    </div>
+                </template>
+            </VueSlickCarousel>
         </div>
         <!--<VueSlickCarousel v-bind="settings">-->
         <!--<div class="p-1" v-for="(product,key) in products" :key="key">-->
@@ -36,13 +35,10 @@
 
 <script>
     import apiServiesRoutes from '../../bootstrap/apiServiesRoutes'
-    import oneProduct from '../pages_components/oneProduct'
+    import newOneProductSlicker from '../pages_components/newOneProductSlicker'
     import Vue from 'vue';
     import Message from 'vue-m-message'
     import {mapState, mapActions} from 'vuex'
-    //
-    // import Slick from 'vue-slick';
-    // import 'slick-carousel/slick/slick.css';
 
     import VueSlickCarousel from 'vue-slick-carousel'
     import 'vue-slick-carousel/dist/vue-slick-carousel.css'
@@ -54,7 +50,7 @@
     export default {
         name: "new_arrival_products",
         components: {
-            oneProduct, VueSlickCarousel
+            newOneProductSlicker, VueSlickCarousel
         },
         data() {
             return {
@@ -62,38 +58,33 @@
                 products: [],
                 lang: this.$ml.current,
                 settings: {
-                    "dots": false,
-                    "arrows": true,
-                    "focusOnSelect": true,
-                    "centerPadding": '24px',
-                    "infinite": true,
-                    "centerMode": true,
-                    "speed": 500,
-                    "slidesToShow": 5,
-                    "slidesToScroll": 3,
-                    "touchThreshold": 5,
-                    "responsive": [
+                    centerMode: true,
+                    centerPadding: '60px',
+                    slidesToShow: 5,
+                    infinite: true,
+                    autoplay: true,
+                    autoplaySpeed: 2000,
+                    slidesToScroll: 5,
+                    arrows: true,
+                    dots: false,
+                    focusOnSelect: true,
+                    responsive: [
                         {
-                            "breakpoint": 1024,
-                            "settings": {
-                                "slidesToShow": 3,
-                                "slidesToScroll": 3,
+                            breakpoint: 768,
+                            settings: {
+                                arrows: true,
+                                centerMode: true,
+                                centerPadding: '40px',
+                                slidesToShow: 2
                             }
                         },
                         {
-                            "breakpoint": 600,
-                            "settings": {
-                                "slidesToShow": 2,
-                                "slidesToScroll": 2,
-                                "initialSlide": 2
-                            }
-                        },
-                        {
-                            "breakpoint": 480,
-                            "settings": {
-                                "slidesToShow": 1,
-                                "slidesToScroll": 1,
-                                "initialSlide": 1
+                            breakpoint: 480,
+                            settings: {
+                                arrows: true,
+                                centerMode: true,
+                                centerPadding: '40px',
+                                slidesToShow: 1
                             }
                         }
                     ]
@@ -118,7 +109,8 @@
             getAllProducts() {
                 let vm = this;
                 vm.$root.$children[0].$refs.loader.show_loader = true;
-                axios.get(apiServiesRoutes.BASE_URL + apiServiesRoutes.HOME_ADS, {
+                // HOME_ADS
+                axios.get(apiServiesRoutes.BASE_URL + apiServiesRoutes.SITE_PRODUCTS, {
                     params: {
                         lang: vm.lang
                     }
@@ -126,7 +118,8 @@
                     let status = resp.data.status;
                     let data = resp.data.data;
                     if (status) {
-                        vm.products = data.recent_products
+                        // vm.products = data.recent_products
+                        vm.products = data.products
                     }
                     vm.$root.$children[0].$refs.loader.show_loader = false;
                 }).catch((error) => {
@@ -204,35 +197,43 @@
         display: none;
     }
 
-    .slick-next img {
+    .newArrival .slick-next img {
         width: 25px;
         position: absolute;
-        right: -10px;
+        right: 10px;
     }
 
-    .slick-prev img {
+    .newArrival .slick-prev img {
         width: 25px;
         position: absolute;
-        left: -10px;
+        left: 10px;
+        text-align: center;
     }
 
-    .slick-slide > div {
-        /*transform: scale(.7);*/
-        /*transition: transform .3s cubic-bezier(.4, 0, .2, 1);*/
-    }
+    /*.slick-slide {*/
+    /*padding: 50px;*/
+    /*}*/
 
-    .slick-center > div {
-        /*transform: scale(1);*/
-    }
+    /*.slick-slide > div {*/
+    /*min-height: 200px;*/
+    /*transform: scale(.7);*/
+    /*transition: transform .3s cubic-bezier(.4, 0, .2, 1);*/
+    /*}*/
+
+    /*.slick-center > div {*/
+    /*transform: scale(1);*/
+    /*}*/
 
     .new_arrival {
-        min-height: 550px;
+        min-height: 650px;
         background: url("../../assets/images/newImages/new_arrival.png") left center no-repeat;
         background-size: contain;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        background-color: #f6f6f6;
+        box-shadow: inset 1px 2px 10px 20px #eee;
     }
 
     .w_90l_80sm {
@@ -245,4 +246,29 @@
             width: 70% !important;
         }
     }
+
+
+    .newArrival.center {
+        margin-left: -40px;
+        margin-right: -40px;
+    }
+
+
+    .newArrival .slick-slide {
+        /*background: #fff;*/
+        opacity: 0.5;
+        transition: all 300ms ease;
+        transform: scale(0.7);
+    }
+
+    .newArrival.center .slick-slide.slick-active {
+        transform: scale(.8);
+        opacity: 0.7;
+    }
+
+    .newArrival.center .slick-slide.slick-center {
+        transform: scale(1);
+        opacity: 1;
+    }
+
 </style>
