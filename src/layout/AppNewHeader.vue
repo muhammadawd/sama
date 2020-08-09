@@ -247,7 +247,8 @@
                                                     {{$helper.getSettings().phone2}}
                                                 </a>
                                             </li>
-                                            <li class="list-inline-item animIcons" v-if="$helper.getSettings().facebook">
+                                            <li class="list-inline-item animIcons"
+                                                v-if="$helper.getSettings().facebook">
                                                 <a :href="$helper.getSettings().facebook">
                                                     <img :src="require('@/assets/images/newImages/facebook.png')"
                                                          width="30px"
@@ -261,23 +262,27 @@
                                                          alt="">
                                                 </a>
                                             </li>
-                                            <li class="list-inline-item animIcons" v-if="$helper.getSettings().snapchat">
+                                            <li class="list-inline-item animIcons"
+                                                v-if="$helper.getSettings().snapchat">
                                                 <a :href="$helper.getSettings().snapchat">
                                                     <img :src="require('@/assets/images/newImages/snapchat.png')"
                                                          width="30px"
                                                          alt="">
                                                 </a>
                                             </li>
-                                            <li class="list-inline-item animIcons" v-if="$helper.getSettings().instagram">
+                                            <li class="list-inline-item animIcons"
+                                                v-if="$helper.getSettings().instagram">
                                                 <a :href="$helper.getSettings().instagram">
                                                     <img :src="require('@/assets/images/newImages/instagram.png')"
                                                          width="30px"
                                                          alt="">
                                                 </a>
                                             </li>
-                                            <li class="list-inline-item animIcons" v-if="$helper.getSettings().front_email">
+                                            <li class="list-inline-item animIcons"
+                                                v-if="$helper.getSettings().front_email">
                                                 <a :href="'mailto:'+$helper.getSettings().front_email">
-                                                    <img :src="require('@/assets/images/newImages/email.png')" width="30px"
+                                                    <img :src="require('@/assets/images/newImages/email.png')"
+                                                         width="30px"
                                                          alt="">
                                                 </a>
                                             </li>
@@ -330,7 +335,8 @@
                                     <div class="header_fav_cart">
                                         <ul class="list-unstyled text-center direction">
                                             <li class="mt-2 bg-active-login" v-if="!auth_user">
-                                                <a class="text-white" href="" @click.prevent="$router.push({name:'login'})">
+                                                <a class="text-white" href=""
+                                                   @click.prevent="$router.push({name:'login'})">
                                                     {{$ml.get('login')}}
                                                 </a>
                                             </li>
@@ -472,8 +478,12 @@
 
         <modal :show.sync="modals.modal2"
                gradient="white"
+               :showClose="false"
+               modal-content-classes="new_content_modal"
+               header-classes="new_header_modal"
                modal-classes="modal-danger modal-dialog-centered modal-lg">
-            <h6 slot="header" class="modal-title font-weight-bold text-left display-4 text-black direction"
+            <h6 slot="header"
+                class="modal-title font-weight-bold text-center m-auto display-4 text-white direction "
                 id="modal-title-notification">
                 {{this.$ml.get('your_cart')}}</h6>
 
@@ -500,14 +510,18 @@
         </modal>
         <modal :show.sync="modals.modal1"
                gradient="white"
+               :showClose="false"
+               modal-content-classes="new_content_modal"
+               header-classes="new_header_modal"
                modal-classes="modal-danger modal-dialog-centered modal-lg">
-            <h6 slot="header" class="modal-title font-weight-bold text-left display-4 text-black direction">
+            <h6 slot="header"
+                class="modal-title font-weight-bold text-center m-auto display-4 text-white direction ">
                 {{this.$ml.get('favourites')}}</h6>
 
             <div class="py-3 text-center">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card  d-none d-md-block ">
                             <div class="card-body text-dark">
                                 <div class="table-responsive mb-2">
                                     <table class="table new_table">
@@ -558,10 +572,71 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row mb-2 d-md-none" v-for="(fav , k) in $store.getters['getFavourites']" :key="k">
+                            <div class="col-6">
+                                <div class="favItem">
+                                    <div class="item_header">
+                                        {{$ml.get('image')}}
+                                    </div>
+                                    <img v-if="fav.product" :src="fav.product.main_image" class="w-100 mt-1"
+                                         alt=""/>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="favItem">
+                                    <div class="item_header">
+                                        {{$ml.get('product_name')}}
+                                    </div>
+                                    <div class="mt-2 mb-2 text-left text-black p-2">
+                                        <b>
+                                            {{fav.product_translation ? fav.product_translation.title : ''}}
+                                        </b>
+                                    </div>
+                                </div>
+                                <div class="row_item text-left p-1">
+                                    <div class="row_item_key">
+                                        {{$ml.get('category')}}
+                                    </div>
+                                    <div class="row_item_value">
+                                        {{fav.product ? fav.product.category ? fav.product.category.translated.title :
+                                        '' : ''}}
+                                    </div>
+                                </div>
+                                <div class="row_item text-left p-1">
+                                    <div class="row_item_key">
+                                        {{$ml.get('price')}}
+                                    </div>
+                                    <div class="row_item_value">
+                                        {{fav.pov ? fav.pov.price : ''}} {{$store.getters.getCurrency}}
+                                    </div>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <div class="btn-group" dir="ltr">
+                                        <button class="btn btn-danger btn-sm"
+                                                @click="removeFavourites(fav,k)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                        <button class="btn btn-neutral btn-sm" @click="AddToCart(fav,k)">
+                                            <img :src="require('@/assets/images/newImages/cart.png')"
+                                                 style="width:30px" alt="">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2 text-center text-md-left" @click="modals.modal1 = false">
+                        <button class="btn btn-default" style="background: #5d5d5d">
+                            {{$ml.get('continue_shopping')}}
+                        </button>
+                    </div>
+                    <div class="col-md-6 mt-2 text-center text-md-right"  @click="modals.modal1 = false;modals.modal2 = true;">
+                        <button class="btn btn-info">
+                            {{$ml.get('open_cart')}}
+                        </button>
                     </div>
                 </div>
             </div>
-
         </modal>
     </div>
 </template>
@@ -1071,6 +1146,11 @@
         min-width: 600px;
     }
 
+    .new_table th {
+        background: #8d8d8d;
+        color: #fff;
+    }
+
     .dropbtn {
         background-color: transparent;
         /*color: white;*/
@@ -1123,5 +1203,47 @@
     .dropdown:hover .dropbtn {
         background-color: #00adee;
         color: #fff;
+    }
+
+    .favItem {
+        border: 1px solid #aaa;
+    }
+
+    .favItem .item_header {
+        background: #8d8d8d;
+        font-weight: bold;
+        padding: 10px 5px;
+    }
+
+    .row_item {
+        display: flex;
+        background: #8d8d8d;
+    }
+
+    .row_item
+    .row_item_key {
+        flex: 1;
+    }
+
+    .row_item
+    .row_item_value {
+        flex: 2;
+        background: #fff;
+        color: #000;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    .new_header_modal {
+        background: #1dadee;
+        border-radius: 30px 30px 0 0;
+        text-align: center;
+        color: #fff;
+    }
+
+    .new_content_modal {
+        border-radius: 30px 30px 0 0 !important;
+        text-align: center;
+        overflow: hidden;
     }
 </style>

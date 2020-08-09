@@ -258,9 +258,13 @@ export default new MLCreate({
             author_books: 'author books',
             events: 'Events',
             days: 'days',
+            continue_shopping: 'continue shopping',
+            open_cart: 'open cart',
         }),
 
         new MLanguage('ar').create({
+            continue_shopping: 'متابعة التسوق',
+            open_cart: '  سلة المشتريات',
             days: 'يوم',
             events: 'احداث ومعارض',
             products_count: 'عدد الاصدارات',
@@ -393,7 +397,7 @@ export default new MLCreate({
             modify_order: 'تعديل الطلب',
             items: 'منتج',
             qty: 'عدد',
-            price: 'سعر',
+            price: 'السعر',
             add_address: 'اضافة عنوان',
             add: 'اضافة',
             please_add_address: 'من فضلك اضف عنوان من اجل انهاء عمليه الشراء',

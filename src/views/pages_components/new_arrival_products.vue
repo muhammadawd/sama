@@ -8,7 +8,6 @@
                 <div class="col-md-12">
                     <VueSlickCarousel v-bind="settings" :arrows="true">
                         <div class="slider__item  pr-2 pl-2" v-for="(product,key) in products" :key="key" v-if="key < 20">
-
                             <oneProduct v-bind:addToCart="addToCart"
                                         v-bind:product="product"></oneProduct>
                         </div>
