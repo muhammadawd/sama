@@ -260,9 +260,11 @@ export default new MLCreate({
             days: 'days',
             continue_shopping: 'continue shopping',
             open_cart: 'open cart',
+            removecart: 'remove cart',
         }),
 
         new MLanguage('ar').create({
+            removecart: 'حذف من السلة',
             continue_shopping: 'متابعة التسوق',
             open_cart: '  سلة المشتريات',
             days: 'يوم',
@@ -370,7 +372,7 @@ export default new MLCreate({
             min_order_amount: 'الاقل تكلفة',
             show_product: 'عرض ',
             no_data_cart: 'ﻻ يوجد اى منتجات فى السلة الخاصة بك',
-            sub_total: 'اجمالى',
+            sub_total: 'الاجمالى',
             total: 'الاجمالى النهائي',
             submit_checkout: 'اضغط لانهاء عملية الطلب',
             products: 'جميع المنتجات',

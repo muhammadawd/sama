@@ -1,33 +1,16 @@
 <template>
-    <div class="row">
-        <div class="col-md-12 text-center" v-if="cart.length == 0">
-            <i class="ni ni-bag-17 ni-5x text-black-50"></i>
-            <p class="lead text-black-50">{{this.$ml.get('no_data_cart')}}</p>
-        </div>
-        <div class="col-md-12 bg-white pt-2 pb-5 text-black text-center" v-if="cart.length > 0">
-            <div class="row" v-for="(element,key) in cart" :key="key">
-                <div class="col-4">
-                    <div class="form-group input-group input-group-alternative">
-                        <div class="input-group-prepend p-1">
-                            <button style="cursor: pointer;outline: 0" class="input-group-text p-1"
-                                    @click="plusAmount(element,key)">
-                                <i class="fa fa-minus text-black"></i>
-                            </button>
-                        </div>
-                        <!--                               @keypress.prevent-->
-                        <input aria-describedby="addon-right addon-left"
-                               @change="updateAmount(element , key)"
-                               v-model="element.min_amount_needed" style="height: 30px;"
-                               class="form-control text-center p-1">
-                        <div class="input-group-append p-1">
-                            <button style="cursor: pointer;outline: 0" class="input-group-text p-1"
-                                    @click="minusAmount(element,key)">
-                                <i class="fa fa-plus text-black"></i>
-                            </button>
-                        </div>
+    <div>
+        <div class="row">
+            <div class="col-md-12 text-center" v-if="cart.length == 0">
+                <i class="ni ni-bag-17 ni-5x text-black-50"></i>
+                <p class="lead text-black-50">{{this.$ml.get('no_data_cart')}}</p>
+            </div>
+            <div class="d-none d-md-block col-md-12 bg-white pt-2 pb-5 text-black text-center" v-if="cart.length > 0">
+                <div class="row" v-for="(element,key) in cart" :key="key">
+                    <div class="col-4">
+                        <img v-if="element.product" :src="element.product.main_image" style="width: 90px" alt="">
                     </div>
-                </div>
-                <div class="col-3 text-left">
+                    <div class="col-3 text-left">
                     <span style="font-size: 12px" class="font-weight-bold text-black">
                         {{element.product_translation.title}} <br>
                         <!--                        <span v-for="(pov , k) in element.pov.product_option_value_details" :key="k">-->
@@ -36,102 +19,199 @@
                         <!--                            <span v-if="k+1 != element.pov.product_option_value_details.length">,</span>-->
                         <!--                        </span>-->
                     </span>
+                        <div class="form-group input-group input-group-alternative mt-2">
+                            <div class="input-group-prepend p-1">
+                                <button style="cursor: pointer;outline: 0" class="input-group-text p-1"
+                                        @click="plusAmount(element,key)">
+                                    <i class="fa fa-minus text-black"></i>
+                                </button>
+                            </div>
+                            <!--                               @keypress.prevent-->
+                            <input aria-describedby="addon-right addon-left"
+                                   @change="updateAmount(element , key)"
+                                   v-model="element.min_amount_needed" style="height: 30px;"
+                                   class="form-control text-center p-1">
+                            <div class="input-group-append p-1">
+                                <button style="cursor: pointer;outline: 0" class="input-group-text p-1"
+                                        @click="minusAmount(element,key)">
+                                    <i class="fa fa-plus text-black"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <small class="font-weight-bold text-black-50">
+                            <slot v-if="parseFloat(element.pov.price).toFixed(3) == 0">
+                                <span class="badge badge-info"
+                                      style="font-size: 13px">{{$ml.get('undefined_price')}}</span>
+                            </slot>
+                            <slot v-if="parseFloat(element.pov.price).toFixed(3) != 0">
+                                {{parseFloat(element.pov.price).toFixed(3)}}
+                                <small>{{getCurrency()}}</small>
+                            </slot>
+                        </small>
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-danger btn-sm" @click="removeCart(element,key)">
+                            <i class="fa fa-remove"></i>
+                        </button>
+                    </div>
+                    <div class="col-12">
+                        <hr class="m-2">
+                    </div>
                 </div>
-                <div class="col-3">
-                    <small class="font-weight-bold text-black-50">
-                        <slot v-if="parseFloat(element.pov.price).toFixed(3) == 0">
-                            <span class="badge badge-info" style="font-size: 13px">{{$ml.get('undefined_price')}}</span>
-                        </slot>
-                        <slot v-if="parseFloat(element.pov.price).toFixed(3) != 0">
-                            {{parseFloat(element.pov.price).toFixed(3)}}
-                            <small>{{getCurrency()}}</small>
-                        </slot>
-                    </small>
+
+                <!--<p class="lead text-black-50 p-0 m-0" style="font-size: 14px">-->
+                <!--{{this.$ml.get('shipping_data')}} {{$helper.getSettings().delivery_cost_condition}}-->
+                <!--{{this.$ml.get('shipping_data2')}} {{$helper.getSettings().delivery_cost}}-->
+                <!--</p>-->
+                <div class="row">
+                    <div class="col-6">
+                        <ul class="list-unstyled text-left p-3">
+                            <li>
+                                <b>{{this.$ml.get('sub_total')}}</b>
+                            </li>
+                            <li v-if="current_coupon">
+                                <b>{{this.$ml.get('coupon_total')}}</b>
+                            </li>
+                            <li>
+                                <b>{{this.$ml.get('total')}}</b>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <ul class="list-unstyled text-right p-3">
+                            <li>
+                                <b>{{getTotalCost}}</b>
+                                {{$store.getters.getCurrency}}
+                            </li>
+                            <li v-if="current_coupon">
+                                <b v-if="current_coupon.value" style="color: #f00;">
+                                    - ( {{parseFloat(current_coupon.value).toFixed(3)}})
+                                </b>
+                                {{current_coupon.type == 'value' ? $store.getters.getCurrency : '%'}}
+                            </li>
+                            <li>
+                                <b>{{getFinalTotalCost}}</b>
+                                {{$store.getters.getCurrency}}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!--<div class="col-md-12">-->
+                    <!--&lt;!&ndash;                    <router-link class="btn btn-outline-danger btn-block" @click="CloseModal()" :to="{name:'checkout'}">&ndash;&gt;-->
+                    <!--&lt;!&ndash;                        {{this.$ml.get('submit_checkout')}}&ndash;&gt;-->
+                    <!--&lt;!&ndash;                    </router-link>&ndash;&gt;-->
+                    <!--<button class="btn btn-outline-info btn-block" @click="closeModal()">-->
+                    <!--{{this.$ml.get('submit_checkout')}}-->
+                    <!--</button>-->
+                    <!--&lt;!&ndash;                    data-dismiss="modal"&ndash;&gt;-->
+                    <!--</div>-->
                 </div>
-                <div class="col-2">
-                    <button class="btn btn-danger btn-sm" @click="removeCart(element,key)">
-                        <i class="fa fa-remove"></i>
-                    </button>
+            </div>
+        </div>
+        <div v-if="cart.length > 0">
+            <div class="row mb-3 d-md-none" v-for="(element,key) in cart" :key="'cart'+key">
+                <div class="col-6 p-0">
+                    <div class="favItem">
+                        <div class="item_header">
+                            {{$ml.get('image')}}
+                        </div>
+                        <img v-if="element.product" :src="element.product.main_image" class="w-100 mt-1"
+                             alt=""/>
+                        <div class="mt-3">
+                            <button class="btn btn-danger btn-md btn-block " @click="removeCart(element,key)">
+                                <i class="fa fa-remove"></i> {{$ml.get('removecart')}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 p-0">
+                    <div class="favItem">
+                        <div class="item_header">
+                            {{$ml.get('product_name')}}
+                        </div>
+                        <div class="mt-2 mb-2 text-left text-black p-2">
+                            <b>
+                                {{element.product_translation.title}}
+                            </b>
+                        </div>
+                    </div>
+                    <div class="row_item text-left p-1">
+                        <div class="row_item_key">
+                            {{$ml.get('category')}}
+                        </div>
+                        <div class="row_item_value">
+                            {{element.product ? element.product.category ? element.product.category.translated.title :
+                            '' : ''}}
+                        </div>
+                    </div>
+                    <div class="row_item text-left p-1">
+                        <div class="row_item_key">
+                            {{$ml.get('price')}}
+                        </div>
+                        <div class="row_item_value">
+                            {{parseFloat(element.pov.price).toFixed(3)}} {{$store.getters.getCurrency}}
+                        </div>
+                    </div>
+                    <div class="row_item text-left p-1">
+                        <div class="row_item_key">
+                            {{$ml.get('quantity')}}
+                        </div>
+                        <div class="row_item_value_qty">
+                            <div>
+                                <div class="form-group input-group input-group-alternative mb-0 pb-0">
+                                    <div class="input-group-prepend p-1">
+                                        <button style="cursor: pointer;outline: 0" class="input-group-text p-1"
+                                                @click="plusAmount(element,key)">
+                                            <i class="fa fa-minus text-black"></i>
+                                        </button>
+                                    </div>
+                                    <!--                               @keypress.prevent-->
+                                    <input aria-describedby="addon-right addon-left"
+                                           @change="updateAmount(element , key)"
+                                           v-model="element.min_amount_needed" style="height: 30px;"
+                                           class="form-control text-center p-1">
+                                    <div class="input-group-append p-1">
+                                        <button style="cursor: pointer;outline: 0" class="input-group-text p-1"
+                                                @click="minusAmount(element,key)">
+                                            <i class="fa fa-plus text-black"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row_item text-left p-1">
+                        <div class="row_item_key">
+                            {{$ml.get('sub_total')}}
+                        </div>
+                        <div class="row_item_value">
+                            {{(parseFloat(element.pov.price) * parseFloat(element.min_amount_needed)).toFixed(3)}}
+                        </div>
+                    </div>
+
                 </div>
                 <div class="col-12">
                     <hr class="m-2">
                 </div>
             </div>
-
-            <p class="lead text-black-50 p-0 m-0" style="font-size: 14px">
-                {{this.$ml.get('shipping_data')}} {{$helper.getSettings().delivery_cost_condition}}
-                {{this.$ml.get('shipping_data2')}} {{$helper.getSettings().delivery_cost}}
-            </p>
-            <!--            <div class="row">-->
-            <!--                <div class="col-12 text-left">-->
-            <!--                    <ul class="list-unstyled">-->
-            <!--                        <li v-for="(offer ,key) in offers" :key="key">-->
-            <!--                            <b>{{offer.branch.title_ar}}</b>-->
-            <!--                            <ul class="list-unstyled">-->
-            <!--                                <li v-for="(_offer,_key1) in offer.offers.single_selection" :key="_key1">-->
-            <!--                                    <label>{{_offer.offer_text}}</label>-->
-            <!--                                    &lt;!&ndash;                                    <input type="radio" :name="'single_offer_id_'+key" v-model="offerSingleModel[offer.branch.id]"&ndash;&gt;-->
-            <!--                                    &lt;!&ndash;                                           :value="_offer">&ndash;&gt;-->
-            <!--                                </li>-->
-            <!--                            </ul>-->
-            <!--                            <ul class="list-unstyled">-->
-            <!--                                <li v-for="(_offer,_key2) in offer.offers.multi_selection" :key="_key2">-->
-            <!--                                    <label>{{_offer.offer_text}}</label>-->
-            <!--                                    &lt;!&ndash;                                    <input type="checkbox" :name="'multi_offer_id_'+key" v-model="offerMultiModel"&ndash;&gt;-->
-            <!--                                    &lt;!&ndash;                                           :value="_offer">&ndash;&gt;-->
-            <!--                                </li>-->
-            <!--                            </ul>-->
-            <!--                        </li>-->
-            <!--                        <li>-->
-            <!--                            <hr>-->
-            <!--                        </li>-->
-            <!--                    </ul>-->
-            <!--                </div>-->
-            <!--            </div>-->
-            <div class="row">
-                <div class="col-6">
-                    <ul class="list-unstyled text-left p-3">
-                        <li>
-                            <b>{{this.$ml.get('sub_total')}}</b>
-                        </li>
-                        <li v-if="current_coupon">
-                            <b>{{this.$ml.get('coupon_total')}}</b>
-                        </li>
-                        <li>
-                            <b>{{this.$ml.get('total')}}</b>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-6">
-                    <ul class="list-unstyled text-right p-3">
-                        <li>
-                            <b>{{getTotalCost}}</b>
-                            {{$store.getters.getCurrency}}
-                        </li>
-                        <li v-if="current_coupon">
-                            <b v-if="current_coupon.value" style="color: #f00;">
-                                - ( {{parseFloat(current_coupon.value).toFixed(3)}})
-                            </b>
-                            {{current_coupon.type == 'value' ? $store.getters.getCurrency : '%'}}
-                        </li>
-                        <li>
-                            <b>{{getFinalTotalCost}}</b>
-                            {{$store.getters.getCurrency}}
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-md-12">
-                    <!--                    <router-link class="btn btn-outline-danger btn-block" @click="CloseModal()" :to="{name:'checkout'}">-->
-                    <!--                        {{this.$ml.get('submit_checkout')}}-->
-                    <!--                    </router-link>-->
-                    <button class="btn btn-outline-danger btn-block" @click="closeModal()">
-                        {{this.$ml.get('submit_checkout')}}
-                    </button>
-                    <!--                    data-dismiss="modal"-->
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6 mt-2 text-center text-md-left" @click="dismissModal()">
+                        <button class="btn btn-default" style="background: #5d5d5d">
+                            {{$ml.get('continue_shopping')}}
+                        </button>
+                    </div>
+                    <div class="col-md-6 mt-2 text-center text-md-right" @click="closeModal()">
+                        <button class="btn btn-info">
+                            {{$ml.get('submit_checkout')}}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
@@ -168,7 +248,7 @@
         },
         computed: {
             ...mapState([
-                'cart', 'offers'
+                'cart', 'offers', 'favourites'
             ]),
             getTotalCost() {
                 let vm = this;
@@ -206,8 +286,12 @@
         methods: {
             closeModal() {
                 let vm = this;
-                $('button[data-dismiss="modal"]').trigger('click')
+                $('div.modal.fade.show.d-block').trigger('click')
                 vm.$router.push({'name': 'checkout'})
+            },
+            dismissModal() {
+                let vm = this;
+                $('div.modal.fade.show.d-block').trigger('click')
             },
             minusAmount(element, key) {
                 let vm = this;

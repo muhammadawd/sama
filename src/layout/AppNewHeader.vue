@@ -1206,7 +1206,7 @@
     }
 
     .favItem {
-        border: 1px solid #aaa;
+        border: 1px solid #eee;
     }
 
     .favItem .item_header {
@@ -1232,6 +1232,13 @@
         color: #000;
         padding: 5px;
         border-radius: 5px;
+    }
+
+    .row_item
+    .row_item_value_qty {
+        flex: 2;
+        background: #fff;
+        color: #000;
     }
 
     .new_header_modal {
