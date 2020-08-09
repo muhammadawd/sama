@@ -120,7 +120,7 @@
                         <img v-if="element.product" :src="element.product.main_image" class="w-100 mt-1"
                              alt=""/>
                         <div class="mt-3">
-                            <button class="btn btn-danger btn-md btn-block " @click="removeCart(element,key)">
+                            <button class="btn btn-danger btn-sm btn-block " @click="removeCart(element,key)">
                                 <i class="fa fa-remove"></i> {{$ml.get('removecart')}}
                             </button>
                         </div>
@@ -137,7 +137,7 @@
                             </b>
                         </div>
                     </div>
-                    <div class="row_item text-left p-1">
+                    <div class="row_item mt-3 text-left p-1">
                         <div class="row_item_key">
                             {{$ml.get('category')}}
                         </div>
@@ -187,7 +187,7 @@
                             {{$ml.get('sub_total')}}
                         </div>
                         <div class="row_item_value">
-                            {{(parseFloat(element.pov.price) * parseFloat(element.min_amount_needed)).toFixed(3)}}
+                            {{(parseFloat(element.pov.price) * parseFloat(element.min_amount_needed)).toFixed(3)}} {{$store.getters.getCurrency}}
                         </div>
                     </div>
 

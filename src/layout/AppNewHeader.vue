@@ -623,6 +623,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-12">
+                                <hr class="m-2">
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6 mt-2 text-center text-md-left" @click="modals.modal1 = false">
