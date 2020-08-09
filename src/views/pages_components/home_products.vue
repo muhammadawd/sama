@@ -36,8 +36,8 @@
 
                     <swiper ref="mySwiper" :options="swiperOptions">
                         <swiper-slide v-for="(product,key) in cat.products" :key="key">
-                            <oneProduct v-bind:addToCart="addToCart"
-                                        v-bind:product="product"></oneProduct>
+                            <newOneProduct v-bind:addToCart="addToCart"
+                                        v-bind:product="product"></newOneProduct>
                         </swiper-slide>
 
                     </swiper>
@@ -79,7 +79,7 @@
 
 <script>
     import apiServiesRoutes from '../../bootstrap/apiServiesRoutes'
-    import oneProduct from '../pages_components/oneProduct'
+    import newOneProduct from '../pages_components/newOneProduct'
     import Vue from 'vue';
     import Message from 'vue-m-message'
     import {mapState, mapActions} from 'vuex'
@@ -92,7 +92,7 @@
     export default {
         name: "home_products",
         components: {
-            oneProduct, Tabs, Tab,
+            newOneProduct, Tabs, Tab,
             swiper,
             swiperSlide,
         },
