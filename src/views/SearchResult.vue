@@ -137,6 +137,10 @@
                             <newOneProduct v-bind:addToCart="addToCart"
                                         v-bind:product="product"></newOneProduct>
                         </div>
+                        <div class="col-md-12 mt-5 mb-2 text-center" v-if="products.length == 0">
+                            <h4 class="text-uppercase display-4" v-if="loading">{{$ml.get('loading')}}</h4>
+                            <h4 class="text-uppercase display-4" v-if="no_data">{{$ml.get('no_data')}}</h4>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -145,10 +149,6 @@
                     <div slot="no-more"></div>
                     <div slot="no-results"></div>
                 </infinite-loading>
-            </div>
-            <div class="col-md-12 mt-2 text-center" v-if="products.length == 0">
-                <h4 class="text-uppercase display-4" v-if="loading">{{$ml.get('loading')}}</h4>
-                <h4 class="text-uppercase display-4" v-if="no_data">{{$ml.get('no_data')}}</h4>
             </div>
         </div>
         <modal :show.sync="modals.modal1"

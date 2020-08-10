@@ -243,7 +243,7 @@
                 if (search) {
                     search = search.toLowerCase();
                     let route = this.$router.resolve({name: 'search_result', query: {q: search}});
-                    let url = 'http://' + location.host + process.env.VUE_APP_PUBLIC_PATH + '' + route.href;
+                    let url = 'https://' + location.host  + '' + route.href;
                     console.log(url)
                     location.href = url
                 }

@@ -4,9 +4,9 @@
         <header class="header" style="margin:0">
             <div style="width: 40%;display: inline-block;text-align: left">
                 <div style="display: grid">
-                    <img :src="require('@/assets/images/tlogo-02.png')" alt="" height="130px"
-                         @click="goHome"/>
-                    <div style="display: inline-block;margin-top:20px ">
+                    <!--<img :src="require('@/assets/images/tlogo-02.png')" alt="" height="130px"-->
+                         <!--@click="goHome"/>-->
+                    <div style="display: inline-block;margin-top:0px ">
                         <div style="width: 50%;display: inline-block">
                             <div style="background: #49a9e2;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
                                 <i class="fa fa-facebook"></i>
@@ -43,8 +43,7 @@
             <div style="width: 40%;display: inline-block;text-align: right">
                 <div style="display: grid">
                     <img :src="$helper.getSettings().logo ? $helper.getSettings().logo :require('@/assets/images/tlogo-01.png')"
-                         height="120px" alt=""
-                         style="width: 70%;margin-left: auto;" @click="goHome"/>
+                         style="width: 40%;margin-left: auto;" @click="goHome"/>
                     <div>
                         <slot v-if="$helper.getSettings()">
                             {{$helper.getSettings().address_en}}
