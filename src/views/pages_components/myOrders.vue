@@ -125,7 +125,9 @@
                     <!--                    <base-button tag="a" href="#" type="primary" class="mt-4" @click.prevent="showInvoice(sale.id)">-->
                     <!--                        {{$ml.get('show_details')}}-->
                     <!--                    </base-button>-->
-                    <router-link :to="{name:'invoice',query:{'id':sale.id}}" class="btn btn-primary">
+                    <router-link
+                            :to="{name:'invoice',params:{'branch_id':(sale.branch_id ? sale.branch_id : 1),'recipt_code':sale.receipt_code}}"
+                            class="btn btn-primary">
                         {{$ml.get('show_details')}}
                     </router-link>
                 </div>

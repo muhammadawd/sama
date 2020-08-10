@@ -343,6 +343,14 @@ router.beforeEach((to, from, next) => {
     // close menu mobile
     $('.collapse-close button').trigger('click');
 
+    if (to.name == 'invoice') {
+        const descEl = document.querySelector('head meta[name="viewport"]');
+        descEl.setAttribute('content', '');
+    } else {
+        const descEl = document.querySelector('head meta[name="viewport"]');
+        descEl.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=1, shrink-to-fit=no');
+    }
+
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (localStorage.getItem('auth') == null) {
             next({name: 'login', query: {nextUrl: to.name}});

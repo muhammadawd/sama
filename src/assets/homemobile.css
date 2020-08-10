@@ -264,10 +264,14 @@ body, div, span, h1, h2, h3, h4, h5, h6 {
     overflow: hidden;
 }
 
-.product_card_book img,
-.product_card_book_slicker img {
+.product_card_book img {
     height: 200px;
     min-height: 200px;
+}
+
+.product_card_book_slicker img {
+    height: 400px;
+    min-height: 400px;
 }
 
 .bg-dark-gray {
@@ -276,4 +280,11 @@ body, div, span, h1, h2, h3, h4, h5, h6 {
 
 .radius-0 {
     border-radius: 0;
+}
+
+.mt-10{
+    margin-top: 100px;
+}
+.mb-10{
+    margin-bottom: 100px;
 }

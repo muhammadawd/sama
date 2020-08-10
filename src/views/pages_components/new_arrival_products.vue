@@ -7,7 +7,7 @@
                 </div>
             </div>
 
-            <div class="d-none d-md-block" >
+            <div class="d-none d-md-block">
                 <div class="mycontrols">
                     <div class="left">
                         <img :src="require('@/assets/images/newImages/prev.png')" class="right"
@@ -19,7 +19,8 @@
                              alt="">
                     </div>
                 </div>
-                <carousel-3d :autoplay="true" :display="5" :controls-visible="true" :perspective="10" :space="320" style="transform: scale(0.8)"
+                <carousel-3d :autoplay="true" :display="5" :controls-visible="true" :perspective="10" :space="320"
+                             style="transform: scale(0.8)"
                              :loop="true" :controls-prev-html="' '" :controls-next-html="' '">
                     <slide v-for="(product,key) in products" :index="key">
                         <newOneProductSlicker v-bind:addToCart="addToCart"
@@ -27,7 +28,7 @@
                     </slide>
                 </carousel-3d>
             </div>
-            <div class="d-md-none">
+            <div class="d-md-none mb-10 mt-5">
                 <VueSlickCarousel id="newArrival" v-if="products.length > 0" class="newArrival center" v-bind="settings"
                                   :arrows="true">
                     <div class="slide_item" v-for="(product,key) in products" :key="key">
@@ -139,7 +140,7 @@
                 let vm = this;
                 vm.$root.$children[0].$refs.loader.show_loader = true;
                 // HOME_ADS
-                axios.get(apiServiesRoutes.BASE_URL + apiServiesRoutes.SITE_PRODUCTS, {
+                axios.get(apiServiesRoutes.BASE_URL + apiServiesRoutes.HOME_ADS, {
                     params: {
                         lang: vm.lang
                     }
@@ -147,8 +148,8 @@
                     let status = resp.data.status;
                     let data = resp.data.data;
                     if (status) {
-                        // vm.products = data.recent_products
-                        vm.products = data.products
+                        vm.products = data.recent_products
+                        // vm.products = data.products
                     }
                     vm.$root.$children[0].$refs.loader.show_loader = false;
                 }).catch((error) => {
@@ -328,6 +329,10 @@
 
         .new_arrival {
             min-height: 500px;
+        }
+
+        .new_arrival {
+            background-attachment: fixed;
         }
     }
 </style>

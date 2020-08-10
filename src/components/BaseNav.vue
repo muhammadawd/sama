@@ -31,7 +31,7 @@
                                 <router-link :to="{name:'home'}" class="nav-link get-toggle-button">
                                     <span class="nav-link-inner--text font-weight-bold text-capitalize direction-inverse">
                                         <i class="fa fa-home"></i>
-                                        {{this.$ml.get('home')}}
+                                        {{this.$ml.get('home')}} {{auth}}
                                     </span>
                                 </router-link>
                             </li>
@@ -83,7 +83,7 @@
                                     </span>
                                 </router-link>
                             </li>
-                            <li class="nav-item p-1" v-if="auth">
+                            <li class="nav-item p-1" v-if="auth_user">
                                 <router-link :to="{name:'account'}" class="nav-link get-toggle-button">
                                     <span class="nav-link-inner--text font-weight-bold text-capitalize">
                                         <i class="fa fa-user"></i>
@@ -91,7 +91,7 @@
                                     </span>
                                 </router-link>
                             </li>
-                            <li class="nav-item p-1" v-if="auth && checkPointModule()">
+                            <li class="nav-item p-1" v-if="auth_user && checkPointModule()">
                                 <router-link :to="{name:'my_points'}" class="nav-link get-toggle-button">
                                     <span class="nav-link-inner--text font-weight-bold text-capitalize">
                                         <i class="fa fa-gift"></i>
@@ -99,7 +99,7 @@
                                     </span>
                                 </router-link>
                             </li>
-                            <li class="nav-item p-1 get-toggle-button" v-if="auth">
+                            <li class="nav-item p-1 get-toggle-button" v-if="auth_user">
                                 <a href="" @click.prevent="Logout" class="nav-link">
                                     <span class="nav-link-inner--text font-weight-bold text-capitalize">
                                         <i class="fa fa-sign-out"></i>
@@ -107,7 +107,7 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="nav-item p-1" v-if="!auth">
+                            <li class="nav-item p-1" v-if="!auth_user">
                                 <router-link :to="{name:'login'}" class="nav-link nav-link-icon get-toggle-button">
                                     <span class="nav-link-inner--text font-weight-bold text-capitalize">
                                         <i class="fa fa-sign-in"></i>
@@ -115,7 +115,7 @@
                                     </span>
                                 </router-link>
                             </li>
-                            <li class="nav-item p-1" v-if="!auth">
+                            <li class="nav-item p-1" v-if="!auth_user">
                                 <router-link :to="{name:'register'}"
                                              class="nav-link nav-link-icon get-toggle-button">
                                     <span class="nav-link-inner--text font-weight-bold text-capitalize">
@@ -226,12 +226,15 @@
         },
         data() {
             return {
+                auth_user: null,
                 lang: this.$ml.current,
                 toggled: false,
                 categories: [],
             };
         },
         mounted() {
+
+            this.auth_user = localStorage.getItem('auth');
             this.getAllCategory();
         },
         computed: {

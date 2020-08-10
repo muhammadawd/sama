@@ -18,7 +18,8 @@
                              alt="">
                     </div>
                 </div>
-                <carousel-3d :autoplay="true" :display="5" :controls-visible="true" :perspective="10" :space="320"  style="transform: scale(0.8)"
+                <carousel-3d :autoplay="true" :display="5" :controls-visible="true" :perspective="10" :space="320"
+                             style="transform: scale(0.8)"
                              :loop="true" :controls-prev-html="' '" :controls-next-html="' '">
                     <slide v-for="(product,key) in products" :index="key">
                         <newOneProductSlicker v-bind:addToCart="addToCart"
@@ -26,7 +27,7 @@
                     </slide>
                 </carousel-3d>
             </div>
-            <div class="d-md-none">
+            <div class="d-md-none mb-10 mt-5">
                 <VueSlickCarousel id="bestSales" v-if="products.length > 0" class="bestSales center" v-bind="settings"
                                   :arrows="true">
                     <div class="slider_item" v-for="(product,key) in products" :key="key"
@@ -242,6 +243,12 @@
         .w_90l_80sm {
             width: 70% !important;
         }
+
+        .best_sales {
+            background: url("../../assets/images/newImages/best_sales_mobile.png") bottom center no-repeat;
+            background-size:cover;
+            background-attachment: fixed;
+        }
     }
 
     .bestSales .slick-next img {
@@ -279,9 +286,11 @@
     .bestSales.center .slick-slide.slick-center {
         transform: scale(1);
         opacity: 1;
-    }    .carousel-3d-container {
-             height: 600px !important;
-         }
+    }
+
+    .carousel-3d-container {
+        height: 600px !important;
+    }
 
     .carousel-3d-container .carousel-3d-slide {
         padding: 0 !important;

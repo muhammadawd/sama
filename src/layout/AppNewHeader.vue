@@ -78,9 +78,9 @@
 
                         <div class="row" slot="content-header" slot-scope="{closeMenu}">
                             <div class="col-6 collapse-brand text-left" style="text-align:right;">
-                                <a href="./">
+                                <router-link to="/">
                                     <img :src="$helper.getLogo()">
-                                </a>
+                                </router-link>
                             </div>
                             <div class="col-6 collapse-close text-right">
                                 <close-button @click="closeMenu"></close-button>
@@ -210,7 +210,7 @@
                             <div class="row">
                                 <div class="col-1">
                                     <div class="header_logo">
-                                        <a href="./">
+                                        <a href="./" @click.prevent="$router.push({name:'home'})">
                                             <img :src="$helper.getLogo()" width="120px" alt="">
                                         </a>
                                     </div>
@@ -406,7 +406,7 @@
                     <div class="col-12">
                         <ul class="list-unstyled direction list_menu text-left" :class="$ml.current">
                             <li :class="$route.name == 'home' ? 'active' : ''">
-                                <a href="./">
+                                <a href="./" @click.prevent="$router.push({name:'home'})">
                                     {{$ml.get('home')}}
                                 </a>
                             </li>
@@ -1259,7 +1259,7 @@
         overflow: hidden;
     }
 
-    .new_table td{
+    .new_table td {
         vertical-align: middle !important;
     }
 </style>

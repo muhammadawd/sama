@@ -4,29 +4,29 @@
         <header class="header" style="margin:0">
             <div style="width: 40%;display: inline-block;text-align: left">
                 <div style="display: grid">
-                    <!-- <img :src="require('@/assets/images/tlogo-02.png')" alt="" height="130px"
-                         style="width: 70%;margin-right: auto;" @click="goHome"/> -->
+                    <img :src="require('@/assets/images/tlogo-02.png')" alt="" height="130px"
+                          @click="goHome"/>
                     <div style="display: inline-block;margin-top:20px ">
                         <div style="width: 50%;display: inline-block">
-                            <div style="background: #f44336;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
+                            <div style="background: #49a9e2;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
                                 <i class="fa fa-facebook"></i>
                             </div>
-                            {{$helper.getSettings().facebook}}
+                            {{$helper.getSettings().facebook ?$helper.getSettings().facebook :''}}
                         </div>
                         <div style="width: 50%;display: inline-block">
-                            <div style="background: #f44336;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
+                            <div style="background: #49a9e2;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
                                 <i class="fa fa-twitter"></i>
                             </div>
                             {{$helper.getSettings().twitter}}
                         </div>
                         <div style="width: 50%;display: inline-block">
-                            <div style="background: #f44336;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
+                            <div style="background: #49a9e2;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
                                 <i class="fa fa-envelope"></i>
                             </div>
                             {{$helper.getSettings().front_email}}
                         </div>
                         <div style="width: 50%;display: inline-block">
-                            <div style="background: #f44336;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
+                            <div style="background: #49a9e2;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
                                 <i class="fa fa-instagram"></i>
                             </div>
                             {{$helper.getSettings().instagram}}
@@ -57,7 +57,7 @@
                     </div>
                     <div style="font-weight: bold">
                         <slot v-if="$helper.getSettings()">
-                            Mob : +
+                            Mob : 
                             {{$helper.getSettings().phone1}}
                             {{$helper.getSettings().phone2}}
                         </slot>
@@ -92,7 +92,9 @@
             <!--Customer Name-->
             <!--</div>-->
             <!--</div>-->
-            <div style="direction: rtl;margin-top: 5px">
+
+
+             <div style="direction: rtl;margin-top: 5px">
                 <div style="direction: rtl;width: 50%;display: inline-block;padding-left: 12px">
                     <div style="width: 20%;display: inline-block;text-align: right">
                         رقم العميل
@@ -111,7 +113,7 @@
                         L.P.O.No.
                     </div>
                 </div>
-            </div>
+            </div> 
             <div style="direction: rtl;margin-top: 5px">
                 <div style="direction: rtl;width: 50%;display: inline-block;padding-left: 12px">
                     <div style="width: 20%;display: inline-block;text-align: right">
@@ -121,18 +123,18 @@
                     <div style="width: 25%;display: inline-block;text-align: left">
                         N.O.No.
                     </div>
-                </div>
+                </div> 
                 <div style="direction: rtl;width: 50%;display: inline-block">
-                    <!--<div style="width: 20%;display: inline-block;text-align: right">-->
-                    <!--شروط السداد-->
-                    <!--</div>-->
-                    <!--<div style="border-bottom: 1px dotted #000;width: 50%;display: inline-block;text-align: center"></div>-->
-                    <!--<div style="width: 30%;display: inline-block;text-align: left">-->
-                    <!--Terms Of Payment-->
-                    <!--</div>-->
-                </div>
+                    <div style="width: 20%;display: inline-block;text-align: right">
+                    شروط السداد
+                    </div>
+                    <div style="border-bottom: 1px dotted #000;width: 50%;display: inline-block;text-align: center"></div>
+                    <div style="width: 30%;display: inline-block;text-align: left">
+                    Terms Of Payment
+                    </div>
+                 </div>
             </div>
-        </div>
+        </div> 
 
 
         <table class="meta tables" style="width:48%">
@@ -365,40 +367,40 @@
                 <!--We look forward to serving you in your next visit.-->
                 <!--</h5>-->
 
-                <!--<h3 style="font-weight:bold;margin-top:40px;text-transform:uppercase">({{sale.admin.username}})</h3>-->
-                <!--<h3 style="font-weight:bold;margin-top:20px">THANK YOU FOR YOUR VISIT</h4>-->
+                <!-- <h3 style="font-weight:bold;margin-top:40px;text-transform:uppercase"></h3>
+                <h4 style="font-weight:bold;margin-top:20px">THANK YOU FOR YOUR VISIT</h4> -->
 
 
             </div>
 
             <div style="display: flex;direction: rtl">
-                <div style="text-align: right;width: 50%;padding: 8px;margin-top: 10px;margin: 5px">
-                    <h4 style="font-weight: bold;">شروط السداد</h4>
-                    <ul style="direction: rtl;list-style-type: square;font-size: 14px">
-                        <li>
-                            يعد التوقيع على الفاتورة ملزماً للعميل وذلك بناء على طلبه من المتجر الإلكترونى للشركة
-                        </li>
-                        <li>
-                            تعتبر هذه الفاتورة صحيحه إذا لم تراجع إدارة الشركة بشأنها خلال أسبوع من تاريخها
-                        </li>
-                        <li>
-                            إن التوقيع على هذه الفاتورة من المستلم بعد استلامه للمنتجات بحالة جيدة ومطابقة للمواصفات
-                        </li>
-                        <li>
-                            اتعهد بأن ادفع قيمة هذه الفاتورة حسب الطريقة المتفق عليها عن طريق المتجر الإلكترونى
-                        </li>
-                    </ul>
-                </div>
-                <!-- <div style="text-align: left;width: 50%;padding: 8px;margin-top: 10px;margin: 5px">
-                    <h4 style="font-weight: bold;">Cheque Payment Or Bank Transfer To </h4>
-                    <div>
-                        Roll And Pack Co . For Papers , Plastic products And Derivatives.
-                    </div>
-                    <div>National Bank Of Kuwait</div>
-                    <div>Account No : 2018040370</div>
-                    <div>IBAN : KW42NBOK0000000000002018040370</div>
-                    <div>SWIFT Code : NBOKKWKW</div>
-                </div> -->
+                <!--<div style="text-align: right;width: 50%;padding: 8px;margin-top: 10px;margin: 5px">-->
+                    <!--<h4 style="font-weight: bold;">شروط السداد</h4>-->
+                    <!--<ul style="direction: rtl;list-style-type: square;font-size: 14px">-->
+                        <!--<li>-->
+                            <!--يعد التوقيع على الفاتورة ملزماً للعميل وذلك بناء على طلبه من المتجر الإلكترونى للشركة-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--تعتبر هذه الفاتورة صحيحه إذا لم تراجع إدارة الشركة بشأنها خلال أسبوع من تاريخها-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--إن التوقيع على هذه الفاتورة من المستلم بعد استلامه للمنتجات بحالة جيدة ومطابقة للمواصفات-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--اتعهد بأن ادفع قيمة هذه الفاتورة حسب الطريقة المتفق عليها عن طريق المتجر الإلكترونى-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div> -->
+                <!--<div style="text-align: left;width: 50%;padding: 8px;margin-top: 10px;margin: 5px">-->
+                    <!--<h4 style="font-weight: bold;">Cheque Payment Or Bank Transfer To </h4>-->
+                    <!--<div>-->
+                        <!--Roll And Pack Co . For Papers , Plastic products And Derivatives.-->
+                    <!--</div>-->
+                    <!--<div>National Bank Of Kuwait</div>-->
+                    <!--<div>Account No : 2018040370</div>-->
+                    <!--<div>IBAN : KW42NBOK0000000000002018040370</div>-->
+                    <!--<div>SWIFT Code : NBOKKWKW</div>-->
+                <!--</div> -->
             </div>
             <div style="display: flex;direction: rtl">
                 <div style="border: 1px solid #000;width: 50%;padding: 8px;margin-top: 10px;margin: 5px">
@@ -483,11 +485,82 @@
             if (auth) {
                 vm.token = auth.token;
             }
-            let recipt_code = vm.$route.params.recipt_code;
-            let branch_id = vm.$route.params.branch_id;
-            vm.showInvoice(branch_id, recipt_code)
+            this.getAllSettings()
         },
         methods: {
+            getAllSettings() {
+                let vm = this;
+                vm.$root.$children[0].$refs.loader.show_loader = true;
+                let settings = localStorage.getItem('settings')
+                if (settings) {
+                    settings = JSON.parse(settings);
+                    vm.settings = settings;
+                    // return
+                }
+                axios.get(apiServiesRoutes.BASE_URL + apiServiesRoutes.HOME_ADS, {
+                    params: {
+                        lang: vm.lang
+                    }
+                }).then((resp) => {
+                    let status = resp.data.status;
+                    let data = resp.data.data;
+                    if (status) {
+                        let logo = '';
+                        let pointModule = '';
+                        let to_money_percent = '0';
+                        try {
+                            logo = data.setting.logo[0].path.path;
+                        } catch (e) {
+                            logo = '';
+                        }
+                        try {
+                            pointModule = data.pointSystem.point_status[0].value
+                        } catch (e) {
+                            pointModule = '';
+                        }
+                        try {
+                            to_money_percent = data.pointSystem.to_money_percent[0].value
+                        } catch (e) {
+                            to_money_percent = '';
+                        }
+                        let settings = {
+                            KNET_PAYMENT_PERCENT: parseFloat(data.payment_setting.KNET_PAYMENT_PERCENT),
+                            KNET_PAYMENT_FIXED: parseFloat(data.payment_setting.KNET_PAYMENT_FIXED),
+                            VISA_PAYMENT_PERCENT: parseFloat(data.payment_setting.VISA_PAYMENT_PERCENT),
+                            VISA_PAYMENT_FIXED: parseFloat(data.payment_setting.VISA_PAYMENT_FIXED),
+                            CARDS_PAYMENT_PERCENT: 1,
+                            CARDS_PAYMENT_FIXED: 1,
+                            address_ar: data.setting.address_ar[0].value,
+                            address_en: data.setting.address_en[0].value,
+                            phone1: data.setting.phone1[0].value,
+                            phone2: data.setting.phone2[0].value,
+                            facebook: data.setting.facebook[0].value,
+                            twitter: data.setting.twitter[0].value,
+                            snapchat: data.setting.snapchat[0].value,
+                            instagram: data.setting.instagram[0].value,
+                            front_email: data.setting.front_email[0].value,
+                            pinterest: data.setting.pinterest[0].value,
+                            youtube: data.setting.youtube[0].value,
+                            googleplay: data.setting.googleplay[0].value,
+                            appstore: data.setting.appstore[0].value,
+                            delivery_cost: data.setting.delivery_cost[0].value,
+                            delivery_cost_condition: data.setting.delivery_cost_condition[0].value,
+                            logo: logo
+                        };
+                        vm.settings = settings;
+                        localStorage.setItem('settings', JSON.stringify(settings))
+                        localStorage.setItem('pointModule', JSON.stringify(pointModule))
+                        localStorage.setItem('to_money_percent', JSON.stringify(to_money_percent))
+                        let recipt_code = vm.$route.params.recipt_code;
+                        let branch_id = vm.$route.params.branch_id;
+                        vm.showInvoice(branch_id, recipt_code)
+                    }
+                    vm.$root.$children[0].$refs.loader.show_loader = false;
+                }).catch((error) => {
+                    vm.$root.$children[0].$refs.loader.show_loader = false;
+
+                })
+            },
             showInvoice(branch_id, recipt_code) {
                 let vm = this;
 

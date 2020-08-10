@@ -184,7 +184,7 @@
                             showClose: true
                         });
                         console.log(data.sale);
-                         vm.$router.push({name: 'invoice', params: {'branch_id': data.branch_id,'recipt_code':data.sale.receipt_code}})
+                         vm.$router.push({name: 'invoice', params: {'branch_id': (data.branch_id ? data.branch_id : 1),'recipt_code':data.sale.receipt_code}})
                         // vm.$router.push({name: 'home'})
                         // vm.branches = data.branches
                         return;
