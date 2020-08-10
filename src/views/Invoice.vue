@@ -5,7 +5,7 @@
             <div style="width: 40%;display: inline-block;text-align: left">
                 <div style="display: grid">
                     <img :src="require('@/assets/images/tlogo-02.png')" alt="" height="130px"
-                          @click="goHome"/>
+                         @click="goHome"/>
                     <div style="display: inline-block;margin-top:20px ">
                         <div style="width: 50%;display: inline-block">
                             <div style="background: #49a9e2;width: 22px;height: 22px;border-radius: 5px;color: #fff;text-align: center;line-height: 22px;display: inline-block">
@@ -57,7 +57,7 @@
                     </div>
                     <div style="font-weight: bold">
                         <slot v-if="$helper.getSettings()">
-                            Mob : 
+                            Mob :
                             {{$helper.getSettings().phone1}}
                             {{$helper.getSettings().phone2}}
                         </slot>
@@ -94,7 +94,7 @@
             <!--</div>-->
 
 
-             <div style="direction: rtl;margin-top: 5px">
+            <div style="direction: rtl;margin-top: 5px">
                 <div style="direction: rtl;width: 50%;display: inline-block;padding-left: 12px">
                     <div style="width: 20%;display: inline-block;text-align: right">
                         رقم العميل
@@ -113,7 +113,7 @@
                         L.P.O.No.
                     </div>
                 </div>
-            </div> 
+            </div>
             <div style="direction: rtl;margin-top: 5px">
                 <div style="direction: rtl;width: 50%;display: inline-block;padding-left: 12px">
                     <div style="width: 20%;display: inline-block;text-align: right">
@@ -123,18 +123,18 @@
                     <div style="width: 25%;display: inline-block;text-align: left">
                         N.O.No.
                     </div>
-                </div> 
+                </div>
                 <div style="direction: rtl;width: 50%;display: inline-block">
                     <div style="width: 20%;display: inline-block;text-align: right">
-                    شروط السداد
+                        شروط السداد
                     </div>
                     <div style="border-bottom: 1px dotted #000;width: 50%;display: inline-block;text-align: center"></div>
                     <div style="width: 30%;display: inline-block;text-align: left">
-                    Terms Of Payment
+                        Terms Of Payment
                     </div>
-                 </div>
+                </div>
             </div>
-        </div> 
+        </div>
 
 
         <table class="meta tables" style="width:48%">
@@ -200,6 +200,9 @@
                     <th style="text-align:center" width="150"><span>Code</span>
                         <div>الكود</div>
                     </th>
+                    <th style="text-align:center" width="150"><span>Image</span>
+                        <div>الصورة</div>
+                    </th>
                     <th style="text-align:center"><span>Description</span>
                         <div>الوصف</div>
                     </th>
@@ -224,6 +227,11 @@
                             <span>
                                 {{item.product_option_value.barcode}}
                             </span>
+                        </td>
+                        <td style="text-align:center;padding:0">
+                            <slot v-if="item.product_option_value.product.main_image">
+                                <img :src="item.product_option_value.product.main_image" class="mt-1 mb-1" style="width:120px" alt="..">
+                            </slot>
                         </td>
 
                         <td style="text-align:center">
@@ -375,31 +383,31 @@
 
             <div style="display: flex;direction: rtl">
                 <!--<div style="text-align: right;width: 50%;padding: 8px;margin-top: 10px;margin: 5px">-->
-                    <!--<h4 style="font-weight: bold;">شروط السداد</h4>-->
-                    <!--<ul style="direction: rtl;list-style-type: square;font-size: 14px">-->
-                        <!--<li>-->
-                            <!--يعد التوقيع على الفاتورة ملزماً للعميل وذلك بناء على طلبه من المتجر الإلكترونى للشركة-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--تعتبر هذه الفاتورة صحيحه إذا لم تراجع إدارة الشركة بشأنها خلال أسبوع من تاريخها-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--إن التوقيع على هذه الفاتورة من المستلم بعد استلامه للمنتجات بحالة جيدة ومطابقة للمواصفات-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--اتعهد بأن ادفع قيمة هذه الفاتورة حسب الطريقة المتفق عليها عن طريق المتجر الإلكترونى-->
-                        <!--</li>-->
-                    <!--</ul>-->
+                <!--<h4 style="font-weight: bold;">شروط السداد</h4>-->
+                <!--<ul style="direction: rtl;list-style-type: square;font-size: 14px">-->
+                <!--<li>-->
+                <!--يعد التوقيع على الفاتورة ملزماً للعميل وذلك بناء على طلبه من المتجر الإلكترونى للشركة-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--تعتبر هذه الفاتورة صحيحه إذا لم تراجع إدارة الشركة بشأنها خلال أسبوع من تاريخها-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--إن التوقيع على هذه الفاتورة من المستلم بعد استلامه للمنتجات بحالة جيدة ومطابقة للمواصفات-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--اتعهد بأن ادفع قيمة هذه الفاتورة حسب الطريقة المتفق عليها عن طريق المتجر الإلكترونى-->
+                <!--</li>-->
+                <!--</ul>-->
                 <!--</div> -->
                 <!--<div style="text-align: left;width: 50%;padding: 8px;margin-top: 10px;margin: 5px">-->
-                    <!--<h4 style="font-weight: bold;">Cheque Payment Or Bank Transfer To </h4>-->
-                    <!--<div>-->
-                        <!--Roll And Pack Co . For Papers , Plastic products And Derivatives.-->
-                    <!--</div>-->
-                    <!--<div>National Bank Of Kuwait</div>-->
-                    <!--<div>Account No : 2018040370</div>-->
-                    <!--<div>IBAN : KW42NBOK0000000000002018040370</div>-->
-                    <!--<div>SWIFT Code : NBOKKWKW</div>-->
+                <!--<h4 style="font-weight: bold;">Cheque Payment Or Bank Transfer To </h4>-->
+                <!--<div>-->
+                <!--Roll And Pack Co . For Papers , Plastic products And Derivatives.-->
+                <!--</div>-->
+                <!--<div>National Bank Of Kuwait</div>-->
+                <!--<div>Account No : 2018040370</div>-->
+                <!--<div>IBAN : KW42NBOK0000000000002018040370</div>-->
+                <!--<div>SWIFT Code : NBOKKWKW</div>-->
                 <!--</div> -->
             </div>
             <div style="display: flex;direction: rtl">
