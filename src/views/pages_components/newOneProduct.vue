@@ -1,16 +1,32 @@
 <template>
-    <div class="product_card_book" >
-        <div class="image" @click="$router.push({name:'show_product',params:{'id':product.id,branch_id:product.branch_id}})"
+    <div class="product_card_book">
+        <div class="image"
+             @click="$router.push({name:'show_product',params:{'id':product.id,branch_id:product.branch_id}})"
              v-lazy-container="{ selector: 'img', error:'img/icons/common/no_image.png', loading: 'img/icons/common/restricted.gif' }">
-            <img v-if="current_image" :data-src="current_image" width="100%"
+            <img v-if="current_image" :data-src="current_image" width="100%" class="d-md-none"
                  alt="..."/>
+            <div class="pr-img d-none d-md-block">
+                <div class="book-img">
+                    <a href=""
+                       @click.prevent="$router.push({name:'show_product',params:{'id':product.id,branch_id:product.branch_id}})">
+                        <div class="frontcover">
+                            <img v-if="current_image" :data-src="current_image" alt="image description">
+                        </div>
+                        <div class="backcover">
+                            <img v-if="current_image" :data-src="current_image" alt="image description">
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
-        <h3 class="text-black text-center w-100 mt-2" style="font-size: 14px" @click="$router.push({name:'show_product',params:{'id':product.id,branch_id:product.branch_id}})">
+        <h3 class="text-black text-center w-100 mt-2" style="font-size: 14px"
+            @click="$router.push({name:'show_product',params:{'id':product.id,branch_id:product.branch_id}})">
             {{$ml.get('book')}} : {{product.translated.title}} <br>
             {{$ml.get('author')}} : {{product.author ? product.author.translated.title : ''}}
         </h3>
-        <div class="row" @click="$router.push({name:'show_product',params:{'id':product.id,branch_id:product.branch_id}})">
-            <div class="col-12" style="color: #000;" >
+        <div class="row"
+             @click="$router.push({name:'show_product',params:{'id':product.id,branch_id:product.branch_id}})">
+            <div class="col-12" style="color: #000;">
                 <template>
                     <p class="font-weight-bold text-center" style="font-size: 18px;">
                         {{parseFloat(product.minimum_price).toFixed(3)}}
@@ -132,7 +148,7 @@
                     return;
                 }
 
-                vm.$store.dispatch('addToCart', product).then(()=>{
+                vm.$store.dispatch('addToCart', product).then(() => {
                     vm.$router.push({'name': 'checkout'})
                 });
             },

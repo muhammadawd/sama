@@ -52,9 +52,22 @@
                     <hr class="m-0 mt-2">
                 </div>
             </div>
-            <div class="product_card bg-main text-center text-white">
+            <div class="product_card product_card_info bg-main text-center text-white">
                 <img v-for="(image , key) in selected_images" :key="key" v-if="key == 0" @
-                     :src="image.path" class="image" alt="..">
+                     :src="image.path" class="d-md-none" alt="..">
+
+                <div class="pr-img d-none d-md-block">
+                    <div class="book-img">
+                        <div class="frontcover">
+                            <img v-for="(image , key) in selected_images" :key="key" v-if="key == 0" class="image"
+                                 :src="image.path" alt="image description">
+                        </div>
+                        <div class="backcover">
+                            <img v-for="(image , key) in selected_images" :key="key" v-if="key == 0" class="image"
+                                 :src="image.path" alt="image description">
+                        </div>
+                    </div>
+                </div>
                 <h4 class="font-weight-bold mt-2 text-white">
                     {{$ml.get('book')}} : {{product.translated ? product.translated.title : ''}}
                 </h4>
@@ -82,7 +95,7 @@
                     </button>
                     <button class="btn btn-secondary" v-if="pov"
                             :disabled="pov.store_detail && (pov.store_detail.quantity - pov.store_detail.reserved == 0)"
-                             @click="addToCartCheckout(product)">
+                            @click="addToCartCheckout(product)">
                         {{$ml.get('buy')}}
                     </button>
                 </div>

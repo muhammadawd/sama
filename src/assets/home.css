@@ -293,11 +293,12 @@ body, div, span, h1, h2, h3, h4, h5, h6, a {
     overflow: hidden;
 }
 
-.product_card_book img{
+.product_card_book img {
     height: 350px;
     min-height: 350px;
 
 }
+
 .product_card_book_slicker img {
     height: 550px;
     min-height: 550px;
@@ -310,9 +311,119 @@ body, div, span, h1, h2, h3, h4, h5, h6, a {
 .radius-0 {
     border-radius: 0;
 }
-.mt-10{
+
+.mt-10 {
     margin-top: 100px;
 }
-.mb-10{
+
+.mb-10 {
     margin-bottom: 100px;
+}
+
+
+.pr-img {
+    margin: 0;
+    width: 100%;
+    float: right;
+    overflow: hidden;
+    position: relative;
+    transition: all .5s ease;
+    /*height: 360px;*/
+
+}
+
+.book-img {
+    width: 100%;
+    float: right;
+    position: relative;
+    transition: all .5s ease;
+    height: 100%;
+}
+
+.frontcover {
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    float: right;
+    position: relative;
+}
+
+.frontcover:before {
+    top: 0;
+    right: 0;
+    z-index: 3;
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: -moz-linear-gradient(left, rgba(0, 0, 0, 0) 8%, rgba(0, 0, 0, 0.1) 5%, rgba(0, 0, 0, 0) 13%);
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 8%, rgba(0, 0, 0, 0.1) 5%, rgba(0, 0, 0, 0) 13%);
+    background: linear-gradient(to left, rgba(0, 0, 0, 0) 8%, rgba(0, 0, 0, 0.1) 5%, rgba(0, 0, 0, 0) 13%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#00000000', GradientType=1);
+}
+
+.backcover {
+    top: 2%;
+    right: 0;
+    z-index: 1;
+    width: 100%;
+    height: 96%;
+    overflow: hidden;
+    background: #000;
+    position: absolute;
+}
+
+.backcover img {
+    opacity: 0.60;
+    display: block;
+}
+
+.backcover:after {
+    top: 4%;
+    left: 5px;
+    z-index: 2;
+    width: 15px;
+    height: 92%;
+    content: '';
+    position: absolute;
+    background: url('./images/newImages/bookpattren.png') no-repeat;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -ms-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+
+.book-img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    -webkit-transform-style: preserve-3d;
+    object-fit: cover
+}
+
+.product_card_book:hover .pr-img,
+.product_card_info:hover .pr-img {
+    padding: 9px 0 9px 13px;
+}
+
+.product_card_book:hover .book-img,
+.product_card_info:hover .book-img {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: perspective(1000px) rotateY(30deg) rotateZ(0deg);
+    -moz-transform: perspective(1000px) rotateY(30deg) rotateZ(0deg);
+    -ms-transform: perspective(1000px) rotateY(30deg) rotateZ(0deg);
+    -o-transform: perspective(1000px) rotateY(30deg) rotateZ(0deg);
+    transform: perspective(1000px) rotateY(30deg) rotateZ(0deg);
+    transition: all .5s ease;
+}
+
+.product_card_book:hover .backcover,
+.product_card_info:hover .backcover {
+    right: 18px;
+    transition: all .5s ease;
 }
