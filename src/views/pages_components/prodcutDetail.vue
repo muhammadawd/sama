@@ -69,18 +69,21 @@
                     </b> {{getCurrency()}}
                 </h4>
                 <div class="btn-group" dir="ltr">
-                    <button class="btn btn-secondary" @click="addToFavourite(product)">
-                        <i class="fa fa-star fa-lg m-0 p-0"></i>
-                        <i class="fa fa-star fa-lg m-0 p-0"></i>
-                    </button>
-                    <a class="btn btn-secondary" :href="product.book_file_path" :disabled="!product.book_file_path"
+                    <a class="btn btn-secondary" :href="product.book_file_path" v-if="!product.book_file_path"
                        target="_blank" :class="!product.book_file_path ? 'disabled' : ''">
                         <i class="fa fa-book fa-lg"></i>
                     </a>
+                    <button class="btn btn-secondary" @click="AddToCart()">
+                        <img :src="require('@/assets/images/newImages/cart.png')"
+                             style="width: 30px;height: auto;min-height: auto" alt=""/>
+                    </button>
+                    <button class="btn btn-secondary" @click="addToFavourite(product)">
+                        <i class="fa fa-star fa-lg m-0 p-0"></i>
+                    </button>
                     <button class="btn btn-secondary" v-if="pov"
                             :disabled="pov.store_detail && (pov.store_detail.quantity - pov.store_detail.reserved == 0)"
-                            @click="AddToCart()">
-                        <i class="fa fa-cart-plus fa-lg"></i>
+                             @click="addToCartCheckout(product)">
+                        {{$ml.get('buy')}}
                     </button>
                 </div>
             </div>
@@ -333,6 +336,41 @@
             ])
         },
         methods: {
+            addToCartCheckout(product) {
+                let vm = this;
+                let pov = product.product_option_values[0];
+                let normal_product = vm.prepareProductToCart(product, pov);
+                // console.log(normal_product)
+                vm.bindToCartCheckout(normal_product);
+            },
+            bindToCartCheckout(product) {
+                let vm = this;
+                let found = false;
+                let product_id = product.pov.id;
+                vm.cart.filter((value, index, arr) => {
+                    if (product_id == value.pov.id) {
+                        found = true;
+                    }
+                });
+                if (found) {
+
+                    Message({
+                        title: vm.$ml.get('error'),
+                        message: vm.$ml.get('already_added'),
+                        className: 'bg-gray text-white',
+                        zIndex: 9999999,
+                        iconImg: require('@/assets/error.png'),
+                        position: 'bottom-center',
+                        // type: 'error',
+                        showClose: true
+                    })
+                    return;
+                }
+
+                vm.$store.dispatch('addToCart', product).then(() => {
+                    vm.$router.push({'name': 'checkout'})
+                });
+            },
             addToFavourite(product) {
                 let vm = this;
                 let pov = product.product_option_values[0];
@@ -435,7 +473,8 @@
                     store_id: vm.pov.store_detail ? vm.pov.store_detail.store_id : null,
                     product_translation: vm.product.translated,
                     min_amount_needed: vm.pov.min_amount_needed ? vm.pov.min_amount_needed : 1,
-                    pov: vm.pov
+                    pov: vm.pov,
+                    product: vm.product,
                 };
                 vm.bindToCart(prepared_data)
             },

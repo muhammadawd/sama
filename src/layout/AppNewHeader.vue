@@ -927,7 +927,7 @@
                     localStorage.setItem('current_currency', 'KWD')
                 } else {
                     if (!lang) this.$ml.change('ar');
-                    localStorage.setItem('current_currency', 'دينار كويتي')
+                    localStorage.setItem('current_currency', 'د.ك')
                 }
                 location.reload()
             }

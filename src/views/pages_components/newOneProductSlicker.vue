@@ -7,21 +7,29 @@
                  alt="..."/>
         </div>
         <div class="row p-1 justify-content-center">
-            <div class="col-3 p-1">
+            <div class="col-2 p-1">
                 <button class="btn btn-info bg-dark-gray p-1 btn-block pr-2 pl-2 radius-0"
-                        v-on:click.prevent="addToCart(product)"
+                        v-on:click.prevent="addToCartCheckout(product)"
                         v-if="!(product.product_option_values[0].store_detail && (product.product_option_values[0].store_detail.quantity - product.product_option_values[0].store_detail.reserved == 0))">
                     {{$ml.get('buy')}}
                 </button>
             </div>
-            <div class="col-3 p-1">
+            <div class="col-2 p-1">
+                <button class="btn btn-info bg-dark-gray p-1 btn-block pr-2 pl-2 radius-0"
+                        v-on:click.prevent="addToCart(product)"
+                        v-if="!(product.product_option_values[0].store_detail && (product.product_option_values[0].store_detail.quantity - product.product_option_values[0].store_detail.reserved == 0))">
+                    <img :src="require('@/assets/images/newImages/cart-white.png')"
+                         style="width: 30px;height: auto;min-height: auto" alt=""/>
+                </button>
+            </div>
+            <div class="col-2 p-1">
                 <button v-if="!(product.product_option_values[0].store_detail && (product.product_option_values[0].store_detail.quantity - product.product_option_values[0].store_detail.reserved == 0))"
                         v-on:click.prevent="addToFavourite(product)"
                         class="btn btn-info bg-dark-gray p-1 btn-block pr-2 pl-2 radius-0">
                     <i class="fa fa-star fa-lg"></i>
                 </button>
             </div>
-            <div class="col-3 p-1">
+            <div class="col-2 p-1" v-if="!product.book_file_path">
                 <a :href="product.book_file_path"
                    v-if="!product.book_file_path"
                    target="_blank"
@@ -80,11 +88,46 @@
             });
         },
         methods: {
+            addToCartCheckout(product) {
+                let vm = this;
+                let pov = product.product_option_values[0];
+                let normal_product = vm.prepareProductToCart(product, pov);
+                // console.log(normal_product)
+                vm.bindToCart(normal_product);
+            },
+            bindToCart(product) {
+                let vm = this;
+                let found = false;
+                let product_id = product.pov.id;
+                vm.cart.filter((value, index, arr) => {
+                    if (product_id == value.pov.id) {
+                        found = true;
+                    }
+                });
+                if (found) {
+
+                    Message({
+                        title: vm.$ml.get('error'),
+                        message: vm.$ml.get('already_added'),
+                        className: 'bg-gray text-white',
+                        zIndex: 9999999,
+                        iconImg: require('@/assets/error.png'),
+                        position: 'bottom-center',
+                        // type: 'error',
+                        showClose: true
+                    })
+                    return;
+                }
+ 
+                vm.$store.dispatch('addToCart', product).then(() => {
+                    vm.$router.push({'name': 'checkout'})
+                });
+            },
             addToFavourite(product) {
                 let vm = this;
                 let pov = product.product_option_values[0];
                 let normal_product = vm.prepareProductToCart(product, pov);
-                console.log(normal_product)
+                // console.log(normal_product)
                 vm.bindToFavourite(normal_product);
             },
             prepareProductToCart(master, pov) {
