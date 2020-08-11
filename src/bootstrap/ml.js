@@ -262,11 +262,13 @@ export default new MLCreate({
             open_cart: 'open cart',
             removecart: 'remove cart',
             buy: 'Buy',
+            buy_now: 'Buy Now',
             kd: 'Kuwait Dinar',
         }),
 
         new MLanguage('ar').create({
             kd: 'دينار كويتي',
+            buy_now: 'اشتري الان',
             buy: 'اشتر',
             removecart: 'حذف من السلة',
             continue_shopping: 'متابعة التسوق',

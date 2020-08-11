@@ -35,30 +35,32 @@
                 </template>
             </div>
         </div>
-        <div class="row p-2">
-            <div class="col-3 p-1">
-                <button class="btn btn-info p-1 pr-2 pl-2 btn-block radius-0"
+        <div class="row text-center p-2">
+            <div class="col-md-3 col-12 p-1">
+                <button class="btn btn-info p-1 pr-2 pl-2 btn-block text-center text-ellipsis radius-0"
                         v-on:click.prevent="addToCartCheckout(product)"
                         v-if="!(product.product_option_values[0].store_detail && (product.product_option_values[0].store_detail.quantity - product.product_option_values[0].store_detail.reserved == 0))">
-                    {{$ml.get('buy')}}
+                    <span class="d-none d-md-block">{{$ml.get('buy')}}</span>
+                    <span class="d-md-none">{{$ml.get('buy_now')}}</span>
+
                 </button>
             </div>
-            <div class="col-3 p-1">
+            <div class="col-md-3 col-4 p-1">
                 <button v-if="!(product.product_option_values[0].store_detail && (product.product_option_values[0].store_detail.quantity - product.product_option_values[0].store_detail.reserved == 0))"
                         v-on:click.prevent="addToFavourite(product)"
                         class="btn btn-info bg-dark-gray p-1 btn-block pr-2 pl-2 radius-0">
                     <i class="fa fa-star fa-lg"></i>
                 </button>
             </div>
-            <div class="col-3 p-1">
-                <button class="btn btn-info bg-dark-gray p-1 btn-block pr-2 pl-2 radius-0"
+            <div class="col-md-3 col-4 p-1">
+                <button class="btn btn-info bg-dark-gray p-1 btn-block pr-2 pl-2 text-center radius-0"
                         v-on:click.prevent="addToCart(product)"
                         v-if="!(product.product_option_values[0].store_detail && (product.product_option_values[0].store_detail.quantity - product.product_option_values[0].store_detail.reserved == 0))">
-                    <img :src="require('@/assets/images/newImages/cart-white.png')"
+                    <img :src="require('@/assets/images/newImages/cart-white.png')" class="m-auto"
                          style="width: 30px;height: auto;min-height: auto" alt=""/>
                 </button>
             </div>
-            <div class="col-3 p-1">
+            <div class="col-md-3 col-4 p-1">
                 <a :href="product.book_file_path"
                    v-if="!product.book_file_path"
                    target="_blank"
@@ -243,6 +245,14 @@
 </script>
 
 <style>
+    @media only screen and (max-width: 600px) {
+        .image_icon_cart {
+            width: 25px!important;
+            position: relative;
+            right: -4px;
+        }
+    }
+
     .progressive-image-wrapper {
         padding-bottom: 0 !important;
     }

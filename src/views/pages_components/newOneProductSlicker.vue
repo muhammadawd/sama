@@ -8,18 +8,18 @@
         </div>
         <div class="row p-1 justify-content-center">
             <div class="col-2 p-1">
-                <button class="btn btn-info bg-dark-gray p-1 btn-block pr-2 pl-2 radius-0"
+                <button class="btn btn-info bg-dark-gray text-center p-1 btn-block pr-2 pl-1 radius-0"
                         v-on:click.prevent="addToCartCheckout(product)"
                         v-if="!(product.product_option_values[0].store_detail && (product.product_option_values[0].store_detail.quantity - product.product_option_values[0].store_detail.reserved == 0))">
                     {{$ml.get('buy')}}
                 </button>
             </div>
             <div class="col-2 p-1">
-                <button class="btn btn-info bg-dark-gray p-1 btn-block pr-2 pl-2 radius-0"
+                <button class="btn btn-info bg-dark-gray p-1 btn-block pr-2 pl-1 text-center radius-0"
                         v-on:click.prevent="addToCart(product)"
                         v-if="!(product.product_option_values[0].store_detail && (product.product_option_values[0].store_detail.quantity - product.product_option_values[0].store_detail.reserved == 0))">
-                    <img :src="require('@/assets/images/newImages/cart-white.png')"
-                         style="width: 30px;height: auto;min-height: auto" alt=""/>
+                    <img :src="require('@/assets/images/newImages/cart-white.png')" class="m-auto"
+                         style="width: 28px;height: auto;min-height: auto" alt=""/>
                 </button>
             </div>
             <div class="col-2 p-1">
