@@ -294,8 +294,8 @@ body, div, span, h1, h2, h3, h4, h5, h6, a {
 }
 
 .product_card_book img{
-    height: 280px;
-    min-height: 280px;
+    height: 350px;
+    min-height: 350px;
 
 }
 .product_card_book_slicker img {
