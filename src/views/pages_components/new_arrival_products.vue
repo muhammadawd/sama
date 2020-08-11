@@ -298,32 +298,33 @@
         background: #fff;
     }
 
-    .mycontrols {
+    .new_arrival .mycontrols {
         position: absolute;
         top: 40%;
         height: 0;
         margin-top: -10px;
         width: 90%;
+        right: 3%;
         z-index: 1000;
         cursor: pointer;
     }
 
-    .mycontrols .left {
+    .new_arrival .mycontrols .left {
         left: 0;
         position: absolute;
     }
 
-    .mycontrols .right {
+    .new_arrival .mycontrols .right {
         right: 0;
         position: absolute;
     }
 
     @media only screen and (max-width: 600px) {
-        .mycontrols {
+        .new_arrival .mycontrols {
             width: 80%;
         }
 
-        .mycontrols .right {
+        .new_arrival .mycontrols .right {
             right: 7px;
         }
 

@@ -298,12 +298,13 @@
         background: #fff;
     }
 
-    .mycontrols {
+    .best_sales .mycontrols {
         position: absolute;
         top: 40%;
         height: 0;
         margin-top: -10px;
         width: 90%;
+        right: 3%;
         z-index: 1000;
         cursor: pointer;
     }
@@ -319,11 +320,11 @@
     }
 
     @media only screen and (max-width: 600px) {
-        .mycontrols {
+        .best_sales .mycontrols {
             width: 80%;
         }
 
-        .mycontrols .right {
+        .best_sales .mycontrols .right {
             right: 7px;
         }
 
