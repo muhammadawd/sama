@@ -21,7 +21,7 @@
         </div>
         <h3 class="text-black text-center w-100 mt-2" style="font-size: 14px"
             @click="$router.push({name:'show_product',params:{'id':product.id,branch_id:product.branch_id}})">
-            {{$ml.get('book')}} : {{product.translated.title}} <br>
+             <div class="text-ellipsis font-weight-bold">{{$ml.get('book')}} : {{product.translated.title}}  </div>
             {{$ml.get('author')}} : {{product.author ? product.author.translated.title : ''}}
         </h3>
         <div class="row"
