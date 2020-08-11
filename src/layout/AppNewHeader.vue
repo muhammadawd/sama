@@ -15,7 +15,7 @@
                                     |
                                 </li>
                                 <li class="list-inline-item">
-                                    <a class="text-white" href="" @click.prevent>{{$store.getters.getCurrency}}</a>
+                                    <a class="text-white" href="" @click.prevent>{{$ml.get('kd')}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -230,7 +230,7 @@
                                                    @click.prevent="changeLang('en')">English</a>
                                             </li>
                                         </ul>
-                                        <div class="current_currency">{{$store.getters.getCurrency}}</div>
+                                        <div class="current_currency">{{$ml.get('kd')}}</div>
                                     </div>
                                 </div>
                                 <div class="col-5 text-left">

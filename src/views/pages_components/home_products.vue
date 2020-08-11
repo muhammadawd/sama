@@ -112,7 +112,7 @@
                     dragSize: 5,
                     followFinger: false,
                     spaceBetween: 10,
-                    slidesPerView: 5,
+                    slidesPerView: 4,
                     autoplay: true,
                     touchRatio: 3,
                     breakpoints: {

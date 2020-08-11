@@ -119,8 +119,8 @@
         },
         methods: {
             triggerNav(sel) {
-                $(`a.${sel}`).trigger('click')
-                $(`a.${sel} span`).trigger('click')
+                $(`.new_arrival a.${sel}`).trigger('click')
+                $(`.new_arrival a.${sel} span`).trigger('click')
             },
             next() {
                 this.$refs.slick.next();

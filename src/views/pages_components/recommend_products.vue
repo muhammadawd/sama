@@ -237,19 +237,19 @@
 
     .recommended .slick-slide {
         /*background: #fff;*/
-        opacity: 0.7;
+        /*opacity: 0.7;*/
         transition: all 300ms ease;
         /*transform: scale(0.75);*/
     }
 
     .recommended.center .slick-slide.slick-active {
         /*transform: scale(.8);*/
-        opacity: 0.7;
+        /*opacity: 0.7;*/
     }
 
     .recommended.center .slick-slide.slick-center {
         /*transform: scale(1);*/
-        opacity: 1;
+        /*opacity: 1;*/
     }
 
     .w_90l_80sm {
