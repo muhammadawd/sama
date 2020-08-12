@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <h3 class="text-black text-center w-100 mt-2" style="font-size: 14px"
+        <h3 class="text-black text-center w-100 mt-2" style="font-size: 16px"
             @click="$router.push({name:'show_product',params:{'id':product.id,branch_id:product.branch_id}})">
              <div class="text-ellipsis font-weight-bold">{{$ml.get('book')}} : {{product.translated.title}}  </div>
             {{$ml.get('author')}} : {{product.author ? product.author.translated.title : ''}}
@@ -28,14 +28,14 @@
              @click="$router.push({name:'show_product',params:{'id':product.id,branch_id:product.branch_id}})">
             <div class="col-12" style="color: #000;">
                 <template>
-                    <p class="font-weight-bold text-center" style="font-size: 18px;">
+                    <p class="font-weight-bold text-center p-1" style="font-size: 18px;">
                         {{parseFloat(product.minimum_price).toFixed(3)}}
-                        <small style="font-size: 12px">{{getCurrency()}}</small>
+                        <small style="font-size: 17px !important;">{{getCurrency()}}</small>
                     </p>
                 </template>
             </div>
         </div>
-        <div class="row text-center p-2">
+        <div class="row justify-content-center p-2">
             <div class="col-md-3 col-12 p-1">
                 <button class="btn btn-info p-1 pr-2 pl-2 btn-block text-center text-ellipsis radius-0"
                         v-on:click.prevent="addToCartCheckout(product)"
@@ -60,9 +60,9 @@
                          style="width: 30px;height: auto;min-height: auto" alt=""/>
                 </button>
             </div>
-            <div class="col-md-3 col-4 p-1">
+            <div class="col-md-3 col-4 p-1"  v-if="!product.book_file_path" >
                 <a :href="product.book_file_path"
-                   v-if="!product.book_file_path"
+                 
                    target="_blank"
                    class="btn text-white btn-info bg-dark-gray p-1 btn-block pr-2 pl-2 radius-0">
                     <i class="fa fa-book"></i>
