@@ -71,7 +71,7 @@
             <div class="header_nv mb-5 position-relative">
 
                 <header class="header-global">
-                    <base-nav class="navbar-main direction" transparent type="" effect="light" expand>
+                    <base-nav class="navbar-main" dir="rtl" transparent type="" effect="light" expand>
                         <router-link slot="brand" class="navbar-brand mr-lg-5" to="/">
                             <img :src="$helper.getLogo()">
                         </router-link>
@@ -187,7 +187,7 @@
                                         <div class="item text-left"
                                              v-for="(item , key) in items"
                                              :key="key" @click="setQuerySearch(item)">
-                                            <strong>{{item}}</strong>
+                                            <strong @click="setQuerySearch(item)">{{item}}</strong>
                                         </div>
                                         <div class="item text-center"
                                              v-if="items.length == 0">
@@ -391,7 +391,7 @@
                                     <div class="item text-left"
                                          v-for="(item , key) in items"
                                          :key="key" @click="setQuerySearch(item)">
-                                        <strong style="color:#000;">{{item}}</strong>
+                                        <strong @click="setQuerySearch(item)" style="color:#000;">{{item}}</strong>
                                     </div>
                                     <div class="item text-center"
                                          v-if="items.length == 0">
@@ -486,7 +486,13 @@
             <h6 slot="header"
                 class="modal-title font-weight-bold text-center m-auto display-4 text-white direction "
                 id="modal-title-notification">
-                {{this.$ml.get('your_cart')}}</h6>
+                {{this.$ml.get('your_cart')}}
+            </h6>
+            <div slot="header"
+                 style="cursor:pointer;"
+                 class="modal-title font-weight-bold text-right display-4 text-white direction  pull-right float-right">
+                <i class="fa fa-times text-white" @click="modals.modal2 = false"></i>
+            </div>
 
             <div class="py-3 text-center">
                 <div class="row">
@@ -519,6 +525,11 @@
                 class="modal-title font-weight-bold text-center m-auto display-4 text-white direction ">
                 {{this.$ml.get('favourites')}}</h6>
 
+            <div slot="header"
+                 style="cursor:pointer;"
+                 class="modal-title font-weight-bold text-right display-4 text-white direction  pull-right float-right">
+                <i class="fa fa-times text-white" @click="modals.modal1 = false"></i>
+            </div>
             <div class="py-3 text-center">
                 <div class="row">
                     <div class="col-12">

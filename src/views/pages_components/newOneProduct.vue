@@ -57,7 +57,7 @@
                         v-on:click.prevent="addToCart(product)"
                         v-if="!(product.product_option_values[0].store_detail && (product.product_option_values[0].store_detail.quantity - product.product_option_values[0].store_detail.reserved == 0))">
                     <img :src="require('@/assets/images/newImages/cart-white.png')" class="m-auto"
-                         style="width: 30px;height: auto;min-height: auto" alt=""/>
+                         style="width: 25px;height: auto;min-height: auto" alt=""/>
                 </button>
             </div>
             <div class="col-md-3 col-4 p-1">

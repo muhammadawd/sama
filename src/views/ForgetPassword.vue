@@ -90,6 +90,7 @@
         methods: {
             resetPassword() {
                 let vm = this;
+                let phone = vm.email;
                 let request_data = {
                     email: vm.email,
                     lang: vm.lang,
@@ -106,6 +107,7 @@
                             vm.showVaildationMassges(data.validation_errors);
                             return;
                         }
+                        // vm.$router.push({name: 'phone_verification', params: {phone: phone}});
                         vm.reset_sent = true;
                     })
                     .catch((err) => {
@@ -125,6 +127,6 @@
 </script>
 <style scoped>
     .new_card_auth {
-        border-radius: 40px 0 40px 0!important;
+        border-radius: 40px 0 40px 0 !important;
     }
 </style>

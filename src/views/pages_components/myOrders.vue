@@ -56,7 +56,7 @@
                     <badge type="primary" rounded> {{sale.status.translated.title}}</badge>
                 </div>
 
-                <badge class="float-right" rounded>{{sale.created_at}}</badge>
+                <badge class="" rounded>{{sale.created_at}}</badge>
 
                 <ul class="list-unstyled direction p-0">
                     <li class="py-2">
@@ -66,7 +66,7 @@
                         <!--                                <i class="ni ni-pin-3"></i>-->
                         <!--                            </span>-->
                         <h6 class="mb-0">
-                            <b>{{$ml.get('addresses')}} : </b>
+                            <!--<b>{{$ml.get('addresses')}} : </b>-->
                             <!--{{sale.address.governorate.translated.name}} | {{sale.address.city.translated.name}}-->
                             <!--<br>-->
                             <span class="font-weight-bold">{{$ml.get('full_address')}} : </span>

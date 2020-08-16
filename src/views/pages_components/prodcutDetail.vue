@@ -53,8 +53,8 @@
                 </div>
             </div>
             <div class="product_card product_card_info bg-main text-center text-white">
-                <img v-for="(image , key) in selected_images" :key="key" v-if="key == 0" @
-                     :src="image.path" class="d-md-none" alt="..">
+                <img v-for="(image , key) in selected_images" :key="key" v-if="key == 0"
+                     :src="image.path" class="d-md-none w-100" alt="..">
 
                 <div class="pr-img d-none d-md-block">
                     <div class="book-img">
@@ -1020,6 +1020,7 @@
         min-height: 350px;
         padding: 25px;
         background-color: #00aeef;
+        overflow: hidden;
     }
 
     .product_card .image {

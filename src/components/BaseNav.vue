@@ -31,7 +31,7 @@
                                 <router-link :to="{name:'home'}" class="nav-link get-toggle-button">
                                     <span class="nav-link-inner--text font-weight-bold text-capitalize direction-inverse">
                                         <i class="fa fa-home"></i>
-                                        {{this.$ml.get('home')}} {{auth}}
+                                        {{this.$ml.get('home')}}
                                     </span>
                                 </router-link>
                             </li>

@@ -6,7 +6,7 @@ Vue.use(MLInstaller);
 export default new MLCreate({
     initial: 'ar',
     // development  , production
-    save: process.env.NODE_ENV === 'production',
+    save: process.env.NODE_ENV === 'development',
     languages: [
         new MLanguage('en').create({
             by: 'By ',
@@ -104,7 +104,7 @@ export default new MLCreate({
             reset_sent: 'Reset Mail Have Sent Successfully Please Check Your Mail To Change Password ',
             create_account: 'Create New Account',
             have_account: 'Already Have Account !',
-            type_mail_reset: 'Type Your E-Mail To Reset Password',
+            type_mail_reset: 'Type Your Phone To Reset Password',
             show_details: 'Show Details',
             contact_us: 'Contact Us',
             message: 'Message',

@@ -71,14 +71,13 @@
                                 </h5>
                                 <div class="text-center">
                                     <p class="font-weight-bold text-md-center text-left">{{$ml.get('dar_sama')}}</p>
-                                    <p class="text-md-center text-center p-0 m-0">
+                                    <p class="text-md-center text-left p-0 m-0">
                                         {{$ml.get('kuwait')}}</p>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="row direction-inverse-mobile">
                                     <div class="col-7 direction">
-                                        
                                         <ul class="list-unstyled transition">
                                             <li class="list-inline-item animIcons"
                                                 v-if="$helper.getSettings().facebook">
@@ -112,32 +111,31 @@
                                                 </a>
                                             </li>
                                         </ul>
-                                        <div class="d-flex justify-content-end">
-                                            <ul class="list-unstyled direction m-2 transition"
+                                        <div class="d-flex direction justify-content-start">
+                                            <img :src="require('@/assets/images/newImages/phone.png')" width="30px"
+                                                 height="30px" class=""
+                                                 alt="">
+                                            <ul class="list-unstyled direction p-1 m-0 transition"
                                                 style="margin-top: 0!important;">
-                                                <li class="list-inline-item font-weight-bold direction-inverse "
+                                                <li class="  font-weight-bold direction-inverse p-0 m-0"
                                                     v-if="$helper.getSettings().phone1">
                                                     <a :href="'tel:'+$helper.getSettings().phone1">
                                                         {{$helper.getSettings().phone1}}
                                                     </a>
                                                 </li>
-                                                <li class="list-inline-item font-weight-bold direction-inverse"
+                                                <li class="  font-weight-bold direction-inverse"
                                                     v-if="$helper.getSettings().phone2">
                                                     <a :href="'tel:'+$helper.getSettings().phone2">
                                                         {{$helper.getSettings().phone2}}
                                                     </a>
                                                 </li>
                                             </ul>
-                                            <img :src="require('@/assets/images/newImages/phone.png')" width="30px"
-                                                 height="30px" class=""
-                                                 alt="">
                                         </div>
-                                        <div>
+                                        <div class="direction text-left">
                                             <a :href="'mailto:'+$helper.getSettings().front_email">
-                                        <span class="p-1"
-                                              style="font-size: 12px">{{$helper.getSettings().front_email}}</span>
                                                 <img :src="require('@/assets/images/newImages/email.png')" width="30px"
-                                                     alt="">
+                                                     alt=""/>
+                                                <span class="p-1" style="font-size: 12px">{{$helper.getSettings().front_email}}</span>
                                             </a>
                                         </div>
                                     </div>
