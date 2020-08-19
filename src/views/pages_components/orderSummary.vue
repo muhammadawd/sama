@@ -55,7 +55,7 @@
             console.log(this.cart)
             setTimeout(()=>{
                 if (this.cart == 0) {
-                    this.$router.push({name: 'home'})
+                    // this.$router.push({name: 'home'})
                 }
                 this.updateProductsSummary(this.cart)
             },1000)
